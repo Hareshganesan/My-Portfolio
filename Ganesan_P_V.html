@@ -14,6 +14,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <!-- Added modern cursive font -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <!-- Add Herr Von Muellerhoff font -->
+    <link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+    <!-- Add the Great Vibes font - elegant cursive -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Add a new font for "MY PORTFOLIO" -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <!-- Performance optimization - preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- Add critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS for first view - reduces CLS */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-content {
+            padding: 2rem;
+        }
+        .hero-img-container {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+        }
+        @media (max-width: 992px) {
+            .hero-img-container {
+                width: 250px;
+                height: 250px;
+                margin-top: 2rem;
+            }
+        }
+    </style>
     <style>
         :root {
             --primary-color: #5e17eb;
@@ -240,12 +275,22 @@
         }
         
         .navbar {
-            transition: all 0.3s ease;
+            background: rgba(10, 17, 40, 0.9); /* Slightly transparent background */
+            border-radius: 15px; /* Curved edges */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow for floating effect */
+            position: fixed; /* Make it floating */
+            top: 10px; /* Add spacing from the top */
+            left: 50%; /* Center the navbar */
+            transform: translateX(-50%);
+            width: 90%; /* Adjust width */
+            z-index: 1000; /* Ensure it stays on top */
+            transition: all 0.3s ease; /* Smooth transition */
         }
         
         .navbar.scrolled {
-            background-color: var(--dark-bg) !important;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            background: rgba(10, 17, 40, 0.7); /* More transparent when scrolled */
+            backdrop-filter: blur(10px); /* Add blur effect */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Enhance shadow */
         }
         
         .nav-link {
@@ -278,7 +323,7 @@
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.1s ease;
+            transition: all 0.001s ease;
         }
         
         .cursor-dot {
@@ -375,9 +420,10 @@
 
         /* Enhanced Interactive Styles */
         .navbar-brand {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Raleway', sans-serif; /* Use the new font */
+            font-size: 1.5rem; /* Smaller font size */
+            font-weight: 700;
             letter-spacing: 1px;
-            font-size: 1.8rem;
         }
 
         /* Interactive background effect for all sections */
@@ -617,6 +663,7 @@
         .logo-text span {
             display: inline-block;
             animation: textFloat 3s ease-in-out infinite;
+            text-transform: capitalize;
         }
 
         .logo-text span:nth-child(2n) {
@@ -1041,46 +1088,2080 @@
             section::before {
                 background: none;
             }
-        }
-        
-        /* Additional tablet-specific adjustments */
-        @media (min-width: 768px) and (max-width: 992px) {
-            .hero-img-container {
-                width: 300px;
-                height: 300px;
-            }
-            
-            .hero-name {
-                font-size: 4rem;
+            .code-block-3d {
+                display: none;
             }
         }
 
-        /* Fix touch interactions for mobile */
-        @media (hover: none) {
-            .card:hover, .project-card:hover, .skill-item:hover, .hero-img:hover {
-                transform: none; /* Disable hover transforms on touch devices */
+        /* Super Creative About Me Section Styles - Refined Layout */
+        .about-animation-container {
+            position: relative;
+            height: 400px; /* Further increased height for better spacing */
+            width: 100%;
+            overflow: hidden;
+            background: rgba(10, 10, 30, 0.3);
+            border-radius: 20px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(94, 23, 235, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Animated Terminal with Typing Effect */
+        .terminal-container {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.4);
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-prompt {
+            color: #5e17eb;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .terminal-text {
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #5e17eb;
+            width: 0;
+            animation: typing 3s steps(40) forwards, blink 1s step-end infinite;
+        }
+
+        @keyframes typing {
+            0% { width: 0 }
+            80% { width: 100% }
+            100% { width: 100% }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #5e17eb }
+        }
+
+        /* Enhanced skill circles with beautiful colors at the center */
+        .center-skills {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+            display: flex;
+            gap: 25px;
+        }
+
+        .skill-circle {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(10, 10, 30, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .skill-circle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--skill-color) var(--percent), transparent 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            animation: progress 2s ease-out forwards;
+        }
+
+        /* Beautiful skill circle colors */
+        .skill-circle:nth-child(1) { --percent: 90%; --skill-color: #ff5f56; }
+        .skill-circle:nth-child(2) { --percent: 85%; --skill-color: #4ecdc4; }
+        .skill-circle:nth-child(3) { --percent: 80%; --skill-color: #ffbd2e; }
+
+        .skill-circle i {
+            color: white;
+            font-size: 22px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .skill-circle .skill-label {
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        @keyframes progress {
+            0% { --percent: 0%; }
+        }
+
+        /* Missing CSS for 3D Code Block */
+        .code-block-3d {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(15deg) rotateY(-10deg);
+            transform-style: preserve-3d;
+            z-index: 4;
+            width: 80%;
+            height: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .code-line {
+            position: absolute;
+            color: #a78bfa;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: nowrap;
+            text-shadow: 0 0 5px rgba(167, 139, 250, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .code-keyword {
+            color: #ff7edb;
+        }
+
+        .code-function {
+            color: #36f9f6;
+        }
+
+        .code-parameter {
+            color: #fede5d;
+        }
+
+        .code-string {
+            color: #7bf1a8;
+        }
+
+        .code-operator {
+            color: #ff8b39;
+        }
+
+        .code-comment {
+            color: #7970a9;
+        }
+
+        /* Enhanced Background Blur */
+        .about-animation-container {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        section.bg-light {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Binary Rain Effect */
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+            opacity: 0.4; /* Further reduced opacity for better readability */
+            filter: blur(1px); /* Increased blur for better aesthetic */
+        }
+
+        .binary-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(94, 23, 235, 0.6);
+            text-shadow: 0 0 5px rgba(94, 23, 235, 0.4);
+            animation: rainDrop 8s linear infinite;
+            filter: blur(0.8px); /* Increased blur for better aesthetic */
+        }
+
+        @keyframes rainDrop {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Improved Skill Orbit System with blur */
+        .skill-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(94, 23, 235, 0.4)) blur(1px);
+            opacity: 0.7; /* Reduced opacity */
+        }
+
+        .skill-orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(94, 23, 235, 0.3);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.2);
+        }
+
+        /* Enhanced orbit rotation with smoother animation but blurred */
+        @keyframes orbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Improved skill orbs with glow effect and blur */
+        .skill-orb {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(94, 23, 235, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.5);
+            transform: translateX(-50%) translateY(-50%);
+            transition: all 0.3s ease;
+            filter: blur(1px);
+            opacity: 0.8;
+        }
+
+        .skill-orb i {
+            color: white;
+            font-size: 18px;
+            transition: all 0.5s ease;
+        }
+
+        /* Network BG enhancements with increased blur */
+        .network-bg {
+            filter: blur(10px);
+            opacity: 0.1;
+        }
+
+        /* Enhanced Blurred Background */
+        .about-animation-container {
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: rgba(10, 10, 30, 0.4); /* Slightly more opaque */
+        }
+
+        /* Code block with blur */
+        .code-block-3d {
+            filter: blur(4px);
+            opacity: 0.5;
+        }
+
+        /* Fixed Skill Circles and Labels - Properly aligned */
+        .center-skills {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10; /* Higher z-index to ensure visibility */
+            display: flex;
+            gap: 40px; /* Increased gap for better spacing with labels below */
+            justify-content: center;
+            width: 80%;
+        }
+
+        .skill-circle {
+            position: relative;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: rgba(10, 10, 30, 0.7); /* More opaque */
+            display: flex;
+            flex-direction: column;
+            /*justify-content: center;
+            align-items: center;*/
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            overflow: visible; /* Keep visible for label below */
+            z-index: 15; /* Higher z-index */
+        }
+
+        /* Improved label container positioning and sizing */
+        .skill-label-container {
+            position: absolute;
+            top: 80px; /* Adjusted position below the circle */
+            left: 50%; /* Center from the middle of the circle */
+            transform: translateX(-50%); /* Ensure horizontal centering */
+            width: auto; /* Auto width based on content */
+            min-width: 90px; /* Minimum width for short labels */
+            min-height: 24px; /* Fixed height to ensure consistency */
+            background: rgba(10, 10, 30, 0.8); /* More opaque for better readability */
+            border-radius: 10px;
+            padding: 5px 12px; /* Added more horizontal padding */
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 8px rgba(94, 23, 235, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 20; /* Even higher z-index */
+            display: flex;
+            /*justify-content: center;*/
+            /*align-items: center;*/
+            /* Remove any animations that might cause movement */
+            animation: none; /* Remove animation causing drift */
+            opacity: 1; /* Ensure visible at all times */
+        }
+
+        /* Specific adjustment for problem solving label */
+        .skill-circle:nth-child(3) .skill-label-container {
+            width: 130px; /* Fixed width for longer text */
+            min-width: 130px; /* Ensure minimum width */
+        }
+
+        .skill-circle .skill-label {
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 1);
+            /*text-align: center;*/
+            white-space: nowrap;
+            width: 100%; /* Ensure text takes full width of container */
+        }
+
+        /* Remove or comment out the problematic animations */
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        @keyframes floatLabel {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-3px); }
+        }
+        
+
+        /* Enhanced holographic name for better visibility */
+        .holographic-name {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            text-transform: none; /* Remove uppercase to preserve the font's elegance */
+            color: white; /* Changed from transparent to white for better visibility */
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 1) 20%,
+                rgba(94, 23, 235, 1) 50%,
+                rgba(255, 255, 255, 1) 80%,
+                rgba(255, 255, 255, 0.2) 100%
+            );
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-shadow: 
+                0 0 15px rgba(94, 23, 235, 0.8),
+                0 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 25; /* Highest z-index to ensure visibility */
+            animation: hologram-flow 5s linear infinite;
+            opacity: 0.9; /* Increased opacity */
+        }
+
+        /* Better skill circle visual with enhanced contrast */
+        .skill-circle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--skill-color) var(--percent), transparent 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            animation: progress 2s ease-out forwards;
+            z-index: 1;
+        }
+
+        .skill-circle i {
+            color: white;
+            font-size: 24px; /* Larger icon */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.5);
+            z-index: 3;
+            position: relative;
+        }
+
+        /* Binary Rain Effect */
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+            opacity: 0.6; /* Reduced opacity for better readability */
+        }
+
+        .binary-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(94, 23, 235, 0.6);
+            text-shadow: 0 0 5px rgba(94, 23, 235, 0.4);
+            animation: rainDrop 8s linear infinite;
+            filter: blur(0.5px); /* Slight blur for better aesthetic */
+        }
+
+        @keyframes rainDrop {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Improved Skill Orbit System */
+        .skill-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(94, 23, 235, 0.4));
+        }
+
+        .skill-orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(94, 23, 235, 0.3);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.2);
+        }
+
+        .orbit-1 {
+            width: 200px;
+            height: 200px;
+            animation: orbit 20s linear infinite;
+        }
+
+        .orbit-2 {
+            width: 150px;
+            height: 150px;
+            animation: orbit 15s linear infinite reverse;
+        }
+
+        .orbit-3 {
+            width: 250px;
+            height: 250px;
+            animation: orbit 25s linear infinite;
+        }
+
+        /* Enhanced orbit rotation with smoother animation */
+        @keyframes orbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Improved skill orbs with glow effect */
+        .skill-orb {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(94, 23, 235, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.6);
+            transform: translateX(-50%) translateY(-50%);
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .skill-orb i {
+            color: white;
+            font-size: 18px;
+            transition: all 0.5s ease;
+        }
+
+        /* Fixed Skill Circles - Move labels below circles */
+        .center-skills {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+            display: flex;
+            gap: 65px; /* Increased gap for better spacing with labels below */
+        }
+
+        .skill-circle {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(10, 10, 30, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            overflow: visible; /* Keep visible for label below */
+            z-index: 10;
+        }
+
+        .skill-circle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--skill-color) var(--percent), transparent 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            animation: progress 2s ease-out forwards;
+            z-index: 1;
+        }
+
+        .skill-circle i {
+            color: white;
+            font-size: 24px; /* Larger icon */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            z-index: 3;
+            position: relative;
+        }
+
+        /* New Label Design - Below Circle with Nice Effects */
+        .skill-label-container {
+            position: absolute;
+            top: 95px; /* Position below the circle */
+            left: -17%;
+            transform: translateX(-50%);
+            width: 90px;
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 10px;
+            padding: 5px 0;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 0 5px rgba(94, 23, 235, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 4;
+            animation: fadeIn 0.5s ease-out forwards, float 4s ease-in-out infinite;
+            animation-delay: 0.5s, 1s;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .skill-circle .skill-label {
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Custom float animation for skill labels */
+        @keyframes floatLabel {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-3px); }
+        }
+
+        /* Beautiful skill circle colors with improved contrast */
+        .skill-circle:nth-child(1) { --percent: 90%; --skill-color: #ff5f56; }
+        .skill-circle:nth-child(2) { --percent: 85%; --skill-color: #4ecdc4; }
+        .skill-circle:nth-child(3) { --percent: 80%; --skill-color: #ffbd2e; }
+
+        /* Skill circle pulsating glow based on color */
+        .skill-circle:nth-child(1)::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 95, 86, 0.4) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse 3s infinite;
+        }
+
+        .skill-circle:nth-child(2)::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.4) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse 3s infinite 1s;
+        }
+
+        .skill-circle:nth-child(3)::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 189, 46, 0.4) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse 3s infinite 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* Hologram effect animation fix */
+        @keyframes hologram-flow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Network BG enhancements */
+        .network-bg {
+            filter: blur(3px);
+            opacity: 0.25;
+        }
+
+        /* Binary Rain Effect */
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .binary-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(94, 23, 235, 0.6);
+            text-shadow: 0 0 5px rgba(94, 23, 235, 0.4);
+            animation: rainDrop 8s linear infinite;
+        }
+
+        @keyframes rainDrop {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Cosmic Stars Background */
+        .cosmic-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .cosmic-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 5px rgba(94, 23, 235, 0.8);
+            animation: twinkle 5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Skill Orbit System */
+        .skill-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            z-index: 3;
+        }
+
+        .skill-orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(94, 23, 235, 0.3);
+            border-radius: 50%;
+        }
+
+        .orbit-1 {
+            width: 200px;
+            height: 200px;
+            animation: orbit 20s linear infinite;
+        }
+
+        .orbit-2 {
+            width: 150px;
+            height: 150px;
+            animation: orbit 15s linear infinite reverse;
+        }
+
+        .orbit-3 {
+            width: 250px;
+            height: 250px;
+            animation: orbit 25s linear infinite;
+        }
+
+        .skill-orb {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(94, 23, 235, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.6);
+            transform: translateX(-50%) translateY(-50%);
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .skill-orb i {
+            color: white;
+            font-size: 18px;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes orbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Enhanced Terminal */
+        .terminal-container {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(94, 23, 235, 0.4);
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-prompt {
+            color: #5e17eb;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .terminal-text {
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #5e17eb;
+            width: 0;
+            animation: typing 5s steps(40) forwards, blink 1s step-end infinite;
+        }
+
+        /* Terminal Command Styling */
+        .terminal-command-line {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .terminal-command-line.active {
+            opacity: 1;
+            height: 20px;
+        }
+
+        .terminal-output {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        .terminal-output.active {
+            opacity: 1;
+            height: 20px;
+            margin-top: 5px;
+        }
+
+        .terminal-normal {
+            color: #d0d0d0;
+        }
+
+        .terminal-success {
+            color: #7bf1a8;
+        }
+
+        .terminal-highlight {
+            color: #fede5d;
+        }
+
+        .terminal-user {
+            color: #7bf1a8;
+        }
+
+        .terminal-at {
+            color: #d0d0d0;
+        }
+
+        .terminal-machine {
+            color: #ff7edb;
+        }
+
+        .terminal-path {
+            color: #36f9f6;
+        }
+
+        /* Enhance skill circles for better text visibility */
+        .skill-circle {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(10, 10, 30, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            overflow: visible; /* Changed from hidden to visible */
+            z-index: 10;
+        }
+
+        .skill-circle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--skill-color) var(--percent), transparent 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #fff 0);
+            animation: progress 2s ease-out forwards;
+            z-index: 1;
+        }
+
+        .skill-circle i {
+            color: white;
+            font-size: 22px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Enhanced text shadow */
+            z-index: 3;
+            position: relative;
+        }
+
+        .skill-circle .skill-label {
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.9); /* Enhanced text shadow */
+            background: rgba(0, 0, 0, 0.3); /* Added background for better readability */
+            padding: 2px 5px;
+            border-radius: 8px;
+            z-index: 3;
+            position: relative;
+        }
+
+        /* Floating holographic name positioned at the bottom */
+        .holographic-name {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 10;
+            text-transform: none; /* Remove uppercase */
+            color: transparent;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.8) 80%,
+                rgba(0, 157, 255, 0) 100%
+            );
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-shadow: 0 0 15px rgba(94, 23, 235, 0.5);
+            z-index: 5;
+            animation: hologram-flow 6s linear infinite;
+        }
+
+        /* Hero Section Background Enhancements */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background:transparent;
+            /*background: linear-gradient(-45deg, #0a1128, #1e2a78, #5e17eb, #4a11c9, #7c3aed);
+            background-size: 400% 400%;
+            animation: gradientAnimation 1s ease infinite;*/
+        }
+
+        /* Add a glowing particle effect */
+        .hero-section .glowing-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-section .glowing-particles .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+            border-radius: 50%;
+            animation: particleMove 10s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(50vw, 50vh) scale(1.5);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translate(100vw, 100vh) scale(1);
+                opacity: 0.7;
+            }
+        }
+
+        /* Add a holographic wave effect */
+        .hero-section .holographic-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(94, 23, 235, 0.3), transparent 70%);
+            animation: waveAnimation 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes waveAnimation {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.8;
+            }
+        }
+
+        /* Add a starry background effect */
+        .hero-section .starry-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 0;
+        }
+
+        .hero-section .starry-bg .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Add a glowing ring effect */
+        .hero-section .glowing-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(94, 23, 235, 0.5), transparent 70%);
+            animation: ringPulse 5s infinite ease-in-out;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        @keyframes ringPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.8;
+            }
+        }
+
+        /* Hero Section Neural Network Effect */
+        .hero-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-network canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        /* Neural Node Animation */
+        @keyframes nodeGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(94, 23, 235, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(94, 23, 235, 0.6); }
+        }
+
+        .neural-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(94, 23, 235, 0.8);
+            border-radius: 50%;
+            animation: nodeGlow 3s ease-in-out infinite;
+        }
+
+        /* Morphing Effects */
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+            }
+            30% {
+                border-radius: 60% 40% 40% 60% / 40% 60% 60% 40%;
+            }
+            60% {
+                border-radius: 40% 60% 50% 50% / 50% 60% 40% 50%;
+            }
+            80% {
+                border-radius: 60% 40% 50% 50% / 50% 40% 60% 50%;
+            }
+        }
+
+        .morph {
+            animation: morph 8s ease-in-out infinite;
+            transition: all 1s ease-in-out;
+        }
+
+        /* Apply morph to hero image container */
+        .hero-img-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+            overflow: visible;
+            z-index: 10;
+            perspective: 1000px;
+            /* Add morph class here */
+            &.morph {
+                animation: morph 8s ease-in-out infinite;
+                transition: all 1s ease-in-out;
+            }
+        }
+
+        /* Sophisticated Background Effects */
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        /* Advanced Neural Grid Animation */
+        .neural-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(94, 23, 235, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(94, 23, 235, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            animation: gridPulse 15s infinite linear;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { background-size: 40px 40px; }
+            50% { background-size: 60px 60px; }
+        }
+
+        /* Floating Geometric Shapes */
+        .geometric-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .geometric-shape {
+            position: absolute;
+            border: 1px solid rgba(94, 23, 235, 0.3);
+            border-radius: 50%;
+            opacity: 0.4;
+            transform-style: preserve-3d;
+            animation: floatShape 40s infinite linear;
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translateY(100vh) translateX(-50vw) rotate(0deg) scale(0.2);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50vw) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Sophisticated Gradient Orbs */
+        .gradient-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.7;
+            filter: blur(80px);
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(94, 23, 235, 0.6) 0%, rgba(94, 23, 235, 0) 70%);
+            opacity: 0.3;
+            animation: orbFloat 30s infinite ease-in-out;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(10%, 15%); }
+            50% { transform: translate(5%, -10%); }
+            75% { transform: translate(-10%, 5%); }
+        }
+
+        /* Digital Rain Effect (subtle and sophisticated) */
+        .digital-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .rain-column {
+            position: absolute;
+            top: -50px;
+            font-family: monospace;
+            color: rgba(94, 23, 235, 0.5);
+            font-size: 14px;
+            text-shadow: 0 0 5px rgba(94, 23, 235, 0.8);
+            animation: digitalRain 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes digitalRain {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px));
+                opacity: 0;
+            }
+        }
+
+        /* Glowing Dots Constellation */
+        .constellation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(94, 23, 235, 0.8);
+            animation: twinkleStar 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkleStar {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Nebula Effect */
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(94, 23, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(156, 85, 255, 0.05) 0%, transparent 70%);
+            filter: blur(30px);
+            opacity: 0.8;
+            animation: nebulaShift 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes nebulaShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* Hello Section */
+        .hello-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e2a78 100%);
+            z-index: 2000;
+        }
+
+        .hello-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(4rem, 15vw, 12rem);
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 5px 15px rgba(94, 23, 235, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.5s ease forwards;
+        }
+
+        .hello-subtext {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.5s ease forwards 0.5s;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .scroll-arrow:after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            position: absolute;
+            left: 50%;
+            top: 8px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translate(-50%, 0); opacity: 0; }
+            30% { opacity: 1; }
+            80% { transform: translate(-50%, 20px); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Page Navigation Dots */
+        .page-indicator {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .page-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        /* Make other sections snap to scroll */
+        .snap-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+        }
+        /* Enhanced Hello Section */
+        .hello-section {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hello-content {
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s ease forwards 0.5s;
+        }
+
+        .hello-text {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+
+        .hello-subtext {
+            font-family: 'SF Pro Display', -apple-system, sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #86868b;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.5s ease forwards 1s;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .scroll-arrow {
+            width: 26px;
+            height: 44px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 13px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            width: 2px;
+            height: 8px;
+            background: #ffffff;
+            position: absolute;
+            left: 50%;
+            top: 8px;
+            transform: translateX(-50%);
+            border-radius: 1px;
+            animation: scrollPulse 2s infinite;
+        }
+
+        /* Background Effects */
+        .hello-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            z-index: 1;
+        }
+
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* Navigation Dots */
+        .page-indicator {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .page-dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-dot.active {
+            background: #ffffff;
+            transform: scale(1.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes scrollPulse {
+            0% { transform: translate(-50%, 0); opacity: 1; }
+            75% { transform: translate(-50%, 20px); opacity: 0; }
+            100% { transform: translate(-50%, 0); opacity: 0; }
+        }
+
+        /* Modern Hello Section */
+        .hello-section {
+            position: relative;
+            min-height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hello-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: contentFade 1.5s ease forwards 0.5s;
+        }
+
+        .hero-headline {
+            font-size: clamp(3rem, 15vw, 9rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5em;
+            line-height: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: titleFade 1.5s ease forwards;
+        }
+
+        .hero-subtext {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: #86868b;
+            margin-bottom: 2em;
+            opacity: 0;
+            animation: subtextFade 1.5s ease forwards 0.8s;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1em 2em;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: ctaFade 1.5s ease forwards 1s;
+        }
+
+        .hero-cta:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .parallax-bg {
+            position: absolute;
+            inset: -50px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            z-index: 1;
+            will-change: transform;
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, 
+                rgba(94, 23, 235, 0.2),
+                transparent 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0;
+            animation: sphereFade 2s ease forwards 0.5s;
+        }
+
+        .sphere-1 { top: 20%; left: 10%; }
+        .sphere-2 { bottom: 10%; right: 20%; }
+
+        @keyframes contentFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes titleFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes subtextFade {
+            to { opacity: 1; }
+        }
+
+        @keyframes ctaFade {
+            to { opacity: 1; }
+        }
+
+        @keyframes sphereFade {
+            to { opacity: 1; }
+        }
+
+        /* Fix horizontal scroll */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced Background Effects */
+        .parallax-bg {
+            position: absolute;
+            inset: -50px;
+            width: 100vw;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            z-index: 1;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            width: min(600px, 80vw);
+            height: min(600px, 80vw);
+            background: radial-gradient(circle at center, 
+                rgba(94, 23, 235, 0.15),
+                transparent 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0;
+            animation: sphereFade 2s ease forwards 0.5s;
+            transform: translateZ(0);
+        }
+
+        /* Modern Glass Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            box-shadow: 
+                0 4px 24px -1px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Enhanced Text Animation */
+        .hero-headline {
+            font-size: clamp(2rem, 8vw, 7rem);
+            font-weight: 700;
+            background: linear-gradient(
+                to right bottom,
+                rgba(255, 255, 255, 0.95),
+                rgba(255, 255, 255, 0.5)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-headline span {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(4px);
+            animation: revealText 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+        }
+
+        .hero-headline span:nth-child(1) { animation-delay: 0.1s; }
+        .hero-headline span:nth-child(2) { animation-delay: 0.2s; }
+        .hero-headline span:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes revealText {
+            from {
+                opacity: 0;
+                transform: translateY(20px) rotateX(-90deg);
+                filter: blur(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Fix Container Widths */
+        .container {
+            width: min(1200px, 90%);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
+        }
+
+        /* Enhance Mobile Experience */
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: clamp(2rem, 10vw, 4rem);
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .glass-panel {
+                margin: 0 10px;
+            }
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+            z-index: 20;
+        }
+
+        .scroll-text {
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .scroll-arrow {
+            position: relative;
+            width: 30px;
+            height: 50px;
+        }
+
+        .scroll-chevron {
+            position: absolute;
+            width: 28px;
+            height: 8px;
+            opacity: 0;
+            animation: moveDown 1.5s ease-in-out infinite;
+        }
+
+        .scroll-chevron:before,
+        .scroll-chevron:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 51%;
+            background: #fff;
+        }
+
+        .scroll-chevron:before {
+            left: 0;
+            transform: skew(0deg, 30deg);
+        }
+
+        .scroll-chevron:after {
+            right: 0;
+            transform: skew(0deg, -30deg);
+        }
+
+        .scroll-chevron:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .scroll-chevron:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .scroll-chevron:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes moveDown {
+            25% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            75% {
+                opacity: 0.5;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+        /* Fix for parallax causing jankiness */
+        .parallax-bg, .gradient-sphere {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce animation complexity for better performance */
+        @media (prefers-reduced-motion: reduce) {
+            .floating, .morph, .hero-img, .project-card, .card, .skill-item, 
+            .parallax-bg, .gradient-sphere, .hero-headline span,
+            .orbit-1, .orbit-2, .orbit-3, .holographic-name {
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
             }
             
-            .custom-cursor, .cursor-dot {
-                display: none; /* Hide custom cursor on touch devices */
+            .neural-grid, .geometric-shapes, .digital-rain, .binary-rain {
+                display: none !important;
+            }
+        }
+        
+        /* Fix heavy animation stutter by using hardware acceleration */
+        .hero-section, .about-animation-container, .card, .project-card,
+        .skill-item, .social-link, .hero-img-container, .hero-img-outline,
+        .hero-img-outline-2, .skill-orb, .glowing-particles {
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+        
+        /* Improve mobile experience */
+        @media (max-width: 768px) {
+            /* Fix hero section overflow */
+            .hero-section {
+                min-height: 100vh;
+                height: auto;
+                padding: 100px 0 50px;
             }
             
-            .card::before, .project-card::before {
-                opacity: 0.5; /* Always show some gradient on cards for mobile */
+            /* Fix hero name size on mobile */
+            .hero-name {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
             
-            .project-card .project-overlay {
-                opacity: 0.9; /* Make project details more visible on touch devices */
+            /* Reduce animation complexity for mobile */
+            .skill-orb, .binary-column, .skill-orbit-ring, .hero-img-outline, 
+            .hero-img-outline-2, .network-bg {
+                animation-duration: 40s !important;
+                animation-timing-function: linear !important;
             }
+            
+            /* Fix button sizing on mobile */
+            .btn-custom, .btn-outline-light {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.9rem !important;
+                white-space: nowrap;
+            }
+            
+            /* Fix overflow issues */
+            .container {
+                width: 100%;
+                padding-left: 15px;
+                padding-right: 15px;
+                overflow-x: hidden;
+            }
+            
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+            
+            /* Enhance mobile navbar */
+            .navbar {
+                width: 95%;
+                padding: 0.5rem;
+            }
+            
+            /* Fix about section overflow on mobile */
+            .about-animation-container {
+                height: 300px;
+            }
+            
+            /* Optimize skill circles for mobile */
+            .center-skills {
+                gap: 25px;
+            }
+            
+            .skill-circle {
+                width: 60px;
+                height: 60px;
+            }
+            
+            /* Make images responsive */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Stack columns properly */
+            .col-lg-6, .col-md-6 {
+                width: 100%;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+        
+        /* Fix for Safari issues with transforms */
+        @supports (-webkit-overflow-scrolling: touch) {
+            .hero-img-outline, .hero-img-outline-2 {
+                animation: none;
+                opacity: 0.5;
+            }
+            
+            .skill-orbit {
+                display: none;
+            }
+        }
+        
+        /* Optimize render performance */
+        .particles-container, .network-bg, .neural-grid, .constellation, .nebula-bg {
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Reduce particle counts for better performance */
+        .particles-js-canvas-el {
+            opacity: 0.5;
+        }
+        
+        /* Reduce layout thrashing with fixed sizes */
+        .skill-item, .project-card, .card {
+            contain: layout style paint;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.css">
 </head>
 <body>
+    <!-- Performance optimization: add lazy loading spinner -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Mobile performance fix: reduce background effects -->
+    <div class="mobile-optimized-bg d-md-none"></div>
+    <div class="desktop-effects d-none d-md-block">
+        <!-- Advanced Background Effects (only shown on desktop) -->
+        <div class="nebula-bg"></div>
+        <div class="neural-grid"></div>
+        <div class="geometric-shapes" id="geometricShapes"></div>
+        <div class="gradient-orbs" id="gradientOrbs"></div>
+        <div class="digital-rain" id="digitalRain"></div>
+        <div class="constellation" id="constellation"></div>
+        
+        <!-- Canvas for WebGL effects -->
+        <canvas class="bg-canvas" id="bgCanvas"></canvas>
+    </div>
+    
+    <!-- Original elements -->
     <div class="network-bg"></div>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-    <div class="cursor-dot"></div>
+    <!-- Custom Cursor (desktop only) -->
+    <div class="custom-cursor d-none d-md-block"></div>
+    <div class="cursor-dot d-none d-md-block"></div>
+
+    <!-- Hello Section -->
+    <section id="hello" class="hello-section">
+        <div class="parallax-bg"></div>
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        
+        <div class="hello-content">
+            <h1 class="hero-headline">
+                Design.<br>
+                Develop.<br>
+                Create.
+            </h1>
+            <p class="hero-subtext">Turning imagination into reality</p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll Down</span>
+            <div class="scroll-arrow">
+                <div class="scroll-chevron"></div>
+                <div class="scroll-chevron"></div>
+                <div class="scroll-chevron"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Navigation -->
+        <div class="page-dot" data-section="skills"></div>
+        <div class="page-dot" data-section="contact"></div>
+    </div>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -1117,7 +3198,8 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero-section snap-section">
+        <div class="hero-network"></div>
         <div class="network-bg"></div>
         <div class="container">
             <div class="row align-items-center">
@@ -1131,7 +3213,7 @@
                         <span class="role-text">Full Stack Developer</span>
                     </div>
                     <p class="lead text-white-50 mb-5 reveal-text" style="animation-delay: 0.8s;">
-                        I create beautiful, functional websites and applications with passion and dedication.
+                        I create beautiful, functional projects and applications with passion and dedication.
                     </p>
                     <div class="d-flex gap-3 reveal-text" style="animation-delay: 1s;">
                         <a href="#contact" class="btn btn-custom px-4 py-3">
@@ -1149,7 +3231,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <div class="hero-img-container">
+                    <div class="hero-img-container morph">
                         <div class="hero-img-glow"></div>
                         <div class="hero-img-outline"></div>
                         <div class="hero-img-outline-2"></div>
@@ -1161,7 +3243,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-5 bg-light">
+    <section id="about" class="py-5 bg-light snap-section">
         <div class="network-bg"></div>
         <div class="container py-5">
             <div class="row justify-content-center mb-5">
@@ -1172,15 +3254,109 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-lg-5 mb-4 mb-lg-0">
-                    <img src="./images/about.jpg" alt="About Me" class="img-fluid rounded shadow">
+                    <div class="about-animation-container">
+                        <!-- Cosmic stars background -->
+                        <div class="cosmic-dots" id="cosmic-background"></div>
+
+                        <!-- Binary rain matrix effect -->
+                        <div class="binary-rain" id="binary-rain"></div>
+
+                        <!-- 3D Code block -->
+                        <div class="code-block-3d" id="code-block">
+                            <div class="code-line" style="top: 10px; left: 10%;">
+                                <span class="code-comment">// About Ganesan P V</span>
+                            </div>
+                            <div class="code-line" style="top: 30px; left: 10%;">
+                                <span class="code-keyword">const</span> developer = {
+                            </div>
+                            <div class="code-line" style="top: 50px; left: 15%;">
+                                name: <span class="code-string">"Ganesan P V"</span>,
+                            </div>
+                            <div class="code-line" style="top: 70px; left: 15%;">
+                                role: <span class="code-string">"Full Stack Developer"</span>,
+                            </div>
+                            <div class="code-line" style="top: 90px; left: 15%;">
+                                education: <span class="code-string">"B.Tech, Computing Engineering"</span>,
+                            </div>
+                            <div class="code-line" style="top: 110px; left: 15%;">
+                                skills: [<span class="code-string">"Python"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"React"</span>],
+                            </div>
+                            <div class="code-line" style="top: 130px; left: 15%;">
+                                passion: <span class="code-string">"Creating elegant solutions"</span>,
+                            </div>
+                            <div class="code-line" style="top: 150px; left: 15%;">
+                                focus: <span class="code-string">"Turning challenges into opportunities"</span>
+                            </div>
+                            <div class="code-line" style="top: 170px; left: 10%;">};</div>
+                            <div class="code-line" style="top: 190px; left: 10%;">
+                                <span class="code-keyword">function</span> <span class="code-function">createAmazing</span>(<span class="code-parameter">ideas</span>, <span class="code-parameter">skills</span>) {
+                            </div>
+                            <div class="code-line" style="top: 210px; left: 15%;">
+                                <span class="code-keyword">return</span> innovation <span class="code-operator">+</span> creativity <span class="code-operator">+</span> dedication;
+                            </div>
+                            <div class="code-line" style="top: 230px; left: 10%;">}</div>
+                        </div>
+                        
+                        <!-- Orbital Skill System -->
+                        <div class="skill-orbit">
+                            <div class="skill-orbit-ring orbit-1">
+                                <div class="skill-orb" style="top: 0; left: 50%;"><i class="fab fa-python"></i></div>
+                                <div class="skill-orb" style="bottom: 0; left: 50%;"><i class="fab fa-js"></i></div>
+                                <div class="skill-orb" style="top: 50%; left: 0;"><i class="fab fa-react"></i></div>
+                                <div class="skill-orb" style="top: 50%; right: 0;"><i class="fab fa-node-js"></i></div>
+                            </div>
+                            <div class="skill-orbit-ring orbit-2">
+                                <div class="skill-orb" style="top: 0; left: 50%;"><i class="fab fa-html5"></i></div>
+                                <div class="skill-orb" style="bottom: 0; left: 50%;"><i class="fab fa-css3-alt"></i></div>
+                                <div class="skill-orb" style="top: 50%; left: 0;"><i class="fab fa-git-alt"></i></div>
+                            </div>
+                            <div class="skill-orbit-ring orbit-3">
+                                <div class="skill-orb" style="top: 30%; left: 0;"><i class="fas fa-database"></i></div>
+                                <div class="skill-orb" style="top: 70%; left: 0;"><i class="fab fa-aws"></i></div>
+                                <div class="skill-orb" style="top: 30%; right: 0;"><i class="fab fa-docker"></i></div>
+                                <div class="skill-orb" style="top: 70%; right: 0;"><i class="fab fa-figma"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Terminal with Typing Animation -->
+                        <div class="terminal-container">
+                            <div class="terminal-prompt">$</div>
+                            <div class="terminal-text" id="terminal-text">npm start portfolio.js</div>
+                        </div>
+
+                        <!-- Core Skills with Progress and Labels -->
+                        <div class="center-skills">
+                            <div class="skill-circle">
+                                <i class="fas fa-code"></i>
+                                <div class="skill-label-container">
+                                    <span class="skill-label">Coding</span>
+                                </div>
+                            </div>
+                            <div class="skill-circle">
+                                <i class="fas fa-laptop-code"></i>
+                                <div class="skill-label-container">
+                                    <span class="skill-label">Design</span>
+                                </div>
+                            </div>
+                            <div class="skill-circle">
+                                <i class="fas fa-brain"></i>
+                                <div class="skill-label-container">
+                                    <span class="skill-label">Problem Solving</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Holographic name effect -->
+                        <div class="holographic-name">Hello!</div>
+                    </div>
                 </div>
                 <div class="col-lg-7 ps-lg-5">
-                    <h3 class="mb-4">I'm a passionate <span class="text-primary-custom">Web Developer</span> from San Francisco</h3>
+                    <h3 class="mb-4">I'm a passionate <span class="text-primary-custom">Student & Web Developer</span> from Chennai, India</h3>
                     <p class="lead text-muted mb-4">
-                        I've been designing and developing websites for over 7 years. I specialize in creating clean, elegant, and functional websites that provide great user experiences.
+                        I'm currently pursuing my B.Tech in Computer and Communication Engineering at Amrita School of Engineering (2023–2027). I enjoy learning new technologies and building projects that combine clean design with functionality.
                     </p>
                     <p class="text-muted mb-5">
-                        I'm passionate about leveraging technology to solve real-world problems. My approach combines technical expertise with creative thinking to deliver high-quality solutions that exceed client expectations. When I'm not coding, you can find me hiking, reading, or experimenting with new technologies.
+                        I'm passionate about using technology to solve real-world problems. My expertise includes Python, JavaScript, C, and SQL, with hands-on experience in web development, database management, and machine learning projects. When I'm not coding, you can find me listening to music, reading, or experimenting with new technologies.
                     </p>
                     <div class="row mb-5">
                         <div class="col-md-6 mb-3">
@@ -1188,7 +3364,7 @@
                                 <i class="fas fa-envelope text-primary-custom me-3 fa-2x"></i>
                                 <div>
                                     <h6 class="fw-bold mb-1">Email</h6>
-                                    <p class="text-muted mb-0">contact@ganesanpv.com</p>
+                                    <p class="text-muted mb-0">Hareshganesan1@gmail.com</p>
                                 </div>
                             </div>
                         </div>
@@ -1197,7 +3373,7 @@
                                 <i class="fas fa-phone text-primary-custom me-3 fa-2x"></i>
                                 <div>
                                     <h6 class="fw-bold mb-1">Phone</h6>
-                                    <p class="text-muted mb-0">+1 (123) 456-7890</p>
+                                    <p class="text-muted mb-0">+91 9566096541</p>
                                 </div>
                             </div>
                         </div>
@@ -1206,7 +3382,7 @@
                                 <i class="fas fa-map-marker-alt text-primary-custom me-3 fa-2x"></i>
                                 <div>
                                     <h6 class="fw-bold mb-1">Location</h6>
-                                    <p class="text-muted mb-0">San Francisco, CA</p>
+                                    <p class="text-muted mb-0">Chennai, India</p>
                                 </div>
                             </div>
                         </div>
@@ -1215,7 +3391,7 @@
                                 <i class="fas fa-graduation-cap text-primary-custom me-3 fa-2x"></i>
                                 <div>
                                     <h6 class="fw-bold mb-1">Education</h6>
-                                    <p class="text-muted mb-0">MSc Computer Science</p>
+                                    <p class="text-muted mb-0">B.Tech Computer & Communication Engineering</p>
                                 </div>
                             </div>
                         </div>
@@ -1229,7 +3405,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-5">
+    <section id="projects" class="py-5 snap-section">
         <div id="particles-js" class="particles-container"></div>
         <div class="network-bg"></div>
         <div class="container py-5">
@@ -1284,7 +3460,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-5 bg-light">
+    <section id="skills" class="py-5 bg-light snap-section">
         <div class="network-bg"></div>
         <div class="container py-5">
             <div class="row justify-content-center mb-5">
@@ -1389,7 +3565,7 @@
     </section>
 
     <!-- Contact Section with Integrated Social Icons -->
-    <section id="contact" class="py-5 bg-custom-dark">
+    <section id="contact" class="py-5 bg-custom-dark snap-section">
         <div class="container py-5 position-relative">
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-7 text-center" data-aos="fade-up">
@@ -1402,15 +3578,15 @@
                     <div class="mb-5">
                         <div class="d-flex justify-content-center mb-4 contact-item align-items-center">
                             <i class="fas fa-map-marker-alt text-primary-custom me-3 fa-2x"></i>
-                            <p class="text-white mb-0 fs-5">123 Main Street, San Francisco, CA 94107</p>
+                            <p class="text-white mb-0 fs-5">New Perungalathur, Chennai 600063, India</p>
                         </div>
                         <div class="d-flex justify-content-center mb-4 contact-item align-items-center">
                             <i class="fas fa-envelope text-primary-custom me-3 fa-2x"></i>
-                            <a href="mailto:contact@ganesanpv.com" class="text-white mb-0 fs-5 text-decoration-none">contact@ganesanpv.com</a>
+                            <a href="mailto:hareshganesan1@gmail.com" class="text-white mb-0 fs-5 text-decoration-none">Hareshganesan1@gmail.com</a>
                         </div>
                         <div class="d-flex justify-content-center mb-4 contact-item align-items-center">
                             <i class="fas fa-phone text-primary-custom me-3 fa-2x"></i>
-                            <a href="tel:+11234567890" class="text-white mb-0 fs-5 text-decoration-none">+1 (123) 456-7890</a>
+                            <a href="tel:+919566096541" class="text-white mb-0 fs-5 text-decoration-none">+91 9566096541</a>
                         </div>
                     </div>
                     
@@ -1434,7 +3610,7 @@
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white">
         <div class="container text-center">
-            <p class="mb-0">© 2023 Ganesan P V | All Rights Reserved</p>
+            <p class="mb-0">© 2025 Ganesan P V | All Rights Reserved</p>
         </div>
     </footer>
 
@@ -1689,8 +3865,8 @@
                         particles.push({
                             x: Math.random() * canvas.width,
                             y: Math.random() * canvas.height,
-                            vx: Math.random() * 1 - 0.5,
-                            vy: Math.random() * 1 - 0.5,
+                            vx: (Math.random() - 0.5) * 1,
+                            vy: (Math.random() - 0.5) * 1,
                             size: Math.random() * 2 + 1
                         });
                     }
@@ -1967,9 +4143,6 @@
                         line_linked: {
                             distance: 100,
                             opacity: 0.2
-                        },
-                        move: {
-                            speed: 1
                         }
                     }
                 };
@@ -2027,6 +4200,1174 @@
 
         window.addEventListener('resize', setMobileViewportHeight);
         setMobileViewportHeight();
+
+        // Add animation for about section words
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate about section words with random positions
+            const words = document.querySelectorAll('.animated-word');
+            const container = document.querySelector('.animated-word-cloud');
+            
+            if (container && words.length) {
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                
+                words.forEach(word => {
+                    // Random position within container boundaries with some padding
+                    const padding = 50;
+                    const randomX = Math.random() * (containerWidth - padding*2) + padding;
+                    const randomY = Math.random() * (containerHeight - padding*2) + padding;
+                    const randomZ = Math.random() * 100 - 50;
+                    const randomRotation = Math.random() * 20 - 10;
+                    
+                    word.style.left = `${randomX}px`;
+                    word.style.top = `${randomY}px`;
+                    word.style.transform = `translateZ(${randomZ}px) rotate(${randomRotation}deg)`;
+                });
+            }
+            
+            // Cycle through multiple quotes
+            const quotes = [
+                "Turning ideas into elegant digital solutions",
+                "Code is poetry in the digital age",
+                "Creating tomorrow's technology today",
+                "Passionate about problem-solving through code",
+                "Engineering solutions that matter"
+            ];
+            
+            let quoteIndex = 0;
+            const quoteElement = document.querySelector('.about-quote');
+            
+            if (quoteElement) {
+                setInterval(() => {
+                    quoteElement.style.opacity = 0;
+                    setTimeout(() => {
+                        quoteElement.textContent = `"${quotes[quoteIndex]}"`;
+                        quoteElement.style.opacity = 1;
+                        quoteIndex = (quoteIndex + 1) % quotes.length;
+                    }, 4000);
+                }, 8000);
+            }
+        });
+
+        // Improved animation for about section words
+        document.addEventListener('DOMContentLoaded', function() {
+            // No need for random positions now since we've predefined them in CSS
+            
+            // Cycle through multiple quotes with better timing
+            const quotes = [
+                "Turning ideas into elegant digital solutions",
+                "Code is poetry in the digital age",
+                "Creating tomorrow's technology today",
+                "Passionate about problem-solving through code",
+                "Engineering solutions that matter"
+            ];
+            
+            let quoteIndex = 0;
+            const quoteElement = document.querySelector('.about-quote');
+            
+            if (quoteElement) {
+                // Show the first quote immediately
+                quoteElement.textContent = `"${quotes[quoteIndex]}"`;
+                quoteElement.style.opacity = 1;
+                
+                setInterval(() => {
+                    quoteElement.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        quoteIndex = (quoteIndex + 1) % quotes.length;
+                        quoteElement.textContent = `"${quotes[quoteIndex]}"`;
+                        quoteElement.style.opacity = 1;
+                    }, 1000); // Shorter fade time for better user experience
+                }, 5000); // Shorter interval so users see more quotes
+            }
+
+            // Add 3D tilt effect to the about container
+            const container = document.querySelector('.about-animation-container');
+            if (container) {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const moveX = (x - centerX) / 20; // Subtle movement
+                    const moveY = (y - centerY) / 20;
+                    
+                    container.style.transform = `perspective(1000px) rotateX(${-moveY}deg) rotateY(${moveX}deg) scale(1.02)`;
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
+            }
+        });
+
+        // Super creative interactive About section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create cosmic background dots
+            const cosmicBackground = document.getElementById('cosmic-background');
+            if (cosmicBackground) {
+                for (let i = 0; i < 100; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'cosmic-dot';
+                    dot.style.top = `${Math.random() * 100}%`;
+                    dot.style.left = `${Math.random() * 100}%`;
+                    dot.style.animationDelay = `${Math.random() * 5}s`;
+                    cosmicBackground.appendChild(dot);
+                }
+            }
+
+            // Create binary rain effect
+            const binaryRain = document.getElementById('binary-rain');
+            if (binaryRain) {
+                const columnCount = Math.floor(binaryRain.offsetWidth / 20);
+                for (let i = 0; i < columnCount; i++) {
+                    const column = document.createElement('div');
+                    column.className = 'binary-column';
+                    
+                    // Create random binary string
+                    let binaryString = '';
+                    const length = 15 + Math.floor(Math.random() * 20);
+                    for (let j = 0; j < length; j++) {
+                        binaryString += Math.round(Math.random());
+                    }
+                    
+                    column.textContent = binaryString;
+                    column.style.left = `${i * 20}px`;
+                    column.style.animationDuration = `${4 + Math.random() * 6}s`;
+                    column.style.animationDelay = `${Math.random() * 5}s`;
+                    binaryRain.appendChild(column);
+                }
+            }
+
+            // Terminal Typing Animation with Command Cycling
+            const terminalText = document.getElementById('terminal-text');
+            if (terminalText) {
+                const commands = [
+                    "npm start portfolio.js --mode=awesome",
+                    "git commit -m 'Always improving my skills'",
+                    "python -c 'import talent; print(talent.level)'",
+                    "./deploy_creativity.sh --force",
+                    "docker run -d --name future dreams:latest"
+                ];
+                
+                let commandIndex = 0;
+                
+                function cycleCommand() {
+                    terminalText.style.animation = 'none';
+                    terminalText.offsetHeight; // Force reflow
+                    
+                    // Set new command
+                    terminalText.textContent = commands[commandIndex];
+                    commandIndex = (commandIndex + 1) % commands.length;
+                    
+                    // Restart animation
+                    terminalText.style.animation = 'typing 3s steps(40) forwards, blink 1s step-end infinite';
+                    
+                    // Schedule next command
+                    setTimeout(cycleCommand, 4000);
+                }
+                
+                // Start the cycle
+                setTimeout(cycleCommand, 3000);
+            }
+
+            // Interactive 3D container effect
+            const container = document.querySelector('.about-animation-container');
+            if (container) {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    // Subtle tilt effect
+                    const tiltX = (y - centerY) / centerY * 5;
+                    const tiltY = (x - centerX) / centerX * -5;
+                    
+                    // Apply transform
+                    container.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+                    
+                    // Move binary columns slightly based on mouse
+                    const binaryColumns = document.querySelectorAll('.binary-column');
+                    binaryColumns.forEach(col => {
+                        col.style.transform = `translateX(${(x - centerX) / 20}px)`;
+                    });
+                    
+                    // Make code block follow mouse slightly
+                    const codeBlock = document.querySelector('.code-block-3d');
+                    if (codeBlock) {
+                        codeBlock.style.transform = `translate(-50%, -50%) rotateX(${15 + tiltX/2}deg) rotateY(${-10 + tiltY/2}deg)`;
+                    }
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                    
+                    const binaryColumns = document.querySelectorAll('.binary-column');
+                    binaryColumns.forEach(col => {
+                        col.style.transform = 'translateX(0)';
+                    });
+                    
+                    const codeBlock = document.querySelector('.code-block-3d');
+                    if (codeBlock) {
+                        codeBlock.style.transform = 'translate(-50%, -50%) rotateX(15deg) rotateY(-10deg)';
+                    }
+                });
+                
+                // Make skill orbs interactive
+                const skillOrbs = document.querySelectorAll('.skill-orb');
+                skillOrbs.forEach(orb => {
+                    orb.addEventListener('mouseenter', () => {
+                        orb.style.transform = 'scale(1.3) translateZ(20px)';
+                    });
+                    
+                    orb.addEventListener('mouseleave', () => {
+                        orb.style.transform = 'scale(1) translateZ(0)';
+                    });
+                });
+            }
+        });
+        
+        // Super creative interactive About section with enhanced terminal
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create cosmic background dots
+            const cosmicBackground = document.getElementById('cosmic-background');
+            if (cosmicBackground) {
+                for (let i = 0; i < 100; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'cosmic-dot';
+                    dot.style.top = `${Math.random() * 100}%`;
+                    dot.style.left = `${Math.random() * 100}%`;
+                    dot.style.animationDelay = `${Math.random() * 5}s`;
+                    cosmicBackground.appendChild(dot);
+                }
+            }
+
+            // Create binary rain effect with varied patterns
+            const binaryRain = document.getElementById('binary-rain');
+            if (binaryRain) {
+                const columnCount = Math.floor(binaryRain.offsetWidth / 15);
+                
+                // More varied binary characters for a more interesting effect
+                const binaryChars = ['0', '1', '0', '1', '+', '-', '|', '*'];
+                
+                for (let i = 0; i < columnCount; i++) {
+                    const column = document.createElement('div');
+                    column.className = 'binary-column';
+                    
+                    // Create random binary string
+                    let binaryString = '';
+                    const length = 10 + Math.floor(Math.random() * 25);
+                    for (let j = 0; j < length; j++) {
+                        binaryString += binaryChars[Math.floor(Math.random() * binaryChars.length)];
+                    }
+                    
+                    column.textContent = binaryString;
+                    column.style.left = `${i * 15}px`;
+                    column.style.animationDuration = `${4 + Math.random() * 8}s`;
+                    column.style.animationDelay = `${Math.random() * 5}s`;
+                    column.style.opacity = `${0.3 + Math.random() * 0.7}`;
+                    binaryRain.appendChild(column);
+                }
+            }
+
+            // Enhanced Terminal Interface with multiple commands and outputs
+            const terminalCommands = document.getElementById('terminal-commands');
+            if (terminalCommands) {
+                // Command sequence with responses and timing
+                const commandSequence = [
+                    {
+                        prompt: '<span class="terminal-user">ganesan</span><span class="terminal-at">@</span><span class="terminal-machine">dev</span><span class="terminal-path">:~/projects$</span>',
+                        command: 'node --version',
+                        output: 'v16.14.2',
+                        outputType: 'normal',
+                        delay: 0
+                    },
+                    {
+                        prompt: '<span class="terminal-user">ganesan</span><span class="terminal-at">@</span><span class="terminal-machine">dev</span><span class="terminal-path">:~/projects$</span>',
+                        command: 'npm init creative-portfolio --yes',
+                        output: 'Creating portfolio project...\nInstalling dependencies...\n✓ Project setup complete!',
+                        outputType: 'success',
+                        delay: 3000
+                    },
+                    {
+                        prompt: '<span class="terminal-user">ganesan</span><span class="terminal-at">@</span><span class="terminal-machine">dev</span><span class="terminal-path">:~/projects$</span>',
+                        command: 'python -c "import skills; print(skills.level)"',
+                        output: "AdvancedDeveloper(expertise=['frontend', 'backend', 'cloud'])",
+                        outputType: 'highlight',
+                        delay: 6000
+                    },
+                    {
+                        prompt: '<span class="terminal-user">ganesan</span><span class="terminal-at">@</span><span class="terminal-machine">dev</span><span class="terminal-path">:~/projects$</span>',
+                        command: 'git commit -m "Always improving and innovating"',
+                        output: '[main 3ab5d71] Always improving and innovating\n4 files changed, 230 insertions(+)',
+                        outputType: 'normal',
+                        delay: 9000
+                    }
+                ];
+                
+                // Clear any existing content
+                terminalCommands.innerHTML = '';
+                
+                // Display each command in sequence
+                commandSequence.forEach((cmdInfo, index) => {
+                    // Create command line
+                    const cmdLine = document.createElement('div');
+                    cmdLine.className = 'terminal-command-line';
+                    cmdLine.innerHTML = `${cmdInfo.prompt} <span class="terminal-text">${cmdInfo.command}</span>`;
+                    
+                    // Create output line
+                    const outputLines = cmdInfo.output.split('\n');
+                    const outputElements = outputLines.map(line => {
+                        const output = document.createElement('div');
+                        output.className = `terminal-output terminal-${cmdInfo.outputType}`;
+                        output.textContent = line;
+                        return output;
+                    });
+                    
+                    // Append with delay for realistic typing effect
+                    setTimeout(() => {
+                        terminalCommands.appendChild(cmdLine);
+                        cmdLine.classList.add('active');
+                        
+                        // Add output after command typing completes
+                        setTimeout(() => {
+                            outputElements.forEach(output => {
+                                terminalCommands.appendChild(output);
+                                output.classList.add('active');
+                            });
+                        }, 1000); // Delay after command before showing output
+                    }, cmdInfo.delay);
+                });
+            }
+
+            // Interactive 3D container effect
+            const container = document.querySelector('.about-animation-container');
+            if (container) {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    // Subtle tilt effect
+                    const tiltX = (y - centerY) / centerY * 5;
+                    const tiltY = (x - centerX) / centerX * -5;
+                    
+                    // Apply transform
+                    container.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+                    
+                    // Move binary columns slightly based on mouse
+                    const binaryColumns = document.querySelectorAll('.binary-column');
+                    binaryColumns.forEach(col => {
+                        col.style.transform = `translateX(${(x - centerX) / 20}px)`;
+                    });
+                    
+                    // Make code block follow mouse slightly
+                    const codeBlock = document.querySelector('.code-block-3d');
+                    if (codeBlock) {
+                        codeBlock.style.transform = `translate(-50%, -50%) rotateX(${15 + tiltX/2}deg) rotateY(${-10 + tiltY/2}deg)`;
+                    }
+                    
+                    // Increase glow on holographic name when mouse is near
+                    const holoName = document.querySelector('.holographic-name');
+                    if (holoName) {
+                        const distToHolo = Math.hypot(x - centerX, y - (rect.height - 50));
+                        const glowIntensity = Math.max(0.5, 1 - (distToHolo / 200));
+                        holoName.style.textShadow = `0 0 ${15 * glowIntensity}px rgba(94, 23, 235, ${0.5 * glowIntensity + 0.5})`;
+                    }
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                    
+                    const binaryColumns = document.querySelectorAll('.binary-column');
+                    binaryColumns.forEach(col => {
+                        col.style.transform = 'translateX(0)';
+                    });
+                    
+                    const codeBlock = document.querySelector('.code-block-3d');
+                    if (codeBlock) {
+                        codeBlock.style.transform = 'translate(-50%, -50%) rotateX(15deg) rotateY(-10deg)';
+                    }
+                    
+                    const holoName = document.querySelector('.holographic-name');
+                    if (holoName) {
+                        holoName.style.textShadow = '0 0 15px rgba(94, 23, 235, 0.5)';
+                    }
+                });
+                
+                // Make skill orbs interactive with enhanced effects
+                const skillOrbs = document.querySelectorAll('.skill-orb');
+                skillOrbs.forEach(orb => {
+                    orb.addEventListener('mouseenter', () => {
+                        orb.style.transform = 'scale(1.5) translateZ(40px)';
+                        orb.style.boxShadow = '0 0 30px rgba(94, 23, 235, 0.9)';
+                        orb.querySelector('i').style.transform = 'rotate(360deg)';
+                    });
+                    
+                    orb.addEventListener('mouseleave', () => {
+                        orb.style.transform = 'scale(1) translateZ(0)';
+                        orb.style.boxShadow = '0 0 15px rgba(94, 23, 235, 0.6)';
+                        orb.querySelector('i').style.transform = 'rotate(0deg)';
+                    });
+                });
+            }
+        });
+        
+        // Add dynamic particles to the hero section
+        document.addEventListener('DOMContentLoaded', function () {
+            const heroSection = document.querySelector('.hero-section');
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'glowing-particles';
+            heroSection.appendChild(particleContainer);
+
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particleContainer.appendChild(particle);
+            }
+
+            // Add stars to the starry background
+            const starryBg = document.createElement('div');
+            starryBg.className = 'starry-bg';
+            heroSection.appendChild(starryBg);
+
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                starryBg.appendChild(star);
+            }
+
+            // Add a holographic wave
+            const holographicWave = document.createElement('div');
+            holographicWave.className = 'holographic-wave';
+            heroSection.appendChild(holographicWave);
+
+            // Add a glowing ring
+            const glowingRing = document.createElement('div');
+            glowingRing.className = 'glowing-ring';
+            heroSection.appendChild(glowingRing);
+        });
+
+        // Neural Network Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroNetwork = document.querySelector('.hero-network');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            heroNetwork.appendChild(canvas);
+
+            let width, height, nodes = [], connections = [];
+            const nodeCount = 50;
+            const connectionDistance = 150;
+            const nodeSpeed = 0.5;
+
+            function initNetwork() {
+                width = heroNetwork.offsetWidth;
+                height = heroNetwork.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+                
+                nodes = Array.from({ length: nodeCount }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * nodeSpeed,
+                    vy: (Math.random() - 0.5) * nodeSpeed
+                }));
+            }
+
+            function drawNetwork() {
+                ctx.clearRect(0, 0, width, height);
+                
+                nodes.forEach(node => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    
+                    if(node.x < 0 || node.x > width) node.vx *= -1;
+                    if(node.y < 0 || node.y > height) node.vy *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(94, 23, 235, 0.6)';
+                    ctx.fill();
+                });
+                
+                nodes.forEach((node, i) => {
+                    nodes.slice(i + 1).forEach(other => {
+                        const dx = other.x - node.x;
+                        const dy = other.y - node.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if(distance < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.strokeStyle = `rgba(94, 23, 235, ${1 - distance/connectionDistance})`;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(drawNetwork);
+            }
+
+            initNetwork();
+            drawNetwork();
+            window.addEventListener('resize', initNetwork);
+
+            // Interactive effect
+            heroNetwork.addEventListener('mousemove', (e) => {
+                const rect = heroNetwork.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                nodes.forEach(node => {
+                    const dx = mouseX - node.x;
+                    const dy = mouseY - node.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if(distance < 100) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (100 - distance) * 0.02;
+                        node.vx -= Math.cos(angle) * force;
+                        node.vy -= Math.sin(angle) * force;
+                    }
+                });
+            });
+        });
+
+        // Initialize sophisticated background effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create geometric shapes
+            const geometricShapes = document.getElementById('geometricShapes');
+            for (let i = 0; i < 15; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'geometric-shape';
+                
+                // Random size between 100px and 300px
+                const size = 100 + Math.random() * 200;
+                shape.style.width = `${size}px`;
+                shape.style.height = `${size}px`;
+                
+                // Random position
+                shape.style.left = `${Math.random() * 100}%`;
+                shape.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay and duration
+                shape.style.animationDelay = `${Math.random() * 20}s`;
+                shape.style.animationDuration = `${30 + Math.random() * 30}s`;
+                
+                geometricShapes.appendChild(shape);
+            }
+            
+            // Create gradient orbs
+            const gradientOrbs = document.getElementById('gradientOrbs');
+            for (let i = 0; i < 5; i++) {
+                const orb = document.createElement('div');
+                orb.className = 'gradient-orb';
+                
+                // Random size between 200px and 500px
+                const size = 200 + Math.random() * 300;
+                orb.style.width = `${size}px`;
+                orb.style.height = `${size}px`;
+                
+                // Random position
+                orb.style.left = `${Math.random() * 100}%`;
+                orb.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                orb.style.animationDelay = `${Math.random() * 10}s`;
+                
+                gradientOrbs.appendChild(orb);
+            }
+            
+            // Create digital rain
+            const digitalRain = document.getElementById('digitalRain');
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            for (let i = 0; i < 25; i++) {
+                const column = document.createElement('div');
+                column.className = 'rain-column';
+                
+                // Random position
+                column.style.left = `${i * 4}%`;
+                
+                // Generate random characters
+                let string = '';
+                for (let j = 0; j < 20; j++) {
+                    string += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                column.textContent = string;
+                
+                // Animation delay and duration
+                column.style.animationDelay = `${Math.random() * 8}s`;
+                column.style.animationDuration = `${5 + Math.random() * 5}s`;
+                
+                digitalRain.appendChild(column);
+            }
+            
+            // Create constellation
+            const constellation = document.getElementById('constellation');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star-dot';
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                
+                constellation.appendChild(star);
+            }
+            
+            // WebGL Canvas Background
+            const canvas = document.getElementById('bgCanvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            
+            if (gl) {
+                // Setup canvas size
+                const setCanvasSize = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                };
+                
+                setCanvasSize();
+                window.addEventListener('resize', setCanvasSize);
+                
+                // Vertex shader program
+                const vsSource = `
+                    attribute vec4 aVertexPosition;
+                    varying vec2 vUV;
+                    
+                    void main() {
+                        gl_Position = aVertexPosition;
+                        vUV = aVertexPosition.xy * 0.5 + 0.5;
+                    }
+                `;
+                
+                // Fragment shader program
+                const fsSource = `
+                    precision highp float;
+                    varying vec2 vUV;
+                    uniform float uTime;
+                    
+                    void main() {
+                        vec2 uv = vUV;
+                        float time = uTime * 0.05;
+                        
+                        vec3 color = vec3(0.0);
+                        
+                        // Create multiple waves
+                        for (float i = 1.0; i <= 3.0; i++) {
+                            float intensity = 1.0 / i;
+                            float speed = time * (0.5 / i);
+                            float scale = 20.0 * i;
+                            
+                            float wave = abs(sin(uv.x * scale + speed) + sin(uv.y * scale + speed));
+                            
+                            color += vec3(
+                                wave * 0.3 * intensity, 
+                                wave * 0.1 * intensity, 
+                                wave * 0.5 * intensity
+                            ) * 0.2;
+                        }
+                        
+                        gl_FragColor = vec4(color, 0.05);
+                    }
+                `;
+                
+                // Create shader program
+                function createShader(gl, type, source) {
+                    const shader = gl.createShader(type);
+                    gl.shaderSource(shader, source);
+                    gl.compileShader(shader);
+                    
+                    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                        console.error('Shader compilation failed: ' + gl.getShaderInfoLog(shader));
+                        gl.deleteShader(shader);
+                        return null;
+                    }
+                    
+                    return shader;
+                }
+                
+                const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+                const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+                
+                const shaderProgram = gl.createProgram();
+                gl.attachShader(shaderProgram, vertexShader);
+                gl.attachShader(shaderProgram, fragmentShader);
+                gl.linkProgram(shaderProgram);
+                
+                if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+                    console.error('Shader program linking failed: ' + gl.getProgramInfoLog(shaderProgram));
+                    return;
+                }
+                
+                // Positions for a square covering the entire canvas
+                const positions = [
+                    -1.0, -1.0,
+                     1.0, -1.0,
+                    -1.0,  1.0,
+                     1.0,  1.0
+                ];
+                
+                // Create buffer
+                const positionBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+                
+                // Shader program info
+                const programInfo = {
+                    program: shaderProgram,
+                    attribLocations: {
+                        vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+                    },
+                    uniformLocations: {
+                        time: gl.getUniformLocation(shaderProgram, 'uTime'),
+                    },
+                };
+                
+                // Render loop
+                let startTime = Date.now();
+                
+                function render() {
+                    const currentTime = Date.now();
+                    const elapsedTime = (currentTime - startTime) / 1000; // Time in seconds
+                    
+                    // Clear the canvas
+                    gl.clearColor(0.0, 0.0, 0.0, 0.0);
+                    gl.clear(gl.COLOR_BUFFER_BIT);
+                    
+                    // Set shader program
+                    gl.useProgram(programInfo.program);
+                    
+                    // Set position attribute
+                    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                    gl.vertexAttribPointer(
+                        programInfo.attribLocations.vertexPosition,
+                        2, // 2 components per vertex (x, y)
+                        gl.FLOAT,
+                        false,
+                        0,
+                        0
+                    );
+                    gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+                    
+                    // Set time uniform
+                    gl.uniform1f(programInfo.uniformLocations.time, elapsedTime);
+                    
+                    // Draw the square
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    
+                    // Request next frame
+                    requestAnimationFrame(render);
+                }
+                
+                // Start rendering
+                render();
+            } else {
+                console.warn('WebGL not available, some effects will be disabled');
+                canvas.style.display = 'none';
+            }
+
+            // Parallax effect for background elements
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                // Apply parallax effect to different layers with varying intensity
+                document.querySelector('.nebula-bg').style.transform = 
+                    `translate(${x * -20}px, ${y * -20}px)`;
+                    
+                document.querySelector('.neural-grid').style.transform = 
+                    `translate3d(${x * -10}px, ${y * -10}px, 0) rotateX(${y * 5}deg) rotateY(${-x * 5}deg)`;
+                    
+                // Move constellation stars slightly
+                document.querySelectorAll('.star-dot').forEach(star => {
+                    const speedFactor = parseFloat(star.getAttribute('data-speed') || Math.random() * 2);
+                    star.style.transform = `translate(${x * speedFactor * 20}px, ${y * speedFactor * 20}px)`;
+                });
+            });
+        });
+
+        // Update active dot on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['hello', 'home', 'about', 'projects', 'skills', 'contact'];
+            const dots = document.querySelectorAll('.page-dot');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    current = section;
+                }
+            });
+            
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for dots
+        document.querySelectorAll('.page-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const section = document.getElementById(dot.dataset.section);
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Fix navigation dots functionality
+        function updateActiveDot() {
+            const sections = document.querySelectorAll('.snap-section');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach((section, index) => {
+                const dot = document.querySelectorAll('.page-dot')[index];
+                if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Smooth scroll to section on dot click
+        document.querySelectorAll('.page-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const targetSection = document.querySelectorAll('.snap-section')[index];
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', updateActiveDot);
+        window.addEventListener('load', updateActiveDot);
+
+        // Add parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const parallaxBg = document.querySelector('.parallax-bg');
+            const spheres = document.querySelectorAll('.gradient-sphere');
+            
+            const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translate(${mouseX * 20}px, ${mouseY * 20}px)`;
+            }
+            
+            spheres.forEach((sphere, index) => {
+                const depth = index + 1;
+                sphere.style.transform = `translate(${mouseX * 40 * depth}px, ${mouseY * 40 * depth}px)`;
+            });
+        });
+
+        // Performance optimization: Lazy load resources
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy load heavy libraries and scripts
+            const lazyScripts = [
+                { src: 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js', id: 'particles-js-script' },
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js', id: 'gsap-script' }
+            ];
+            
+            // Load scripts after critical content is displayed
+            setTimeout(() => {
+                lazyScripts.forEach(script => {
+                    if (!document.getElementById(script.id)) {
+                        const scriptEl = document.createElement('script');
+                        scriptEl.src = script.src;
+                        scriptEl.id = script.id;
+                        document.body.appendChild(scriptEl);
+                    }
+                });
+                
+                // Hide preloader after essential content is loaded
+                setTimeout(() => {
+                    const preloader = document.querySelector('.preloader');
+                    if (preloader) {
+                        preloader.classList.add('hidden');
+                    }
+                }, 500);
+            }, 1000);
+            
+            // Detect low-performance devices and apply reduced animations
+            const isLowPerfDevice = () => {
+                return (
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                    window.innerWidth < 768 ||
+                    navigator.hardwareConcurrency < 4 ||
+                    navigator.deviceMemory < 4
+                );
+            };
+            
+            if (isLowPerfDevice()) {
+                document.body.classList.add('reduced-motion');
+                console.log('Low performance device detected, reducing animations');
+                
+                // Disable heavy animations on low-end devices
+                document.querySelectorAll('.floating, .binary-rain, .skill-orbit, .neural-grid').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Reduce particle count
+                window.PARTICLE_COUNT = 30;
+                window.CONNECTION_DISTANCE = 100;
+            } else {
+                window.PARTICLE_COUNT = 80;
+                window.CONNECTION_DISTANCE = 150;
+            }
+        });
+        
+        // Throttle and debounce functions for performance
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        }
+        
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+        
+        // Use throttled event listeners for heavy operations
+        const throttledMouseMove = throttle((e) => {
+            const cursor = document.querySelector('.custom-cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            
+            if (cursor && cursorDot) {
+                cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+                cursorDot.style.transform = `translate(${e.clientX - 2}px, ${e.clientY - 2}px)`;
+            }
+            
+            // Throttled parallax effect
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            parallaxElements.forEach(el => {
+                const speed = el.getAttribute('data-speed') || 5;
+                const x = (e.clientX / window.innerWidth - 0.5) * speed;
+                const y = (e.clientY / window.innerHeight - 0.5) * speed;
+                el.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        }, 16); // 60fps equivalent
+        
+        document.addEventListener('mousemove', throttledMouseMove);
+        
+        // Optimize scroll event handling
+        const debouncedScroll = debounce(() => {
+            const scrollY = window.scrollY;
+            document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`);
+            
+            // Navbar effect
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            
+            // Only render visible sections
+            document.querySelectorAll('section').forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const isVisible = (
+                    rect.top < window.innerHeight &&
+                    rect.bottom > 0
+                );
+                
+                if (isVisible) {
+                    section.classList.add('is-visible');
+                } else {
+                    section.classList.remove('is-visible');
+                }
+            });
+        }, 100);
+        
+        window.addEventListener('scroll', debouncedScroll);
+        
+        // Page specific optimizations
+        window.addEventListener('load', function() {
+            // Intersection Observer for lazy loading content
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('lazy-section')) {
+                            // Enable animations only when section is visible
+                            entry.target.classList.add('animate-section');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe all sections for lazy loading
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('lazy-section');
+                observer.observe(section);
+            });
+            
+            // Reduce particle count on mobile
+            if (window.innerWidth < 768) {
+                const particlesConfig = {
+                    particles: {
+                        number: { value: 30 },
+                        size: { value: 2 },
+                        line_linked: {
+                            enable: true,
+                            distance: 100,
+                            opacity: 0.2
+                        },
+                        move: {
+                            speed: 1
+                        }
+                    }
+                };
+                
+                if (typeof particlesJS === 'function') {
+                    if (document.getElementById('particles-js')) {
+                        particlesJS('particles-js', particlesConfig);
+                    }
+                }
+                
+                // Simplify network background
+                const networkBgs = document.querySelectorAll('.network-bg canvas');
+                networkBgs.forEach(canvas => {
+                    if (canvas.getContext) {
+                        const ctx = canvas.getContext('2d');
+                        if (ctx) {
+                            ctx.globalAlpha = 0.2;
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Fix for mobile navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Close mobile menu when a link is clicked
+                    if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                });
+            });
+            
+            // Fix viewport height issues on mobile browsers
+            function setMobileHeight() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            setMobileHeight();
+            window.addEventListener('resize', setMobileHeight);
+        });
+        
+        // Optimize particles.js configuration
+        function initOptimizedParticles() {
+            if (typeof particlesJS === 'function') {
+                // Determine particle count based on device
+                const particleCount = window.innerWidth < 768 ? 30 : 60;
+                const particlesConfig = {
+                    particles: {
+                        number: { value: particleCount },
+                        color: { value: '#5e17eb' },
+                        shape: { type: 'circle' },
+                        opacity: {
+                            value: 0.3,
+                            random: true,
+                            animation: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false }
+                        },
+                        size: {
+                            value: 2,
+                            random: true
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 100,
+                            color: '#5e17eb',
+                            opacity: 0.2,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 1,
+                            direction: 'none',
+                            random: false,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false,
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: { enable: window.innerWidth > 768, mode: 'repulse' },
+                            onclick: { enable: false },
+                            resize: true
+                        },
+                        modes: {
+                            repulse: { distance: 50, duration: 0.4 }
+                        }
+                    },
+                    retina_detect: true
+                };
+                
+                if (document.getElementById('particles-js')) {
+                    particlesJS('particles-js', particlesConfig);
+                }
+            }
+        }
+        
+        // Load particles only when needed and if script is available
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth > 768) {
+                const particlesScript = document.createElement('script');
+                particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+                particlesScript.onload = function() {
+                    initOptimizedParticles();
+                };
+                document.body.appendChild(particlesScript);
+            }
+        });
     </script>
 </body>
 </html>
