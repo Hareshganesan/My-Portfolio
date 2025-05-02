@@ -3578,7 +3578,7 @@
                     <div class="mb-5">
                         <div class="d-flex justify-content-center mb-4 contact-item align-items-center">
                             <i class="fas fa-map-marker-alt text-primary-custom me-3 fa-2x"></i>
-                            <p class="text-white mb-0 fs-5">New Perungalathur, Chennai 600063, India</p>
+                            <p class="text-white mb-0 fs-5">Chennai 600063, India</p>
                         </div>
                         <div class="d-flex justify-content-center mb-4 contact-item align-items-center">
                             <i class="fas fa-envelope text-primary-custom me-3 fa-2x"></i>
@@ -3619,6 +3619,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         // Initialize AOS
         AOS.init({
@@ -5368,6 +5369,174 @@
                 document.body.appendChild(particlesScript);
             }
         });
+
+        // Initialize Three.js Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Add a rotating cube
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshStandardMaterial({ color: 0x5e17eb });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        // Add lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        // Position the camera
+        camera.position.z = 5;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Mobile optimization
+        function initMobileOptimizations() {
+            const isMobile = window.innerWidth < 768;
+
+            // Optimize Three.js for mobile
+            if (isMobile) {
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                // Reduce geometry complexity for mobile
+                const mobileGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+                cube.geometry.dispose();
+                cube.geometry = mobileGeometry;
+            }
+
+            // Optimize background effects for mobile
+            if (isMobile) {
+                // Reduce particle count and complexity
+                const elements = document.querySelectorAll('.particle, .star-dot, .geometric-shape');
+                elements.forEach((el, index) => {
+                    if (index > 20) { // Keep only first 20 particles
+                        el.remove();
+                    }
+                });
+
+                // Disable heavy parallax effects on mobile
+                document.removeEventListener('mousemove', parallaxEffect);
+                
+                // Optimize animations
+                document.querySelectorAll('.animated-element').forEach(el => {
+                    el.style.transform = 'none';
+                    el.style.transition = 'transform 0.3s ease-out';
+                });
+            }
+
+            // Handle touch events for mobile interaction
+            if (isMobile) {
+                document.addEventListener('touchmove', (e) => {
+                    if (e.touches.length > 0) {
+                        const touch = e.touches[0];
+                        const x = touch.clientX / window.innerWidth;
+                        const y = touch.clientY / window.innerHeight;
+                        
+                        // Simplified touch-based animation
+                        cube.rotation.x = y * Math.PI;
+                        cube.rotation.y = x * Math.PI;
+                    }
+                });
+            }
+
+            // Add viewport meta for proper mobile scaling
+            const viewportMeta = document.querySelector('meta[name="viewport"]');
+            if (!viewportMeta) {
+                const meta = document.createElement('meta');
+                meta.name = 'viewport';
+                meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+                document.head.appendChild(meta);
+            }
+
+            // Fix mobile height issues
+            function setMobileViewportHeight() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            window.addEventListener('resize', setMobileViewportHeight);
+            window.addEventListener('orientationchange', setMobileViewportHeight);
+            setMobileViewportHeight();
+
+            // Optimize WebGL context for mobile
+            if (gl && isMobile) {
+                gl.getExtension('WEBGL_lose_context');
+                gl.getExtension('WEBGL_debug_renderer_info');
+                
+                // Reduce WebGL quality on mobile
+                gl.disable(gl.DEPTH_TEST);
+                gl.disable(gl.STENCIL_TEST);
+                gl.hint(gl.GENERATE_MIPMAP_HINT, gl.FASTEST);
+            }
+        }
+
+        // Initialize mobile optimizations
+        document.addEventListener('DOMContentLoaded', initMobileOptimizations);
+
+        // Add mobile-specific CSS
+        const mobileStyles = document.createElement('style');
+        mobileStyles.textContent = `
+            @media (max-width: 768px) {
+                .card, .project-card {
+                    width: 100% !important;
+                    margin: 10px 0 !important;
+                }
+                
+                .navbar {
+                    padding: 10px !important;
+                }
+                
+                .hero-section {
+                    height: calc(var(--vh, 1vh) * 100) !important;
+                    padding: 20px !important;
+                }
+                
+                .section {
+                    padding: 40px 20px !important;
+                }
+                
+                .skill-item {
+                    width: calc(50% - 20px) !important;
+                    margin: 10px !important;
+                }
+                
+                .geometric-shape, .gradient-orb {
+                    display: none !important;
+                }
+                
+                canvas {
+                    opacity: 0.5 !important;
+                }
+                
+                .custom-cursor, .cursor-dot {
+                    display: none !important;
+                }
+                
+                .floating {
+                    animation: none !important;
+                }
+            }
+        `;
+        document.head.appendChild(mobileStyles);
     </script>
 </body>
 </html>
