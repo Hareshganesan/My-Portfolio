@@ -3103,6 +3103,70 @@
         .skill-item, .project-card, .card {
             contain: layout style paint;
         }
+
+        /* Fix for profile picture sizing */
+        .hero-img-container {
+            position: relative;
+            width: 250px; /* Reduced from 350px */
+            height: 250px; /* Reduced from 350px */
+            margin: 0 auto;
+            overflow: visible;
+            z-index: 10;
+            perspective: 1000px;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            height: auto;
+            padding: 80px 0; /* Adjusted padding */
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(-45deg, #0a1128, #1e2a78, #5e17eb, #4a11c9);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            overflow: hidden;
+        }
+
+        /* Adjust front page sizing */
+        .container {
+            width: min(1200px, 95%);
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 768px) {
+            .hero-img-container {
+                width: 180px; /* Even smaller on mobile */
+                height: 180px;
+                margin: 20px auto;
+            }
+
+            .hero-section {
+                padding: 60px 0;
+                min-height: calc(100vh - 60px);
+            }
+
+            .hero-content {
+                text-align: center;
+                padding: 20px;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 10px;
+            }
+        }
+
+        /* Remove all Three.js related styles */
+        canvas {
+            display: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.css">
 </head>
