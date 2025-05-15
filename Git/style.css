@@ -53,16 +53,16 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     position: center;
     justify-content: center;
-    background: linear-gradient(-45deg, #0a0a0a, #222, #C9A14A 60%, #B08D3B 100%);
+    background: none;
     background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
+    /*animation: gradientAnimation 15s ease infinite;*/
     overflow: hidden;
 }
 
 .hero-content {
     position: center;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(15, 3, 97, 0.2);
     padding: 2rem;
     border-radius: 15px;
     backdrop-filter: blur(5px);
@@ -75,16 +75,6 @@ h1, h2, h3, h4, h5, h6 {
     border: 5px solid var(--primary-color);
     box-shadow: 0 0 25px rgba(201, 161, 74, 0.6);
     position: relative;
-}
-
-.hero-section:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle, transparent 20%, var(--dark-bg) 80%);
 }
 
 .section-heading {
@@ -376,20 +366,6 @@ section.bg-light::before,
     100% { background-position: 0% 50%; }
 }
 
-/* Glowing effect for section transitions 
-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, 
-        transparent, 
-        rgba(201, 161, 74, 0.5), 
-        transparent
-    );
-}
 
 /* Footer update */
 .bg-dark {
@@ -530,7 +506,7 @@ section::before {
 
 /* Glowing Navigation */
 .navbar {
-    background: rgba(10, 10, 10, 0.8);
+    background: rgba(10, 10, 10, 0.382);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(201, 161, 74, 0.1);
 }
@@ -561,13 +537,6 @@ section::before {
     transform: rotateY(5deg) rotateX(5deg);
 }
 
-/* Animated Background Gradient 
-.hero-section {
-    background: linear-gradient(-45deg, #0a0a0a, #222, #C9A14A, #B08D3B, #F5E7B2);
-    background-size: 800% 400%;
-    animation: gradientAnimation 15s ease infinite;
-    position: relative;
-}
 
 /* Floating Elements Animation */
 .floating {
@@ -580,17 +549,6 @@ section::before {
     100% { transform: translate(0, 0px); }
 }
 
-/* Glitch Text Effect 
-.glitch-text {
-    position: relative;
-    animation: glitch 1s linear infinite;
-}
-
-@keyframes glitch {
-    2%, 64% { transform: translate(2px,0) skew(0deg); }
-    4%, 60% { transform: translate(-2px,0) skew(0deg); }
-    62% { transform: translate(0,0) skew(5deg); }
-}
 
 /* Neural Network Background */
 .network-bg {
@@ -627,9 +585,6 @@ section {
     z-index: 1;
 }
 
-/*section .network-bg {
-    opacity: 0.3;  /* Reduced opacity for subtle effect */
-/*}
 
 /* Logo Animation */
 .logo-text {
@@ -739,66 +694,6 @@ section {
     margin-left: -0.5rem; /* Move name slightly left to fix alignment */
     transform-style: preserve-3d;
     text-align: left; /* Ensure left alignment */
-}
-
-/*.hero-name span {
-    display: inline-block;
-    background: linear-gradient(45deg, #C9A14A, #F5E7B2);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 10px rgba(255, 255, 255, 5);
-    animation: shine 3s infinite;
-    position: relative;
-}
-
-/* Advanced text effect with 3D depth 
-.hero-name::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0.1rem;
-    top: 0.1rem;
-    z-index: -1;
-    background: linear-gradient(45deg, #C9A14A, #F5E7B2);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.6;
-    filter: blur(10px);
-}
-
-/* Enhanced shine animation 
-@keyframes shine {
-    0% { filter: brightness(100%) contrast(100%); }
-    50% { filter: brightness(150%) contrast(120%); }
-    100% { filter: brightness(100%) contrast(100%); }
-}
-
-/* Letter hover effect 
-.hero-name .char {
-    display: inline-block;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform-style: preserve-3d;
-    transform-origin: center bottom;
-    position: relative;
-}
-
-.hero-name:hover .char {
-    animation: charFloat 1.5s ease-in-out infinite;
-    animation-play-state: paused;
-}
-
-.hero-name .char:hover {
-    color: #ffffff;
-    text-shadow: 0 0 15px rgba(201, 161, 74, 0.8);
-    transform: translateY(-10px) scale(1.2) rotate(5deg);
-    animation-play-state: running;
-    z-index: 5;
-}
-
-@keyframes charFloat {
-    0%, 100% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(-15px) rotate(3deg); }
 }
 
 /* Remove unnecessary underlines and effects */
@@ -2117,16 +2012,16 @@ section.bg-light {
     }
 }
 
-/* Hero Section Neural Network Effect */
+/* Hero Section Neural Network Effect 
 .hero-network {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 50;
 }
-
+*/
 .hero-network canvas {
     position: absolute;
     top: 0;
@@ -2200,7 +2095,7 @@ section.bg-light {
     pointer-events: none;
 }
 
-/* Advanced Neural Grid Animation */
+/* Advanced Neural Grid Animation 
 .neural-grid {
     position: fixed;
     top: 0;
@@ -2286,7 +2181,7 @@ section.bg-light {
     75% { transform: translate(-10%, 5%); }
 }
 
-/* Digital Rain Effect (subtle and sophisticated) */
+/* Digital Rain Effect (subtle and sophisticated) 
 .digital-rain {
     position: fixed;
     top: 0;
@@ -2296,7 +2191,7 @@ section.bg-light {
     pointer-events: none;
     z-index: 0;
     opacity: 0.15;
-}
+}*/
 
 .rain-column {
     position: absolute;
@@ -2440,7 +2335,7 @@ html, body {
     letter-spacing: 0;
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeUp 1s ease forwards 0.8s;
+    animation: fadeUp 1s ease forwards 0.9s;
 }
 
 .intro-cta {
@@ -3109,7 +3004,7 @@ section {
 }
 
 .project-card {
-    background: rgba(30, 32, 60, 0.85);
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 18px;
     box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
     overflow: hidden;
@@ -3392,7 +3287,7 @@ section {
     flex-direction: column;
     z-index: 10;
     /* New glassmorphism effect */
-    background: rgba(40, 30, 80, 0.25);
+    background: rgba(218, 229, 99, 0.25);
     backdrop-filter: blur(2px) saturate(100%);
     -webkit-backdrop-filter: blur(5px) saturate(100%);
     border-radius: 18px;
@@ -3422,13 +3317,13 @@ section {
     overflow: hidden;
     border-radius: 18px;
     margin-bottom: 30px;
-    background: rgba(30, 32, 60, 0.85);
+    background: rgba(7, 7, 7, 0.85);
 }
 
 .project-hover-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(13, 12, 34, 0.9); /* Darker, more opaque background */
+    background: rgba(0, 0, 0, 0.536); /* Darker, more opaque background */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3446,7 +3341,7 @@ section {
 
 .project-info {
     padding: 1.5rem;
-    background: rgba(13, 12, 34, 0.95); /* Ensure text background is opaque enough */
+    background: rgba(0, 0, 0, 0.95); /* Ensure text background is opaque enough */
 }
 
 .project-info h4 {
@@ -4157,139 +4052,6 @@ body.transition-in-progress {
     }
 }
 
-/* ...existing code... */
-
-/* Enhanced Name Section Styles - Fixed Alignment 
-.hero-name {
-    font-size: 4.5rem;
-    font-weight: 900;
-    color: #C9A14A;
-    text-shadow: 2px 2px 0 #C9A14A,
-                 4px 4px 0 rgba(201, 161, 74, 0.3);
-    position: relative;
-    z-index: 2;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-    margin-left: -0.5rem; /* Move name slightly left to fix alignment 
-    transform-style: preserve-3d;
-    text-align: left; /* Ensure left alignment 
-}
-
-/*.hero-name span {
-    display: inline-block;
-    background: linear-gradient(45deg, #C9A14A, #F5E7B2);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
-    animation: shine 3s infinite;
-    position: relative;
-}
-
-/* Advanced text effect with 3D depth 
-.hero-name::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0.1rem;
-    top: 0.1rem;
-    z-index: -1;
-    background: linear-gradient(45deg, #C9A14A, #F5E7B2);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.6;
-    filter: blur(10px);
-}
-
-/* Enhanced shine animation 
-@keyframes shine {
-    0% { filter: brightness(100%) contrast(100%); }
-    50% { filter: brightness(150%) contrast(120%); }
-    100% { filter: brightness(100%) contrast(100%); }
-}
-
-/* Letter hover effect 
-.hero-name .char {
-    display: inline-block;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform-style: preserve-3d;
-    transform-origin: center bottom;
-    position: relative;
-}
-
-.hero-name:hover .char {
-    animation: charFloat 1.5s ease-in-out infinite;
-    animation-play-state: paused;
-}
-
-.hero-name .char:hover {
-    color: #ffffff;
-    text-shadow: 0 0 15px rgba(201, 161, 74, 0.8);
-    transform: translateY(-10px) scale(1.2) rotate(5deg);
-    animation-play-state: running;
-    z-index: 5;
-}
-
-@keyframes charFloat {
-    0%, 100% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(-15px) rotate(3deg); }
-}
-
-/* Enhanced reveal overlay with gradient effect 
-.lim-reveal-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background: linear-gradient(90deg, 
-        rgba(15, 15, 35, 0.1), 
-        rgba(201, 161, 74, 0.4), 
-        rgba(15, 15, 35, 0.1)
-    );
-    backdrop-filter: blur(10px);
-    transform: translateX(-100%);
-    pointer-events: none;
-    will-change: transform, opacity;
-    box-shadow: 0 0 100px 50px rgba(201, 161, 74, 0.5);
-}
-
-/* Add an electric glow effect to the hero name 
-.hero-name {
-    position: relative;
-}
-
-.hero-name::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(45deg, 
-        rgba(201, 161, 74, 0) 20%, 
-        rgba(201, 161, 74, 0.4) 30%, 
-        rgba(201, 161, 74, 0) 40%
-    );
-    background-size: 200% 200%;
-    opacity: 0;
-    filter: blur(8px);
-    border-radius: 20px;
-    z-index: -1;
-    animation: electricGlow 5s ease infinite;
-    transition: opacity 0.5s ease;
-}
-
-.hero-name:hover::before {
-    opacity: 1;
-}
-
-@keyframes electricGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 150%; }
-    100% { background-position: 0% 50%; }
-}
 
 /* Add magnetic effect to hero content */
 .hero-content {
@@ -4873,7 +4635,7 @@ section {
   perspective: 1000px;
   width: 200px;
   height: 200px;
-  margin: 2rem auto;
+  margin: 4rem auto;
   position: relative;
 }
 
@@ -4898,12 +4660,14 @@ section {
   position: absolute;
   width: 200px;
   height: 200px;
-  border: 2px solid rgba(201, 161, 74, 0.3);
+  border: 8px solid rgba(201, 161, 74, 0.3);
+  border-style: double;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
-  background: rgba(20, 18, 10, 0.8);
+  font-size: 4rem;
+  background: rgba(20, 10, 18, 0.8);
   color: var(--primary-color);
   box-shadow: inset 0 0 20px rgba(201, 161, 74, 0.2);
   backdrop-filter: blur(5px);
@@ -6306,29 +6070,6 @@ section {
   transform: translateY(-2px);
 }
 
-/* Floating particles in code galaxy background 
-.fun-facts-floaters {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.fun-facts-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(94,23,235,0.05) 0%, rgba(24,26,42,0.1) 100%);
-  z-index: -2;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
 /* ...existing code... */
 
 /* ...existing code... */
@@ -6438,102 +6179,6 @@ section {
 }
 
 /* ...existing code... */
-
-/* Terminal Card Styling */
-.terminal-card {
-  background: #1E1E1E;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  font-family: 'Fira Mono', 'Courier New', monospace;
-  border: 1px solid rgba(94, 23, 235, 0.2);
-  position: relative;
-}
-
-.terminal-header {
-  background: #181a2a;
-  padding: 10px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(94, 23, 235, 0.2);
-}
-
-.terminal-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.terminal-btn {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.terminal-btn.red { background-color: #FF5F56; }
-.terminal-btn.yellow { background-color: #FFBD2E; }
-.terminal-btn.green { background-color: #27C93F; }
-
-.terminal-title {
-  color: #FFD600;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.terminal-body {
-  padding: 15px;
-  height: 200px;
-  overflow-y: auto;
-  position: relative;
-}
-
-.terminal-content {
-  color: #fff;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.terminal-content .command {
-  color: #FFD600;
-}
-
-.terminal-content .success {
-  color: #27C93F;
-}
-
-.terminal-content .error {
-  color: #FF5F56;
-}
-
-.terminal-content .info {
-  color: #61DAFB;
-}
-
-.terminal-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 18px;
-  background-color: #FFD600;
-  animation: blink 1s step-end infinite;
-  vertical-align: middle;
-  margin-left: 2px;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@media (max-width: 767px) {
-  .terminal-body {
-    height: 150px;
-  }
-  
-  .terminal-content {
-    font-size: 12px;
-  }
-}
-
 /* ...existing code... */
 /* Add to your CSS file */
 .typing-cursor {
@@ -6547,7 +6192,7 @@ section {
 /* Hero Section Video Background */
 .hero-section {
   position: relative;
-  height: 100vh;
+  height: 110vh;
   overflow: hidden;
 }
 
@@ -6571,6 +6216,7 @@ section {
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
+  filter: blur(10px);
 }
 
 .hero-video-overlay {
@@ -6579,11 +6225,279 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Adjust overlay opacity */
+  background: rgba(0, 0, 0, 0.1); /* Adjust overlay opacity */
   z-index: 1;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
+}
+
+/* Kali Linux Terminal Styles */
+.kali-terminal {
+  background-color: #0C0D16;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  font-family: monospace;
+  width: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #2A2E3D;
+}
+
+.terminal-header {
+  background-color: #2A2E3D;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.terminal-title {
+  color: #D3DAE3;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.terminal-buttons {
+  display: flex;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 8px;
+  transition: filter 0.2s ease;
+}
+
+.terminal-button.red {
+  background-color: #FF5F57;
+}
+
+.terminal-button.yellow {
+  background-color: #FEBC2E;
+}
+
+.terminal-button.green {
+  background-color: #28C841;
+}
+
+.terminal-button:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
+.terminal-content {
+  padding: 15px 20px;
+  color: #D3DAE3;
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #0C0D16;
+}
+
+/* Scrollbar Styling */
+.terminal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.terminal-content::-webkit-scrollbar-thumb {
+  background-color: #2A2E3D;
+  border-radius: 4px;
+}
+.terminal-content::-webkit-scrollbar-track {
+  background-color: #0C0D16;
+}
+
+.kali-info {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.kali-logo {
+  color: #03A9F4;
+  font-size: 50px;
+  margin-right: 20px;
+}
+
+.kali-dragon {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.kali-dragon img {
+  width: 180%;
+  height: auto;
+}
+
+.kali-details {
+  color: #B7BABE;
+  white-space: pre-line;
+}
+
+/* Prompt Styling */
+.terminal-prompt {
+  color: #D3DAE3;
+  display: flex;
+  align-items: center;
+}
+
+.prompt-user {
+  color: #03A9F4;
+}
+
+.prompt-at {
+  color: #B7BABE;
+}
+
+.prompt-host {
+  color: #9A93E8;
+}
+
+.prompt-path {
+  color: #8DD558;
+}
+
+.prompt-sign {
+  color: #B7BABE;
+  margin-right: 10px;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  color: #D3DAE3;
+  font-family: monospace;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  caret-color: #D3DAE3;
+  margin-left: 5px;
+}
+
+.terminal-output {
+  color: #D3DAE3;
+  white-space: pre-wrap;
+  margin: 5px 0;
+}
+
+.command-history {
+  margin-top: 10px;
+}
+
+/* Cursor */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: #D3DAE3;
+  animation: blink 1s step-end infinite;
+  vertical-align: left;
+  margin-left: 3px;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Typing animation (optional use) */
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #D3DAE3;
+  animation: typing 2s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #D3DAE3; }
+}
+
+/* Fade-in for new command lines */
+.command-line {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Colors */
+.text-primary-kali {
+  color: #03A9F4;
+}
+.text-secondary-kali {
+  color: #9A93E8;
+}
+.text-success-kali {
+  color: #8DD558;
+}
+.text-info-kali {
+  color: #56B6C2;
+}
+.text-warning-kali {
+  color: #FEBC2E;
+}
+.text-danger-kali {
+  color: #FF5F57;
+}
+.text-light-kali {
+  color: #D3DAE3;
+}
+.text-gray-kali {
+  color: #B7BABE;
+}
+
+/* Terminal special */
+.pkg {
+  color: #8DD558;
+}
+
+.terminal-command {
+  color: #FEBC2E;
+}
+
+.terminal-output .highlight {
+  color: #FF5F57;
+}
+
+/* New output types */
+.terminal-error {
+  color: #FF5F57;
+}
+.terminal-success {
+  color: #8DD558;
+}
+.terminal-neutral {
+  color: #B7BABE;
+}
+
+.user-input {
+  color: #FEBC2E;
+  font-weight: bold;
 }
