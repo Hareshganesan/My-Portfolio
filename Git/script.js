@@ -1506,10 +1506,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (terminalText) {
         const commands = [
             "npm start portfolio.js --mode=awesome",
-            "git commit -m",
-            "python -c 'import talent;",
-            "./deploy_creativity.sh --force",
-            "docker run -d --name "
+            "git commit -m --author='Ganesan <",
+            "python -c 'import talent; print(talent)'",
+            "./deploy_creativity.sh --no-cache",
+            "echo 'Hello, World!' > /dev/null",
+            "ls -la /projects --verbose",
+            "echo 'Deploying to production...'",
+            "curl -X GET 'https://api.ganesan.dev/portfolio'",
+            "echo 'Portfolio deployed successfully!'"
         ];
         
         let commandIndex = 0;
@@ -2755,61 +2759,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cursorDot) cursorDot.remove();
 });
 
-// Remove all event listeners and code related to .custom-cursor and .cursor-dot
-// Remove or comment out the following blocks:
-
-/*
-// Enhanced Custom Cursor with auto-hide
-const cursor = document.querySelector('.custom-cursor');
-const cursorDot = document.querySelector('.cursor-dot');
-let cursorTimeout;
-
-// Hide cursors initially
-cursor.style.opacity = '0';
-cursorDot.style.opacity = '0';
-
-document.addEventListener('mousemove', (e) => {
-    // Show cursors
-    cursor.style.opacity = '1';
-    cursorDot.style.opacity = '1';
-    
-    // Update cursor positions
-    cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
-    cursorDot.style.transform = `translate(${e.clientX - 2}px, ${e.clientY - 2}px)`;
-    
-    // Clear existing timeout
-    clearTimeout(cursorTimeout);
-    
-    // Set new timeout to hide cursors after 2 seconds of inactivity
-    cursorTimeout = setTimeout(() => {
-        cursor.style.opacity = '0';
-        cursorDot.style.opacity = '0';
-    }, 2000);
-});
-
-// Hide cursors when mouse leaves the window
-document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-    cursorDot.style.opacity = '0';
-});
-*/
-
-// Remove hover effect handlers that reference cursor
-/*
-const interactiveElements = document.querySelectorAll('a, button, .skill-item, .project-card');
-interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(2)';
-        cursor.style.border = '1px solid var(--primary-color)';
-    });
-    element.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursor.style.border = '2px solid var(--primary-color)';
-    });
-});
-*/
-
-// ...existing code...
 
 // --- REMOVE PARALLAX AND MOUSEMOVE SECTION TRANSFORMS ---
 // Remove the mousemove event that causes sections to move/shake
@@ -5797,44 +5746,147 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Kali Linux Terminal functionality
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("DOM fully loaded ✅");
+  const terminalInput = document.getElementById('terminal-input');
+  const commandHistory = document.getElementById('commandHistory');
+  const cursor = document.getElementById('cursor');
+  const terminalContent = document.querySelector('.terminal-content');
 
-  const connectTerminal = document.getElementById('connect-terminal');
-  console.log("connectTerminal found:", connectTerminal);
+  if (!terminalInput || !commandHistory) return;
 
-  if (connectTerminal) {
-    connectTerminal.addEventListener('keydown', function (e) {
-      console.log("Key pressed:", e.key);
+  // Auto focus input when terminal is clicked
+  document.querySelector('.kali-terminal').addEventListener('click', function () {
+    terminalInput.focus();
+    cursor.style.display = 'inline-block';
+  });
 
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const input = connectTerminal.value.trim().toLowerCase();
-        console.log("User input:", input);
+  // Cursor visibility on blur/focus
+  terminalInput.addEventListener('blur', () => (cursor.style.display = 'none'));
+  terminalInput.addEventListener('focus', () => (cursor.style.display = 'inline-block'));
 
-        let output = "";
-        switch (input) {
-          case "contact":
-            output = "📧 Reach me at: your.email@example.com";
-            break;
-          case "linkedin":
-            output = "🔗 https://linkedin.com/in/yourprofile";
-            break;
-          case "hello":
-            output = "👋 Hello! Thanks for connecting.";
-            break;
-          default:
-            output = "❌ Unknown command. Try: contact, linkedin, hello";
-        }
+  // Focus input on load
+  setTimeout(() => terminalInput.focus(), 500);
 
-        console.log("Output:", output);
-        connectTerminal.value = output;
+  // Handle input commands
+  terminalInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
 
-        // Reset after 3 seconds
-        setTimeout(() => {
-          connectTerminal.value = "";
-        }, 3000);
-      }
-    });
+      const command = this.value.trim();
+      this.value = '';
+
+      // Echo command line
+      const commandLine = document.createElement('div');
+      commandLine.className = 'terminal-input-line command-line';
+      commandLine.innerHTML = `
+        <div class="terminal-prompt">
+          <span class="prompt-user">kalikali</span><span class="prompt-at">@</span><span class="prompt-host">dev</span><span class="prompt-path">:~$</span>
+        </div>
+        <span class="terminal-command user-input">${command}</span>`;
+      commandHistory.appendChild(commandLine);
+
+      // Process command
+      processCommand(command);
+
+      // Scroll to bottom
+      terminalContent.scrollTop = terminalContent.scrollHeight;
+    }
+  });
+
+  // Command logic
+  function processCommand(command) {
+    const output = document.createElement('div');
+    output.className = 'terminal-output command-line';
+
+    switch (command.toLowerCase()) {
+      case 'help':
+        output.innerHTML = `Available commands:
+<span class="text-success-kali">help</span>     - Show this help message
+<span class="text-success-kali">about</span>    - About me
+<span class="text-success-kali">contact</span>  - Contact information
+<span class="text-success-kali">skills</span>   - My technical skills
+<span class="text-success-kali">projects</span> - View my projects
+<span class="text-success-kali">clear</span>    - Clear terminal
+<span class="text-success-kali">socials</span>  - My social media links`;
+        break;
+
+      case 'about':
+        output.innerHTML = `<span class="text-warning-kali">About Me:</span>
+I am a full-stack developer passionate about creating efficient, elegant, and user-friendly web applications.
+With expertise in modern frameworks and a strong foundation in software development principles,
+I deliver solutions that drive results.`;
+        break;
+
+      case 'contact':
+        output.innerHTML = `<span class="text-warning-kali">Contact Information:</span>
+Email: <span class="text-info-kali">ganesan@example.com</span>
+Phone: <span class="text-info-kali">+1 (234) 567-8910</span>
+Location: <span class="text-info-kali">Chennai, India</span>`;
+        break;
+
+      case 'skills':
+        output.innerHTML = `<span class="text-warning-kali">Technical Skills:</span>
+Frontend: <span class="pkg">HTML, CSS, JavaScript, React, Vue, Angular</span>
+Backend: <span class="pkg">Node.js, Express, Django, Flask</span>
+Database: <span class="pkg">MongoDB, PostgreSQL, MySQL, Firebase</span>
+DevOps: <span class="pkg">Docker, Kubernetes, AWS, GCP, Azure</span>
+Others: <span class="pkg">Git, RESTful APIs, GraphQL, WebSockets</span>`;
+        break;
+
+      case 'projects':
+        output.innerHTML = `<span class="text-warning-kali">Recent Projects:</span>
+1. <span class="text-info-kali">E-commerce Platform</span> - Full-stack online shopping platform
+2. <span class="text-info-kali">Task Management App</span> - Productivity tool with real-time collaboration
+3. <span class="text-info-kali">Health Monitoring System</span> - IoT-based health tracking
+4. <span class="text-info-kali">Cryptocurrency Dashboard</span> - Real-time crypto market analyzer
+
+Type <span class="text-success-kali">project [number]</span> for details.`;
+        break;
+
+      case 'clear':
+        commandHistory.innerHTML = '';
+        return;
+
+      case 'socials':
+        output.innerHTML = `<span class="text-warning-kali">Social Media:</span>
+GitHub: <span class="text-info-kali">github.com/ganesan-dev</span>
+LinkedIn: <span class="text-info-kali">linkedin.com/in/ganesan-dev</span>
+Twitter: <span class="text-info-kali">twitter.com/ganesan_dev</span>
+Portfolio: <span class="text-info-kali">ganesan.dev</span>`;
+        break;
+
+      case 'ls':
+        output.innerHTML = `<span class="text-success-kali">projects/</span>  <span class="text-success-kali">resume.pdf</span>  <span class="text-success-kali">skills/</span>  <span class="text-info-kali">contact.txt</span>  <span class="text-info-kali">about.md</span>`;
+        break;
+
+      case 'pwd':
+        output.innerHTML = `/home/ganesan`;
+        break;
+
+      case 'date':
+        output.innerHTML = new Date().toString();
+        break;
+
+      case 'whoami':
+        output.innerHTML = `<span class="text-info-kali">visitor</span>`;
+        break;
+
+      case '':
+        return;
+
+      default:
+        output.innerHTML = `Command not found: <span class="highlight">${command}</span>. Type <span class="text-success-kali">help</span> for available commands.`;
+    }
+
+    commandHistory.appendChild(output);
+    terminalContent.scrollTop = terminalContent.scrollHeight;
   }
+
+  // Initial welcome message
+  const welcomeOutput = document.createElement('div');
+  welcomeOutput.className = 'terminal-output';
+  welcomeOutput.innerHTML = `Welcome to my interactive terminal!
+Type <span class="text-success-kali">help</span> to see available commands.`;
+  commandHistory.appendChild(welcomeOutput);
 });
