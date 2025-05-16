@@ -6602,4 +6602,8 @@ section {
     font-size: 0.9rem !important;
     padding: 1rem !important;
   }
+
+  .network-bg {
+    display: none !important;
+  }  
 }
