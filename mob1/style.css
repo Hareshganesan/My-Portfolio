@@ -374,10 +374,10 @@ section.bg-light::before,
 
 /* Enhanced Interactive Styles */
 .navbar-brand {
-    font-family: 'Raleway', sans-serif; /* Use the new font */
+    font-family: 'Major Mono Display', monospace !important; /* Use the new font */
     font-size: 1.5rem; /* Smaller font size */
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 500;
+    letter-spacing: 2px;
 }
 
 /* Interactive background effect for all sections */
@@ -513,7 +513,8 @@ section::before {
 
 .nav-link {
     position: relative;
-    font-weight: 600;
+    font-weight: 400;
+    font-family: 'Major Mono Display', monospace !important;
     background: linear-gradient(to right, #fff, #fff);
     -webkit-background-clip: text;
     background-clip: text;
@@ -588,7 +589,7 @@ section {
 
 /* Logo Animation */
 .logo-text {
-    font-family: 'Syncopate', sans-serif;
+    font-family: 'Offside', cursive;
     position: relative;
     display: inline-block;
 }
