@@ -1213,14 +1213,14 @@ section.bg-light {
 
 /* Network BG enhancements with increased blur */
 .network-bg {
-    filter: blur(10px);
+    filter: blur(1px);
     opacity: 0.1;
 }
 
 /* Enhanced Blurred Background */
 .about-animation-container {
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     background: rgba(10, 10, 30, 0.4); /* Slightly more opaque */
 }
 
@@ -1366,7 +1366,7 @@ section.bg-light {
     position: relative;
 }
 
-/* Binary Rain Effect */
+/* Binary Rain Effect 
 .binary-rain {
     position: absolute;
     top: 0;
@@ -1375,7 +1375,7 @@ section.bg-light {
     height: 100%;
     z-index: 2;
     overflow: hidden;
-    opacity: 0.6; /* Reduced opacity for better readability */
+    opacity: 0.6; /* Reduced opacity for better readability 
 }
 
 .binary-column {
@@ -1386,13 +1386,13 @@ section.bg-light {
     color: rgba(201, 161, 74, 0.6);
     text-shadow: 0 0 5px rgba(201, 161, 74, 0.4);
     animation: rainDrop 8s linear infinite;
-    filter: blur(0.5px); /* Slight blur for better aesthetic */
+    filter: blur(0.5px); /* Slight blur for better aesthetic 
 }
 
 @keyframes rainDrop {
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100vh); }
-}
+}*/
 
 /* Improved Skill Orbit System */
 .skill-orbit {
@@ -1604,11 +1604,11 @@ section.bg-light {
 
 /* Network BG enhancements */
 .network-bg {
-    filter: blur(3px);
+    filter: blur(1px);
     opacity: 0.25;
 }
 
-/* Binary Rain Effect */
+/* Binary Rain Effect 
 .binary-rain {
     position: absolute;
     top: 0;
@@ -1631,9 +1631,9 @@ section.bg-light {
 @keyframes rainDrop {
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100vh); }
-}
+}*/
 
-/* Cosmic Stars Background */
+/* Cosmic Stars Background 
 .cosmic-dots {
     position: absolute;
     top: 0;
@@ -1641,7 +1641,7 @@ section.bg-light {
     width: 100%;
     height: 100%;
     z-index: 1;
-}
+}/*
 
 /*.cosmic-dot {
     position: absolute;
@@ -1747,7 +1747,7 @@ section.bg-light {
 }
 
 .terminal-text {
-    color: #fff;
+    color: #90c404;
     overflow: hidden;
     white-space: nowrap;
     border-right: 3px solid #C9A14A;
@@ -1896,7 +1896,7 @@ section.bg-light {
     animation: gradientAnimation 1s ease infinite;*/
 }
 
-/* Add a glowing particle effect */
+/* Add a glowing particle effect 
 .hero-section .glowing-particles {
     position: absolute;
     top: 0;
@@ -1930,9 +1930,8 @@ section.bg-light {
         transform: translate(100vw, 100vh) scale(1);
         opacity: 0.7;
     }
-}
-
-/* Add a holographic wave effect 
+}/*
+/* Add a holographic wave effect
 .hero-section .holographic-wave {
     position: absolute;
     top: 0;
@@ -2990,7 +2989,7 @@ section {
 
 /* Projects Section Enhancements */
 #projects {
-    background: linear-gradient(120deg, #181818 0%, #23221a 100%);
+    background:var(--blur-bg);
     position: relative;
     z-index: 2;
 }
@@ -3160,7 +3159,7 @@ section {
     color: #111;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 700px) {
     .project-card {
         min-height: 400px;
     }
@@ -4621,13 +4620,34 @@ section {
 }
 
 .category-title {
-  display: inline-block;
+  display: block;
+  text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   color: var(--primary-color);
-  border-bottom: 2px solid var(--primary-color);
+  /*border-bottom: 2px dotted var(--primary-color);*/
   padding-bottom: 5px;
+}
+
+/* Animated underline */
+.category-title::after {
+  content: '';
+  position: absolute;
+  margin-bottom: auto;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.9s ease, left 0.9s ease;
+  transform: translateX(-50%);
+}
+
+/* When in view or hovered, animate underline */
+.category-title.animate-underline::after,
+.category-title:hover::after {
+  width: 200px; /* Or however wide you want the underline */
 }
 
 /* For the 3D rotating cube of skills */
@@ -5324,7 +5344,7 @@ section {
 }
 
 .contact-info-item:hover {
-  transform: translateX(5px);
+  transform: translateX(1px);
 }
 
 .contact-info-item i {
@@ -5922,8 +5942,8 @@ section {
 /* Code Galaxy Achievement Visualization */
 .code-galaxy-container {
   position: relative;
-  width: 180px;
-  height: 200px;
+  width: 240px;
+  height: 300px;
   border-radius: 12px;
   overflow: hidden;
   background: #181a2a;
@@ -5955,6 +5975,7 @@ section {
 
 .galaxy-stats {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
@@ -6503,46 +6524,22 @@ section {
 }
 
 /* --- Mobile Optimization --- */
-@media (max-width: 767px) {
-  .hero-section {
-    height: auto;
-    min-height: 100vh;
-    padding-top: 60px;
-    padding-bottom: 40px;
-  }
-  .hero-video-container,
-  .hero-video {
-    min-height: 100vh;
-    height: 100vh;
-    object-fit: cover;
-  }
-  .hero-content {
-    padding-top: 40px;
-    padding-bottom: 20px;
-  }
-  .hero-section .container,
-  .hero-content .container {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .hero-section .row {
-    flex-direction: column;
-  }
+@media (max-width: 600px) {
+  
   /* Hide profile pic on mobile */
   .hero-img-container {
     display: none !important;
   }
-  .col-lg-7.hero-content,
-  .col-lg-5.text-center {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: 0 0 100% !important;
-    padding: 0 !important;
-  }
+
   .hero-name {
     font-size: 2rem !important;
     line-height: 1.1;
     word-break: break-word;
+  }
+
+  .hero-content {
+    max-width: 95% !important;
+    margin: auto !important;
   }
   .h4, .lead, .section-heading {
     font-size: 1.1rem !important;
@@ -6553,88 +6550,56 @@ section {
   .navbar-brand .logo-text span {
     font-size: 1.1rem !important;
   }
-  .about-animation-container,
-  .code-block-3d {
-    min-width: 0 !important;
-    max-width: 100vw !important;
-    overflow-x: auto;
-  }
-  .about-animation-container {
-    padding: 10px 0;
-  }
-  .about-section .container,
-  .projects-section .container,
-  .skills-container,
-  .contact-container {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
-  .section-heading {
-    font-size: 1.5rem !important;
-  }
-  .btn, .btn-custom {
-    font-size: 1rem !important;
-    padding: 0.7rem 1.2rem !important;
-  }
+
   .project-card {
     min-height: 260px !important;
     padding: 0.5rem !important;
+    margin: 5% !important;
   }
+
+
   .skills-category .row > div {
-    margin-bottom: 1rem !important;
+    max-width: 80%  !important;
+    margin: auto !important;
+    padding: 0.5rem !important;
   }
   .skills-stats {
     flex-direction: column !important;
+    max-width: 80%;
     gap: 1.5rem !important;
+    margin: auto !important;
   }
   .contact-card {
     padding: 1rem !important;
     font-size: 1rem !important;
+    max-width: 90%;
+    margin: auto;
   }
   .terminal-container {
+    margin: auto !important;
+    max-width: 80%;
     font-size: 0.9rem !important;
     padding: 0.5rem !important;
   }
-  .skill-orbit {
-    transform: scale(0.8);
-  }
-  .center-skills {
-    flex-direction: column !important;
-    gap: 1rem !important;
-  }
-  .skill-circle {
-    margin-bottom: 0.5rem !important;
-  }
-  .noting-os-header .noting-title {
-    font-size: 10px !important;
-  }
-  .noting-os-list {
-    max-height: 120px !important;
-  }
-  .lim-intro .lim-content {
-    padding: 1.5rem 0.5rem !important;
-  }
-  .lim-svg-container {
-    max-width: 95vw !important;
-    overflow-x: auto;
-  }
-  .lim-svg {
-    width: 100vw !important;
-    height: auto !important;
-  }
-  .lim-text-container {
-    font-size: 1rem !important;
-  }
-  .lim-scroll-indicator {
-    margin-top: 1.5rem !important;
-  }
+
   .main-content {
     padding-top: 0 !important;
   }
-  /* Hide custom cursor on mobile */
-  .custom-cursor, .cursor-dot {
-    display: none !important;
+
+  .kali-terminal {
+    width: 90% !important;
+    font-size: 0.8mm !important;
+    margin: auto !important;
+    margin-top: 10% !important;
+  }
+
+  .terminal-content{
+    font-size: 3.1mm !important;
+  }
+
+  .galaxy-stat-item{
+    width: 100% !important;
+    font-size: 0.9rem !important;
+    padding: 1rem !important;
   }
 }
-
-/* ...existing code... */
