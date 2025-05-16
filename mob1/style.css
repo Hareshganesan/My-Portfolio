@@ -6606,4 +6606,9 @@ section {
   .network-bg {
     display: none !important;
   }  
+
+  .about-animation-container{
+    max-width: 85%;
+    margin: auto !important;
+  }
 }
