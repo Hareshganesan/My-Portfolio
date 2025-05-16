@@ -6552,9 +6552,9 @@ section {
   }
 
   .project-card {
-    min-height: 260px !important;
+    min-height: auto !important;
     padding: 0.5rem !important;
-    margin: 5% !important;
+    margin: auto !important;
   }
 
 
@@ -6594,7 +6594,7 @@ section {
   }
 
   .terminal-content{
-    font-size: 3.1mm !important;
+    font-size: 3.3mm !important;
   }
 
   .galaxy-stat-item{
