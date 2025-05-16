@@ -1,5 +1,48 @@
 // Enhanced LIM London style intro animation
+// Add this function to the top of your script.js file or within the DOMContentLoaded event
+function isMobileDevice() {
+  return (window.innerWidth < 768 || 
+          navigator.userAgent.match(/Android/i) || 
+          navigator.userAgent.match(/webOS/i) || 
+          navigator.userAgent.match(/iPhone/i) || 
+          navigator.userAgent.match(/iPad/i) || 
+          navigator.userAgent.match(/iPod/i) || 
+          navigator.userAgent.match(/BlackBerry/i) || 
+          navigator.userAgent.match(/Windows Phone/i));
+}
+
+// Then modify your intro initialization code inside the DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', function() {
+  const limIntro = document.getElementById('limIntro');
+  const mainContent = document.querySelector('.main-content');
+  const navbar = document.getElementById('mainNavbar');
+  
+  // Check if on mobile device
+  if (isMobileDevice()) {
+    // Skip intro animation for mobile devices
+    if (limIntro) limIntro.style.display = 'none';
+    
+    // Show main content immediately
+    if (mainContent) {
+      mainContent.style.opacity = '1';
+      mainContent.style.visibility = 'visible';
+    }
+    
+    // Show navbar immediately
+    if (navbar) navbar.style.display = 'block';
+    
+    // Enable scrolling
+    document.body.style.overflow = 'auto';
+    
+    // Add class to indicate intro is done
+    document.body.classList.add('lim-intro-done');
+  }
+  
+  // Rest of your existing intro code for desktop devices...
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    
     const limIntro = document.getElementById('limIntro');
     const mainContent = document.querySelector('.main-content');
     const navbar = document.getElementById('mainNavbar');
@@ -296,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Simulate loading progress
         let progress = 0;
-        const totalDuration = 8000; // 8 seconds total loading time
+        const totalDuration = 5000; // 8 seconds total loading time
         const interval = 50; // Update every 50ms
         const incrementsPerSecond = 1000 / interval;
         const progressStep = 100 / (totalDuration / 1000 * incrementsPerSecond);
@@ -3109,8 +3152,8 @@ function addContactCardTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const angleX = (y - centerY) / 20;
-      const angleY = (centerX - x) / 20;
+      const angleX = (y - centerY) / 100;
+      const angleY = (centerX - x) / 100;
       
       this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
       
