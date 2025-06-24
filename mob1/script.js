@@ -666,40 +666,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add galaxy dots effect to hero section
-    function createGalaxyEffect() {
-        const heroSection = document.querySelector('.hero-section');
-        const galaxyContainer = document.createElement('div');
-        galaxyContainer.className = 'hero-galaxy';
-        heroSection.appendChild(galaxyContainer);
-        
-        for (let i = 0; i < 100; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'galaxy-dot';
-            
-            // Random position and animation properties
-            const size = 1 + Math.random() * 3;
-            const distance = 50 + Math.random() * 200;
-            const duration = 10 + Math.random() * 20;
-            const delay = Math.random() * 10;
-            const opacity = 0.1 + Math.random() * 0.5;
-            
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
-            dot.style.top = `${50 + (Math.random() - 0.5) * 20}%`;
-            dot.style.left = `${50 + (Math.random() - 0.5) * 20}%`;
-            dot.style.animationDuration = `${duration}s`;
-            dot.style.animationDelay = `${delay}s`;
-            dot.style.opacity = opacity;
-            
-            if (Math.random() > 0.7) {
-                dot.style.background = `rgba(255,214,0, ${opacity + 0.2})`;
-            }
-            
-            galaxyContainer.appendChild(dot);
-        }
-    }
-    
     // Add magnetic effect to hero content
     function addMagneticEffect() {
         const heroContent = document.querySelector('.hero-content');
@@ -788,53 +754,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     ease: "power2.out"
                 });
             });
-        }
-    });
-    
-    // Enhanced interactive text effects for hero name
-    document.addEventListener('DOMContentLoaded', function() {
-        const heroName = document.querySelector('.hero-name');
-        
-        if (heroName) {
-            // Set data-text attribute for 3D shadow effect
-            heroName.setAttribute('data-text', heroName.textContent);
-            
-            // Split text into characters if not already done
-            const spans = heroName.querySelectorAll('span');
-            spans.forEach((span, i) => {
-                if (!span.querySelector('.char')) { // Check if split is already done
-                    const text = span.textContent;
-                    const chars = text.split('');
-                    span.innerHTML = chars.map((char, index) => 
-                        `<span class="char" style="--char-index: ${index + (i * text.length)}">${char}</span>`
-                    ).join('');
-                }
-            });
-            
-            // Add staggered animation to characters on page load
-            const chars = heroName.querySelectorAll('.char');
-            gsap.fromTo(chars, 
-                { 
-                    y: 100, 
-                    opacity: 0, 
-                    rotationX: 90
-                },
-                {
-                    y: 0,
-                    opacity: 1,
-                    rotationX: 0,
-                    stagger: 0.03,
-                    delay: 0.5,
-                    duration: 0.6,
-                    ease: "back.out(1.7)",
-                    onComplete: () => {
-                        // Add hover interactions after animation completes
-                        chars.forEach(char => {
-                            char.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        });
-                    }
-                }
-            );
         }
     });
 });
@@ -1158,37 +1077,6 @@ document.querySelectorAll('.hero-name span').forEach((span, i) => {
     ).join('');
 });
 
-// Add particle effect to text
-const heroName = document.querySelector('.hero-name');
-heroName.addEventListener('mousemove', (e) => {
-    const bounds = heroName.getBoundingClientRect();
-    const x = e.clientX - bounds.left;
-    const y = e.clientY - bounds.top;
-    
-    const particle = document.createElement('span');
-    particle.className = 'particle';
-    particle.style.cssText = `
-        position: absolute;
-        left: ${x}px;
-        top: ${y}px;
-        width: 4px;
-        height: 4px;
-        background: #FFD600;
-        border-radius: 50%;
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-    `;
-    
-    heroName.appendChild(particle);
-    
-    gsap.to(particle, {
-        duration: 1,
-        x: x + (Math.random() - 0.5) * 100,
-        y: y + (Math.random() - 0.5) * 100,
-        opacity: 0,
-        onComplete: () => particle.remove()
-    });
-});
 
 const hero3DText = document.querySelector('.hero-3d-text');
 if (hero3DText) {
@@ -1521,28 +1409,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Create binary rain effect
-    const binaryRain = document.getElementById('binary-rain');
-    if (binaryRain) {
-        const columnCount = Math.floor(binaryRain.offsetWidth / 20);
-        for (let i = 0; i < columnCount; i++) {
-            const column = document.createElement('div');
-            column.className = 'binary-column';
-            
-            // Create random binary string
-            let binaryString = '';
-            const length = 15 + Math.floor(Math.random() * 20);
-            for (let j = 0; j < length; j++) {
-                binaryString += Math.round(Math.random());
-            }
-            
-            column.textContent = binaryString;
-            column.style.left = `${i * 20}px`;
-            column.style.animationDuration = `${4 + Math.random() * 6}s`;
-            column.style.animationDelay = `${Math.random() * 5}s`;
-            binaryRain.appendChild(column);
-        }
-    }
+
 
     // Terminal Typing Animation with Command Cycling
     const terminalText = document.getElementById('terminal-text');
@@ -1828,391 +1695,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Add dynamic particles to the hero section
-document.addEventListener('DOMContentLoaded', function () {
-    const heroSection = document.querySelector('.hero-section');
-    const particleContainer = document.createElement('div');
-    particleContainer.className = 'glowing-particles';
-    heroSection.appendChild(particleContainer);
 
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.top = `${Math.random() * 100}vh`;
-        particle.style.left = `${Math.random() * 100}vw`;
-        particle.style.animationDelay = `${Math.random() * 10}s`;
-        particleContainer.appendChild(particle);
-    }
-
-    // Add stars to the starry background
-    const starryBg = document.createElement('div');
-    starryBg.className = 'starry-bg';
-    heroSection.appendChild(starryBg);
-
-    for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDelay = `${Math.random() * 3}s`;
-        starryBg.appendChild(star);
-    }
-
-    // Add a holographic wave
-    const holographicWave = document.createElement('div');
-    holographicWave.className = 'holographic-wave';
-    heroSection.appendChild(holographicWave);
-
-    // Add a glowing ring
-    const glowingRing = document.createElement('div');
-    glowingRing.className = 'glowing-ring';
-    heroSection.appendChild(glowingRing);
-});
-
-// Neural Network Animation
-document.addEventListener('DOMContentLoaded', function() {
-    const heroNetwork = document.querySelector('.hero-network');
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    heroNetwork.appendChild(canvas);
-
-    let width, height, nodes = [], connections = [];
-    const nodeCount = 50;
-    const connectionDistance = 150;
-    const nodeSpeed = 0.5;
-
-    function initNetwork() {
-        width = heroNetwork.offsetWidth;
-        height = heroNetwork.offsetHeight;
-        canvas.width = width;
-        canvas.height = height;
-        
-        nodes = Array.from({ length: nodeCount }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() * 2 - 1) * nodeSpeed,
-            vy: (Math.random() * 2 - 1) * nodeSpeed
-        }));
-    }
-
-    function drawNetwork() {
-        ctx.clearRect(0, 0, width, height);
-        
-        nodes.forEach(node => {
-            node.x += node.vx;
-            node.y += node.vy;
-            
-            if(node.x < 0 || node.x > width) node.vx *= -1;
-            if(node.y < 0 || node.y > height) node.vy *= -1;
-            
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 214, 0, 0.6)';
-            ctx.fill();
-        });
-        
-        nodes.forEach((node, i) => {
-            nodes.slice(i + 1).forEach(other => {
-                const dx = other.x - node.x;
-                const dy = other.y - node.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if(distance < connectionDistance) {
-                    ctx.beginPath();
-                    ctx.moveTo(node.x, node.y);
-                    ctx.lineTo(other.x, other.y);
-                    ctx.strokeStyle = `rgba(255, 214, 0, ${1 - distance/connectionDistance})`;
-                    ctx.stroke();
-                }
-            });
-        });
-        
-        requestAnimationFrame(drawNetwork);
-    }
-
-    initNetwork();
-    drawNetwork();
-    window.addEventListener('resize', initNetwork);
-
-    // Interactive effect
-    heroNetwork.addEventListener('mousemove', (e) => {
-        const rect = heroNetwork.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        
-        nodes.forEach(node => {
-            const dx = mouseX - node.x;
-            const dy = mouseY - node.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if(distance < 100) {
-                const angle = Math.atan2(dy, dx);
-                const force = (100 - distance) * 0.02;
-                node.vx -= Math.cos(angle) * force;
-                node.vy -= Math.sin(angle) * force;
-            }
-        });
-    });
-});
-
-// Initialize sophisticated background effects
-document.addEventListener('DOMContentLoaded', function() {
-    // Create geometric shapes
-    const geometricShapes = document.getElementById('geometricShapes');
-    for (let i = 0; i < 15; i++) {
-        const shape = document.createElement('div');
-        shape.className = 'geometric-shape';
-        
-        // Random size between 100px and 300px
-        const size = 100 + Math.random() * 200;
-        shape.style.width = `${size}px`;
-        shape.style.height = `${size}px`;
-        
-        // Random position
-        shape.style.left = `${Math.random() * 100}%`;
-        shape.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation delay and duration
-        shape.style.animationDelay = `${Math.random() * 20}s`;
-        shape.style.animationDuration = `${30 + Math.random() * 30}s`;
-        
-        geometricShapes.appendChild(shape);
-    }
-    
-    // Create gradient orbs
-    const gradientOrbs = document.getElementById('gradientOrbs');
-    for (let i = 0; i < 5; i++) {
-        const orb = document.createElement('div');
-        orb.className = 'gradient-orb';
-        
-        // Random size between 200px and 500px
-        const size = 200 + Math.random() * 300;
-        orb.style.width = `${size}px`;
-        orb.style.height = `${size}px`;
-        
-        // Random position
-        orb.style.left = `${Math.random() * 100}%`;
-        orb.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation delay
-        orb.style.animationDelay = `${Math.random() * 10}s`;
-        
-        gradientOrbs.appendChild(orb);
-    }
-    
-    // Create digital rain
-    const digitalRain = document.getElementById('digitalRain');
-    const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-    
-    for (let i = 0; i < 25; i++) {
-        const column = document.createElement('div');
-        column.className = 'rain-column';
-        
-        // Random position
-        column.style.left = `${i * 4}%`;
-        
-        // Generate random characters
-        let string = '';
-        const length = 20 + Math.floor(Math.random() * 20);
-        for (let j = 0; j < length; j++) {
-            string += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        column.textContent = string;
-        
-        // Animation delay and duration
-        column.style.animationDelay = `${Math.random() * 8}s`;
-        column.style.animationDuration = `${5 + Math.random() * 5}s`;
-        
-        digitalRain.appendChild(column);
-    }
-    
-    // Create constellation
-    const constellation = document.getElementById('constellation');
-    for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.className = 'star-dot';
-        
-        // Random position
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation delay
-        star.style.animationDelay = `${Math.random() * 4}s`;
-        
-        constellation.appendChild(star);
-    }
-    
-    // WebGL Canvas Background
-    const canvas = document.getElementById('bgCanvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    
-    if (gl) {
-        // Setup canvas size
-        const setCanvasSize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            gl.viewport(0, 0, canvas.width, canvas.height);
-        };
-        
-        setCanvasSize();
-        window.addEventListener('resize', setCanvasSize);
-        
-        // Vertex shader program
-        const vsSource = `
-            attribute vec4 aVertexPosition;
-            varying vec2 vUV;
-            
-            void main() {
-                gl_Position = aVertexPosition;
-                vUV = aVertexPosition.xy * 0.5 + 0.5;
-            }
-        `;
-        
-        // Fragment shader program
-        const fsSource = `
-            precision highp float;
-            varying vec2 vUV;
-            uniform float uTime;
-            
-            void main() {
-                vec2 uv = vUV;
-                float time = uTime * 0.05;
-                
-                vec3 color = vec3(0.0);
-                
-                // Create multiple waves
-                for (float i = 1.0; i <= 3.0; i++) {
-                    float intensity = 1.0 / i;
-                    float speed = time * (0.5 / i);
-                    float scale = 20.0 * i;
-                    
-                    float wave = abs(sin(uv.x * scale + speed) + sin(uv.y * scale + speed));
-                    
-                    color += vec3(
-                        wave * 0.3 * intensity, 
-                        wave * 0.1 * intensity, 
-                        wave * 0.5 * intensity
-                    ) * 0.2;
-                }
-                
-                gl_FragColor = vec4(color, 0.05);
-            }
-        `;
-        
-        // Create shader program
-        function createShader(gl, type, source) {
-            const shader = gl.createShader(type);
-            gl.shaderSource(shader, source);
-            gl.compileShader(shader);
-            
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                console.error('Shader compilation failed: ' + gl.getShaderInfoLog(shader));
-                gl.deleteShader(shader);
-                return null;
-            }
-            
-            return shader;
-        }
-        
-        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
-        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
-        
-        const shaderProgram = gl.createProgram();
-        gl.attachShader(shaderProgram, vertexShader);
-        gl.attachShader(shaderProgram, fragmentShader);
-        gl.linkProgram(shaderProgram);
-        
-        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-            console.error('Shader program linking failed: ' + gl.getProgramInfoLog(shaderProgram));
-            return;
-        }
-        
-        // Positions for a square covering the entire canvas
-        const positions = [
-            -1.0, -1.0,
-             1.0, -1.0,
-            -1.0,  1.0,
-             1.0,  1.0
-        ];
-        
-        // Create buffer
-        const positionBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-        
-        // Shader program info
-        const programInfo = {
-            program: shaderProgram,
-            attribLocations: {
-                vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
-            },
-            uniformLocations: {
-                time: gl.getUniformLocation(shaderProgram, 'uTime'),
-            },
-        };
-        
-        // Render loop
-        let startTime = Date.now();
-        
-        function render() {
-            const currentTime = Date.now();
-            const elapsedTime = (currentTime - startTime) / 1000; // Time in seconds
-            
-            // Clear the canvas
-            gl.clearColor(0.0, 0.0, 0.0, 0.0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            
-            // Set shader program
-            gl.useProgram(programInfo.program);
-            
-            // Set position attribute
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.vertexAttribPointer(
-                programInfo.attribLocations.vertexPosition,
-                2, // 2 components per vertex (x, y)
-                gl.FLOAT,
-                false,
-                0,
-                0
-            );
-            gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
-            
-            // Set time uniform
-            gl.uniform1f(programInfo.uniformLocations.time, elapsedTime);
-            
-            // Draw the square
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-            
-            // Request next frame
-            requestAnimationFrame(render);
-        }
-        
-        // Start rendering
-        render();
-    } else {
-        console.warn('WebGL not available, some effects will be disabled');
-        canvas.style.display = 'none';
-    }
-
-    // Parallax effect for background elements
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        // Apply parallax effect to different layers with varying intensity
-        document.querySelector('.nebula-bg').style.transform = 
-            `translate(${x * -20}px, ${y * -20}px)`;
-            
-        document.querySelector('.neural-grid').style.transform = 
-            `translate3d(${x * -10}px, ${y * -10}px, 0) rotateX(${y * 5}deg) rotateY(${-x * 5}deg)`;
-            
-        // Move constellation stars slightly
-        document.querySelectorAll('.star-dot').forEach(star => {
-            const speedFactor = parseFloat(star.getAttribute('data-speed') || Math.random() * 2);
-            star.style.transform = `translate(${x * speedFactor * 20}px, ${y * speedFactor * 20}px)`;
-        });
-    });
-});
 
 // Add intro screen functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -2727,80 +2210,7 @@ window.addEventListener('scroll', function() {
 
 
 
-// Reduce cosmic dots and binary rain columns
-document.addEventListener('DOMContentLoaded', function() {
-    const cosmicBackground = document.getElementById('cosmic-background');
-    if (cosmicBackground) {
-        for (let i = 0; i < 30; i++) { // was 100
-            // ...existing code...
-        }
-    }
-    const binaryRain = document.getElementById('binary-rain');
-    if (binaryRain) {
-        const columnCount = Math.floor(binaryRain.offsetWidth / 40); // was / 15
-        for (let i = 0; i < columnCount; i++) {
-            // ...existing code...
-        }
-    }
-    // ...existing code...
-});
 
-// Reduce geometric shapes and gradient orbs
-document.addEventListener('DOMContentLoaded', function() {
-    const geometricShapes = document.getElementById('geometricShapes');
-    for (let i = 0; i < 6; i++) { // was 15
-        // ...existing code...
-    }
-    const gradientOrbs = document.getElementById('gradientOrbs');
-    for (let i = 0; i < 2; i++) { // was 5
-        // ...existing code...
-    }
-    // ...existing code...
-});
-
-// Remove heavy transform/translate on all sections on mousemove
-// ...existing code...
-// Remove this block entirely:
-// document.addEventListener('mousemove', (e) => {
-//     ...parallax effect for all sections...
-// });
-
-// Remove redundant transform reset on mouseleave for sections
-// ...existing code...
-// Remove this block entirely:
-// document.addEventListener('mouseleave', () => {
-//     ...reset transforms...
-// });
-
-// Remove or limit sparkle/particle overlays on project card hover
-document.querySelectorAll('.project-card').forEach(card => {
-    const overlay = card.querySelector('.project-hover-overlay');
-    if (!overlay) return;
-
-    function createSparkles() {
-        overlay.querySelectorAll('.sparkle').forEach(s => s.remove());
-        // Reduce to 3-4 sparkles
-        for (let i = 0; i < 3 + Math.floor(Math.random() * 2); i++) {
-            // ...existing code...
-        }
-    }
-    // ...existing code...
-});
-
-// Remove excessive will-change on elements that animate rarely
-// ...existing code...
-
-// ...existing code...
-
-// --- REMOVE CUSTOM CURSOR FUNCTIONALITY ---
-
-// Remove custom cursor DOM elements if present
-document.addEventListener('DOMContentLoaded', function() {
-    const cursor = document.querySelector('.custom-cursor');
-    const cursorDot = document.querySelector('.cursor-dot');
-    if (cursor) cursor.remove();
-    if (cursorDot) cursorDot.remove();
-});
 
 
 // --- REMOVE PARALLAX AND MOUSEMOVE SECTION TRANSFORMS ---
@@ -2833,7 +2243,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Remove hero particles that cause performance issues
   const particleContainers = [
     '.glowing-particles',
-    '.starry-bg',
     '.holographic-wave',
     '.glowing-ring'
   ];
@@ -2886,28 +2295,6 @@ document.removeEventListener('DOMContentLoaded', function() {
   // This is now disabled
 });
 
-// Simplify neural network animations for better performance
-document.addEventListener('DOMContentLoaded', function() {
-  const heroNetwork = document.querySelector('.hero-network');
-  if (heroNetwork) {
-    const canvas = heroNetwork.querySelector('canvas');
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        // Reduce number of nodes and connections
-        const originalDrawNetwork = window.drawNetwork;
-        window.drawNetwork = function() {
-          // Simplify rendering
-          ctx.globalAlpha = 0.3;
-          // Use less CPU by reducing fps
-          setTimeout(() => requestAnimationFrame(window.drawNetwork), 100);
-        };
-      }
-    }
-  }
-});
-
-// ...existing code...
 
 // Initialize the enhanced skills section
 document.addEventListener('DOMContentLoaded', function() {
@@ -5934,6 +5321,7 @@ Type <span class="text-success-kali">help</span> to see available commands.`;
   commandHistory.appendChild(welcomeOutput);
 });
 
+
 // --- Mobile-specific: Remove profile pic on mobile ---
 document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth < 768) {
@@ -5944,4 +5332,87 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// ...existing code...
+// Remove any old cursor
+document.querySelectorAll('.smooth-cursor-ring, .smooth-cursor-dot').forEach(e => e.remove());
+
+// Create ring and dot
+const ring = document.createElement('div');
+ring.className = 'smooth-cursor-ring';
+document.body.appendChild(ring);
+
+const dot = document.createElement('div');
+dot.className = 'smooth-cursor-dot';
+document.body.appendChild(dot);
+
+// State
+let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
+let ringX = mouseX, ringY = mouseY, dotX = mouseX, dotY = mouseY;
+
+// Show after intro
+function showCursor() {
+  ring.style.opacity = 1;
+  dot.style.opacity = 1;
+}
+function hideCursor() {
+  ring.style.opacity = 0;
+  dot.style.opacity = 0;
+}
+if (document.body.classList.contains('lim-intro-done')) showCursor();
+const cursorObserver = new MutationObserver(() => {
+  if (document.body.classList.contains('lim-intro-done')) showCursor();
+  else hideCursor();
+});
+cursorObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+// Mouse move
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// Smooth animation
+function animate() {
+  ringX += (mouseX - ringX) * 0.18;
+  ringY += (mouseY - ringY) * 0.18;
+  dotX += (mouseX - dotX) * 0.35;
+  dotY += (mouseY - dotY) * 0.35;
+  ring.style.transform = `translate(${ringX-16}px,${ringY-16}px)`;
+  dot.style.transform = `translate(${dotX-3}px,${dotY-3}px)`;
+  requestAnimationFrame(animate);
+}
+animate();
+
+// Pulse on click
+document.addEventListener('click', e => {
+  if (!document.body.classList.contains('lim-intro-done')) return;
+  const pulse = document.createElement('div');
+  pulse.className = 'smooth-cursor-pulse';
+  pulse.style.left = (ringX-20) + 'px';
+  pulse.style.top = (ringY-20) + 'px';
+  document.body.appendChild(pulse);
+  setTimeout(() => pulse.remove(), 600);
+});
+
+// Magnetic morph effect on interactive elements
+const hoverEls = document.querySelectorAll('a, button, .project-card, .skill-item');
+hoverEls.forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.style.boxShadow = '0 0 40px 15px #FFD60044, 0 0 0 3px #fffbe7aa';
+    ring.style.background = 'rgba(201,161,74,0.13)';
+    ring.style.borderColor = '#FFD600';
+    ring.style.transform += ' scale(1.25)';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.boxShadow = '0 0 24px 8px rgba(201,161,74,0.18), 0 0 0 2px #fffbe72c';
+    ring.style.background = 'rgba(201,161,74,0.07)';
+    ring.style.borderColor = 'var(--primary-color)';
+    ring.style.transform = `translate(${ringX-16}px,${ringY-16}px)`;
+  });
+});
+
+if (isMobileDevice()) {
+  // Hide custom cursor on mobile
+  document.querySelectorAll('.custom-cursor, .cursor-dot').forEach(el => {
+    el.style.display = 'none';
+  });
+}
