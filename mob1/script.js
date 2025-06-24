@@ -5332,8 +5332,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+
 // Remove any old cursor
 document.querySelectorAll('.smooth-cursor-ring, .smooth-cursor-dot').forEach(e => e.remove());
+
+
 
 // Create ring and dot
 const ring = document.createElement('div');
@@ -5415,7 +5418,4 @@ if (isMobileDevice()) {
   document.querySelectorAll('.smooth-cursor-ring, .smooth-cursor-dot').forEach(el => {
     if (el) el.remove();
   });
-  // Stop further cursor logic
-  return;
 }
-
