@@ -5410,9 +5410,12 @@ hoverEls.forEach(el => {
   });
 });
 
+// Hide cursor on mobile devices
 if (isMobileDevice()) {
-  // Hide custom cursor on mobile
-  document.querySelectorAll('.custom-cursor, .cursor-dot').forEach(el => {
-    el.style.display = 'none';
+  document.querySelectorAll('.smooth-cursor-ring, .smooth-cursor-dot').forEach(el => {
+    if (el) el.remove();
   });
+  // Stop further cursor logic
+  return;
 }
+
