@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GANESAN P V — Portfolio</title>
+  <meta name="description" content="Ganesan P V — Full Stack Developer. Building digital solutions with precision." />
+  <meta name="theme-color" content="#FF2D20" />
+
+  <!-- Fonts: Space Grotesk + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Cinematic Intro Overlay -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__grain"></div>
+    <div class="intro__content">
+      <span class="intro__line intro__line--top">Portfolio of</span>
+      <h2 class="intro__name">
+        <span class="intro__char">G</span><span class="intro__char">A</span><span class="intro__char">N</span><span class="intro__char">E</span><span class="intro__char">S</span><span class="intro__char">A</span><span class="intro__char">N</span>
+      </h2>
+      <span class="intro__line intro__line--bottom">Full Stack Developer — Chennai, India</span>
+    </div>
+    <button class="intro__skip" id="introSkip" aria-label="Skip intro">Skip &rarr;</button>
+    <div class="intro__progress" id="introProgress"></div>
+  </div>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Grain Overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Section Indicator Nav -->
+  <nav class="section-nav" id="sectionNav" aria-label="Section navigation">
+    <button class="section-nav__dot active" data-target="#hero" aria-label="Hero"></button>
+    <button class="section-nav__dot" data-target="#about" aria-label="About"></button>
+    <button class="section-nav__dot" data-target="#projects" aria-label="Projects"></button>
+    <button class="section-nav__dot" data-target="#skills" aria-label="Skills"></button>
+    <button class="section-nav__dot" data-target="#contact" aria-label="Contact"></button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- NAVIGATION                              -->
+  <!-- ═══════════════════════════════════════ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo" aria-label="Go to top">GPV<span class="accent">.</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks" role="list">
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#projects" class="nav__link">Work</a></li>
+        <li><a href="#skills" class="nav__link">Skills</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- HERO                                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="hero" id="hero" aria-label="Hero introduction">
+    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero__gradient hero__gradient--top" aria-hidden="true"></div>
+    <div class="hero__gradient hero__gradient--bottom" aria-hidden="true"></div>
+
+    <div class="hero__grid">
+      <div class="hero__col hero__col--left">
+        <p class="hero__tag">[Available for hire]</p>
+        <h1 class="hero__name" data-scroll-scale>
+          <span class="hero__name-line" data-split>Ganesan</span>
+          <span class="hero__name-line" data-split>P V<span class="accent">.</span></span>
+        </h1>
+        <div class="hero__role">
+          <span class="hero__rule"></span>
+          <span class="hero__role-text">Full Stack Developer</span>
+        </div>
+        <p class="hero__tagline">I build stuff that works.<br/><em>Sometimes it even looks good.</em></p>
+      </div>
+      <div class="hero__col hero__col--right">
+        <div class="hero__img-wrap" data-scroll-pan>
+          <img src="./images/profile.jpg" alt="Ganesan P V — Portrait" class="hero__img" loading="eager" />
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-num">10+</span>
+            <span class="hero__stat-label">Projects</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">5+</span>
+            <span class="hero__stat-label">Technologies</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">2+</span>
+            <span class="hero__stat-label">Years Exp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABOUT                                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="about section" id="about" aria-label="About me">
+    <div class="about__bg-grid" aria-hidden="true"></div>
+    <div class="section__header">
+      <span class="section__num">01</span>
+      <h2 class="section__title">About</h2>
+    </div>
+    <div class="about__grid">
+      <div class="about__text">
+        <p class="about__lead">I'm a passionate <strong>Student &amp; Web Developer</strong> from Chennai, India.</p>
+        <p>Currently pursuing my B.Tech in Computer and Communication Engineering at Amrita School of Engineering (2023–2027). I enjoy learning new technologies and building projects that combine clean design with functionality.</p>
+        <p>I'm passionate about using technology to solve real-world problems. My expertise includes Python, JavaScript, C, and SQL, with hands-on experience in web development, database management, and machine learning projects. When I'm not coding, you can find me listening to music, reading, or experimenting with new technologies.</p>
+      </div>
+      <div class="about__details">
+        <dl class="about__info">
+          <div class="about__info-row">
+            <dt>Email</dt>
+            <dd><a href="mailto:Hareshganesan1@gmail.com">Hareshganesan1@gmail.com</a></dd>
+          </div>
+          <div class="about__info-row">
+            <dt>Phone</dt>
+            <dd><a href="tel:+919566096541">+91 9566096541</a></dd>
+          </div>
+          <div class="about__info-row">
+            <dt>Location</dt>
+            <dd>Chennai, India</dd>
+          </div>
+          <div class="about__info-row">
+            <dt>Education</dt>
+            <dd>B.Tech Computer &amp; Communication Engineering</dd>
+          </div>
+        </dl>
+        <a href="./files/CV_Ganesan_PV.pdf" download="CV_Ganesan_PV.pdf" class="btn" data-magnetic>Download CV &darr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PROJECTS — Horizontal Scroll Gallery    -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="projects-wrap" id="projects" aria-label="Selected projects">
+    <div class="projects__header-area">
+      <div class="section__header">
+        <span class="section__num">02</span>
+        <h2 class="section__title">Work</h2>
+      </div>
+    </div>
+
+    <div class="projects__track" id="projectsTrack">
+      <!-- Project 01 -->
+      <article class="project" data-project>
+        <div class="project__card">
+          <div class="project__index-wrap">
+            <span class="project__index">01</span>
+          </div>
+          <div class="project__body">
+            <h3 class="project__name">Smart Waste Categorizer</h3>
+            <ul class="project__desc">
+              <li>AI-powered real-time waste sorting using computer vision.</li>
+              <li>Classifies waste into organic, plastic, paper, and metal.</li>
+              <li>Deep learning for accurate waste identification.</li>
+              <li>Designed for smart cities and eco-friendly communities.</li>
+            </ul>
+            <div class="project__tech">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>OpenCV</span>
+            </div>
+            <div class="project__links">
+              <a href="https://github.com/Hareshganesan/Object_Segregration" target="_blank" rel="noopener">GitHub &nearr;</a>
+            </div>
+          </div>
+          <svg class="project__svg-outline" viewBox="0 0 600 400" fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="1" y="1" width="598" height="398" stroke="currentColor" stroke-width="2" pathLength="1" class="project__svg-rect"/>
+          </svg>
+        </div>
+      </article>
+
+      <!-- Project 02 -->
+      <article class="project" data-project>
+        <div class="project__card">
+          <div class="project__index-wrap">
+            <span class="project__index">02</span>
+          </div>
+          <div class="project__body">
+            <h3 class="project__name">Autonomous Vehicle Platoon</h3>
+            <ul class="project__desc">
+              <li>Distributed system for synchronized autonomous vehicle fleets.</li>
+              <li>V2V communication and adaptive cruise control.</li>
+              <li>Real-time sensor fusion for safety and efficiency.</li>
+              <li>Optimized for highway driving and platooning scenarios.</li>
+            </ul>
+            <div class="project__tech">
+              <span>Python</span>
+              <span>Carla</span>
+              <span>PPO</span>
+            </div>
+            <div class="project__links">
+              <a href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" rel="noopener">GitHub &nearr;</a>
+            </div>
+          </div>
+          <svg class="project__svg-outline" viewBox="0 0 600 400" fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="1" y="1" width="598" height="398" stroke="currentColor" stroke-width="2" pathLength="1" class="project__svg-rect"/>
+          </svg>
+        </div>
+      </article>
+
+      <!-- Project 03 -->
+      <article class="project" data-project>
+        <div class="project__card">
+          <div class="project__index-wrap">
+            <span class="project__index">03</span>
+          </div>
+          <div class="project__body">
+            <h3 class="project__name">AI Finance Tracker</h3>
+            <ul class="project__desc">
+              <li>AI-powered dashboard for analyzing spending and predicting trends.</li>
+              <li>Automated expense categorization and real-time budget alerts.</li>
+              <li>Animated charts and beautiful, intuitive UI.</li>
+            </ul>
+            <div class="project__tech">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>Machine Learning</span>
+            </div>
+            <div class="project__links">
+              <a href="https://github.com/Hareshganesan/ai-finance-tracker" target="_blank" rel="noopener">GitHub &nearr;</a>
+              <a href="https://ai-finance-tracker-demo.vercel.app/" target="_blank" rel="noopener">Live Demo &nearr;</a>
+            </div>
+          </div>
+          <svg class="project__svg-outline" viewBox="0 0 600 400" fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="1" y="1" width="598" height="398" stroke="currentColor" stroke-width="2" pathLength="1" class="project__svg-rect"/>
+          </svg>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SIGNATURE MOMENT — Scroll Freeze Wipe   -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="freeze" id="freeze" aria-hidden="true">
+    <div class="freeze__text">
+      <span class="freeze__word" data-speed="0.8">Build</span>
+      <span class="freeze__word freeze__word--accent" data-speed="1.2">Break</span>
+      <span class="freeze__word" data-speed="0.6">Repeat</span>
+    </div>
+    <div class="freeze__mask freeze__mask--left"></div>
+    <div class="freeze__mask freeze__mask--right"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SKILLS — Full Transformation            -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="skills section" id="skills" aria-label="Skills">
+    <div class="skills__bg-grid" aria-hidden="true"></div>
+    <div class="skills__accent-pulse" aria-hidden="true"></div>
+
+    <div class="section__header">
+      <span class="section__num">03</span>
+      <h2 class="section__title">Skills</h2>
+      <div class="skills__view-toggle">
+        <button class="skills__toggle-btn active" data-view="grid" aria-label="Grid view">Grid</button>
+        <button class="skills__toggle-btn" data-view="cloud" aria-label="Cloud view">Depth</button>
+      </div>
+    </div>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Front-End — Back-End — Machine Learning — UI/UX — Cloud — DevOps — Databases — API Design —&nbsp;</span>
+        <span>Front-End — Back-End — Machine Learning — UI/UX — Cloud — DevOps — Databases — API Design —&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- Grid View: 3D Skill Cards -->
+    <div class="skills__cards-grid" id="skillsGrid">
+      <div class="skills__card" data-skill="python" data-val="99">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">PY</span>
+          <h4 class="skills__card-name">Python</h4>
+          <p class="skills__card-desc">AI, ML, Automation, Backend</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:99"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">99<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="c" data-val="85">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">C</span>
+          <h4 class="skills__card-name">C</h4>
+          <p class="skills__card-desc">Systems, Embedded, DSA</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:85"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">85<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="javascript" data-val="80">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">JS</span>
+          <h4 class="skills__card-name">JavaScript</h4>
+          <p class="skills__card-desc">Frontend, Node, GSAP</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:80"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">80<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="java" data-val="60">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">JV</span>
+          <h4 class="skills__card-name">Java</h4>
+          <p class="skills__card-desc">OOP, Android, Spring</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:60"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">60<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="mysql" data-val="95">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">SQL</span>
+          <h4 class="skills__card-name">MySQL</h4>
+          <p class="skills__card-desc">Schema, Query Optimization</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:95"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">95<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="mongodb" data-val="70">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">MDB</span>
+          <h4 class="skills__card-name">MongoDB</h4>
+          <p class="skills__card-desc">NoSQL, Aggregation, Atlas</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:70"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">70<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="git" data-val="85">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">GIT</span>
+          <h4 class="skills__card-name">Git</h4>
+          <p class="skills__card-desc">Version Control, CI/CD</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:85"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">85<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="aws" data-val="75">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">AWS</span>
+          <h4 class="skills__card-name">AWS</h4>
+          <p class="skills__card-desc">EC2, S3, Lambda, Deploy</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:75"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">75<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="figma" data-val="60">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">FIG</span>
+          <h4 class="skills__card-name">Figma</h4>
+          <p class="skills__card-desc">UI Design, Prototyping</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:60"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">60<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="vscode" data-val="100">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">VSC</span>
+          <h4 class="skills__card-name">VS Code</h4>
+          <p class="skills__card-desc">Extensions, Debugging</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:100"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">100<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="premiere" data-val="85">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">PR</span>
+          <h4 class="skills__card-name">Premiere Pro</h4>
+          <p class="skills__card-desc">Video Editing, Motion</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:85"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">85<small>%</small></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="kotlin" data-val="70">
+        <div class="skills__card-inner">
+          <span class="skills__card-label">KT</span>
+          <h4 class="skills__card-name">Kotlin</h4>
+          <p class="skills__card-desc">Android, Coroutines</p>
+          <div class="skills__card-bar">
+            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
+              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:70"/>
+            </svg>
+          </div>
+          <span class="skills__card-pct">70<small>%</small></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cloud View: Floating Skill Cloud -->
+    <div class="skills__cloud" id="skillsCloud">
+      <div class="skills__cloud-item" data-depth="1" style="--cx:12;--cy:20">Python</div>
+      <div class="skills__cloud-item" data-depth="2" style="--cx:68;--cy:12">JavaScript</div>
+      <div class="skills__cloud-item" data-depth="3" style="--cx:38;--cy:58">MySQL</div>
+      <div class="skills__cloud-item" data-depth="1" style="--cx:82;--cy:50">Git</div>
+      <div class="skills__cloud-item" data-depth="2" style="--cx:22;--cy:72">AWS</div>
+      <div class="skills__cloud-item" data-depth="3" style="--cx:55;--cy:32">C</div>
+      <div class="skills__cloud-item" data-depth="1" style="--cx:45;--cy:8">MongoDB</div>
+      <div class="skills__cloud-item" data-depth="2" style="--cx:8;--cy:48">Figma</div>
+      <div class="skills__cloud-item" data-depth="3" style="--cx:88;--cy:78">Java</div>
+      <div class="skills__cloud-item" data-depth="1" style="--cx:58;--cy:82">Kotlin</div>
+      <div class="skills__cloud-item" data-depth="2" style="--cx:30;--cy:38">VS Code</div>
+      <div class="skills__cloud-item" data-depth="3" style="--cx:75;--cy:65">Premiere</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="skills__stats">
+      <div class="skills__stat">
+        <span class="skills__stat-num" data-count="7">0</span>
+        <span class="skills__stat-label">Projects</span>
+      </div>
+      <div class="skills__stat">
+        <span class="skills__stat-num" data-count="12">0</span>
+        <span class="skills__stat-label">Technologies</span>
+      </div>
+      <div class="skills__stat">
+        <span class="skills__stat-num" data-count="4">0</span>
+        <span class="skills__stat-label">Years Coding</span>
+      </div>
+      <div class="skills__stat">
+        <span class="skills__stat-num" data-count="350">0</span>
+        <span class="skills__stat-label">Bugs Squashed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CONTACT                                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="contact section" id="contact" aria-label="Contact">
+    <div class="section__header">
+      <span class="section__num">04</span>
+      <h2 class="section__title">Contact</h2>
+    </div>
+    <div class="contact__grid">
+      <div class="contact__cta reveal-up">
+        <p class="contact__headline">Let's make<br/>something <em>cool</em><span class="accent">.</span></p>
+        <p class="contact__sub">Feel free to reach out. I'm always open to discussing new projects, creative ideas, or opportunities.</p>
+        <a href="mailto:Hareshganesan1@gmail.com" class="btn btn--large" data-magnetic>Say Hello &rarr;</a>
+      </div>
+      <div class="contact__info reveal-up">
+        <dl class="contact__details">
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:Hareshganesan1@gmail.com">Hareshganesan1@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+919566096541">+91 9566096541</a></dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>Chennai 600063, India</dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>Mon – Fri, 9 AM – 6 PM</dd>
+          </div>
+        </dl>
+        <div class="contact__social">
+          <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+          <a href="https://github.com/Hareshganesan" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+          <a href="https://www.instagram.com/bored_boy.7/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- FOOTER                                  -->
+  <!-- ═══════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <p>&copy; 2025 GANESAN P V — BUILT WITH RAGE &amp; CAFFEINE</p>
+      <a href="#hero" class="footer__top" aria-label="Back to top">&uarr; Top</a>
+    </div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger + ScrollTo -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
