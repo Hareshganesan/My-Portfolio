@@ -58,7 +58,7 @@
   <!-- ═══════════════════════════════════════ -->
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav__inner">
-      <a href="#hero" class="nav__logo" aria-label="Go to top">GPV<span class="accent">.</span></a>
+      <a href="#hero" class="nav__logo" aria-label="Go to top">PVG<span class="accent">.</span></a>
       <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span>
       </button>
@@ -133,25 +133,30 @@
         <p>Currently pursuing my B.Tech in Computer and Communication Engineering at Amrita School of Engineering (2023–2027). I enjoy learning new technologies and building projects that combine clean design with functionality.</p>
         <p>I'm passionate about using technology to solve real-world problems. My expertise includes Python, JavaScript, C, and SQL, with hands-on experience in web development, database management, and machine learning projects. When I'm not coding, you can find me listening to music, reading, or experimenting with new technologies.</p>
       </div>
-      <div class="about__details">
-        <dl class="about__info">
-          <div class="about__info-row">
-            <dt>Email</dt>
-            <dd><a href="mailto:Hareshganesan1@gmail.com">Hareshganesan1@gmail.com</a></dd>
+      <div class="about__philosophy">
+        <h3 class="about__philosophy-title">How I Think</h3>
+        <div class="about__philosophy-grid">
+          <div class="about__philosophy-block">
+            <span class="about__philosophy-num">01</span>
+            <h4>Systems First</h4>
+            <p>I think in systems, not screens. Every component exists within a larger architecture — understanding the whole informs every detail.</p>
           </div>
-          <div class="about__info-row">
-            <dt>Phone</dt>
-            <dd><a href="tel:+919566096541">+91 9566096541</a></dd>
+          <div class="about__philosophy-block">
+            <span class="about__philosophy-num">02</span>
+            <h4>Ship &gt; Perfect</h4>
+            <p>Momentum beats perfection. I ship early, iterate fast, and let real feedback shape the product instead of assumptions.</p>
           </div>
-          <div class="about__info-row">
-            <dt>Location</dt>
-            <dd>Chennai, India</dd>
+          <div class="about__philosophy-block">
+            <span class="about__philosophy-num">03</span>
+            <h4>Break to Learn</h4>
+            <p>The best way to understand something is to tear it apart. I reverse-engineer tools, frameworks, and patterns until they click.</p>
           </div>
-          <div class="about__info-row">
-            <dt>Education</dt>
-            <dd>B.Tech Computer &amp; Communication Engineering</dd>
+          <div class="about__philosophy-block">
+            <span class="about__philosophy-num">04</span>
+            <h4>Performance Matters</h4>
+            <p>Speed is a feature. I obsess over load times, bundle sizes, and perceived performance — because every millisecond counts.</p>
           </div>
-        </dl>
+        </div>
         <a href="./files/CV_Ganesan_PV.pdf" download="CV_Ganesan_PV.pdf" class="btn" data-magnetic>Download CV &darr;</a>
       </div>
     </div>
@@ -281,10 +286,7 @@
     <div class="section__header">
       <span class="section__num">03</span>
       <h2 class="section__title">Skills</h2>
-      <div class="skills__view-toggle">
-        <button class="skills__toggle-btn active" data-view="grid" aria-label="Grid view">Grid</button>
-        <button class="skills__toggle-btn" data-view="cloud" aria-label="Cloud view">Depth</button>
-      </div>
+      <p class="section__subtitle">Signal strength across the stack</p>
     </div>
 
     <!-- Marquee -->
@@ -295,192 +297,212 @@
       </div>
     </div>
 
-    <!-- Grid View: 3D Skill Cards -->
+    <!-- Signal Grid: Skill Cards -->
     <div class="skills__cards-grid" id="skillsGrid">
-      <div class="skills__card" data-skill="python" data-val="99">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">PY</span>
-          <h4 class="skills__card-name">Python</h4>
-          <p class="skills__card-desc">AI, ML, Automation, Backend</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:99"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">99<small>%</small></span>
+      <div class="skills__card" data-skill="python" data-val="10">
+        <span class="skills__card-label">PY</span>
+        <h4 class="skills__card-name">Python</h4>
+        <p class="skills__card-desc">AI, ML, Automation, Backend</p>
+        <div class="skills__signal" style="--level:10" aria-label="10 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="c" data-val="85">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">C</span>
-          <h4 class="skills__card-name">C</h4>
-          <p class="skills__card-desc">Systems, Embedded, DSA</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:85"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">85<small>%</small></span>
+      <div class="skills__card" data-skill="c" data-val="9">
+        <span class="skills__card-label">C</span>
+        <h4 class="skills__card-name">C</h4>
+        <p class="skills__card-desc">Systems, Embedded, DSA</p>
+        <div class="skills__signal" style="--level:9" aria-label="9 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="javascript" data-val="80">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">JS</span>
-          <h4 class="skills__card-name">JavaScript</h4>
-          <p class="skills__card-desc">Frontend, Node, GSAP</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:80"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">80<small>%</small></span>
+      <div class="skills__card" data-skill="javascript" data-val="8">
+        <span class="skills__card-label">JS</span>
+        <h4 class="skills__card-name">JavaScript</h4>
+        <p class="skills__card-desc">Frontend, Node, GSAP</p>
+        <div class="skills__signal" style="--level:8" aria-label="8 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="java" data-val="60">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">JV</span>
-          <h4 class="skills__card-name">Java</h4>
-          <p class="skills__card-desc">OOP, Android, Spring</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:60"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">60<small>%</small></span>
+      <div class="skills__card" data-skill="java" data-val="6">
+        <span class="skills__card-label">JV</span>
+        <h4 class="skills__card-name">Java</h4>
+        <p class="skills__card-desc">OOP, Android, Spring</p>
+        <div class="skills__signal" style="--level:6" aria-label="6 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="mysql" data-val="95">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">SQL</span>
-          <h4 class="skills__card-name">MySQL</h4>
-          <p class="skills__card-desc">Schema, Query Optimization</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:95"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">95<small>%</small></span>
+      <div class="skills__card" data-skill="mysql" data-val="10">
+        <span class="skills__card-label">SQL</span>
+        <h4 class="skills__card-name">MySQL</h4>
+        <p class="skills__card-desc">Schema, Query Optimization</p>
+        <div class="skills__signal" style="--level:10" aria-label="10 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="mongodb" data-val="70">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">MDB</span>
-          <h4 class="skills__card-name">MongoDB</h4>
-          <p class="skills__card-desc">NoSQL, Aggregation, Atlas</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:70"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">70<small>%</small></span>
+      <div class="skills__card" data-skill="mongodb" data-val="7">
+        <span class="skills__card-label">MDB</span>
+        <h4 class="skills__card-name">MongoDB</h4>
+        <p class="skills__card-desc">NoSQL, Aggregation, Atlas</p>
+        <div class="skills__signal" style="--level:7" aria-label="7 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="git" data-val="85">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">GIT</span>
-          <h4 class="skills__card-name">Git</h4>
-          <p class="skills__card-desc">Version Control, CI/CD</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:85"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">85<small>%</small></span>
+      <div class="skills__card" data-skill="git" data-val="9">
+        <span class="skills__card-label">GIT</span>
+        <h4 class="skills__card-name">Git</h4>
+        <p class="skills__card-desc">Version Control, CI/CD</p>
+        <div class="skills__signal" style="--level:9" aria-label="9 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="aws" data-val="75">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">AWS</span>
-          <h4 class="skills__card-name">AWS</h4>
-          <p class="skills__card-desc">EC2, S3, Lambda, Deploy</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:75"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">75<small>%</small></span>
+      <div class="skills__card" data-skill="aws" data-val="8">
+        <span class="skills__card-label">AWS</span>
+        <h4 class="skills__card-name">AWS</h4>
+        <p class="skills__card-desc">EC2, S3, Lambda, Deploy</p>
+        <div class="skills__signal" style="--level:8" aria-label="8 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="figma" data-val="60">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">FIG</span>
-          <h4 class="skills__card-name">Figma</h4>
-          <p class="skills__card-desc">UI Design, Prototyping</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:60"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">60<small>%</small></span>
+      <div class="skills__card" data-skill="figma" data-val="6">
+        <span class="skills__card-label">FIG</span>
+        <h4 class="skills__card-name">Figma</h4>
+        <p class="skills__card-desc">UI Design, Prototyping</p>
+        <div class="skills__signal" style="--level:6" aria-label="6 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="vscode" data-val="100">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">VSC</span>
-          <h4 class="skills__card-name">VS Code</h4>
-          <p class="skills__card-desc">Extensions, Debugging</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:100"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">100<small>%</small></span>
+      <div class="skills__card" data-skill="vscode" data-val="10">
+        <span class="skills__card-label">VSC</span>
+        <h4 class="skills__card-name">VS Code</h4>
+        <p class="skills__card-desc">Extensions, Debugging</p>
+        <div class="skills__signal" style="--level:10" aria-label="10 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="premiere" data-val="85">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">PR</span>
-          <h4 class="skills__card-name">Premiere Pro</h4>
-          <p class="skills__card-desc">Video Editing, Motion</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:85"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">85<small>%</small></span>
+      <div class="skills__card" data-skill="premiere" data-val="9">
+        <span class="skills__card-label">PR</span>
+        <h4 class="skills__card-name">Premiere Pro</h4>
+        <p class="skills__card-desc">Video Editing, Motion</p>
+        <div class="skills__signal" style="--level:9" aria-label="9 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="kotlin" data-val="70">
-        <div class="skills__card-inner">
-          <span class="skills__card-label">KT</span>
-          <h4 class="skills__card-name">Kotlin</h4>
-          <p class="skills__card-desc">Android, Coroutines</p>
-          <div class="skills__card-bar">
-            <svg viewBox="0 0 200 6" preserveAspectRatio="none">
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-bg"/>
-              <line x1="0" y1="3" x2="200" y2="3" class="skills__bar-fill" style="--val:70"/>
-            </svg>
-          </div>
-          <span class="skills__card-pct">70<small>%</small></span>
+      <div class="skills__card" data-skill="kotlin" data-val="7">
+        <span class="skills__card-label">KT</span>
+        <h4 class="skills__card-name">Kotlin</h4>
+        <p class="skills__card-desc">Android, Coroutines</p>
+        <div class="skills__signal" style="--level:7" aria-label="7 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
         </div>
       </div>
-    </div>
-
-    <!-- Cloud View: Floating Skill Cloud -->
-    <div class="skills__cloud" id="skillsCloud">
-      <div class="skills__cloud-item" data-depth="1" style="--cx:12;--cy:20">Python</div>
-      <div class="skills__cloud-item" data-depth="2" style="--cx:68;--cy:12">JavaScript</div>
-      <div class="skills__cloud-item" data-depth="3" style="--cx:38;--cy:58">MySQL</div>
-      <div class="skills__cloud-item" data-depth="1" style="--cx:82;--cy:50">Git</div>
-      <div class="skills__cloud-item" data-depth="2" style="--cx:22;--cy:72">AWS</div>
-      <div class="skills__cloud-item" data-depth="3" style="--cx:55;--cy:32">C</div>
-      <div class="skills__cloud-item" data-depth="1" style="--cx:45;--cy:8">MongoDB</div>
-      <div class="skills__cloud-item" data-depth="2" style="--cx:8;--cy:48">Figma</div>
-      <div class="skills__cloud-item" data-depth="3" style="--cx:88;--cy:78">Java</div>
-      <div class="skills__cloud-item" data-depth="1" style="--cx:58;--cy:82">Kotlin</div>
-      <div class="skills__cloud-item" data-depth="2" style="--cx:30;--cy:38">VS Code</div>
-      <div class="skills__cloud-item" data-depth="3" style="--cx:75;--cy:65">Premiere</div>
     </div>
 
     <!-- Stats -->

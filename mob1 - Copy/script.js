@@ -181,7 +181,7 @@
       document.removeEventListener('mousemove', show);
     });
 
-    const hoverSel = 'a, button, [data-magnetic], .project, .contact__social a, .nav__link, .skills__card, .skills__cloud-item, .skills__toggle-btn';
+    const hoverSel = 'a, button, [data-magnetic], .project, .contact__social a, .nav__link, .skills__card';
     const textSel  = 'p, li, dd, dt, h3, .about__lead, .contact__sub, .hero__tagline, .skills__card-desc';
 
     $$(hoverSel).forEach(el => {
@@ -546,13 +546,14 @@
       );
     });
 
-    /* Info rows — clip-path from bottom */
-    $$('.about__info-row').forEach((row, i) => {
-      gsap.fromTo(row,
-        { clipPath: 'inset(0 0 100% 0)', opacity: 0 },
-        { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: 0.7, delay: i * 0.08,
+    /* Philosophy blocks — clip-path from bottom + rotateX */
+    $$('.about__philosophy-block').forEach((block, i) => {
+      gsap.fromTo(block,
+        { clipPath: 'inset(0 0 100% 0)', opacity: 0, rotateX: 8 },
+        { clipPath: 'inset(0 0 0% 0)', opacity: 1, rotateX: 0,
+          duration: 0.7, delay: i * 0.1,
           ease: EASE.smooth,
-          scrollTrigger: { trigger: row, start: 'top 90%', toggleActions: 'play none none none' }
+          scrollTrigger: { trigger: block, start: 'top 90%', toggleActions: 'play none none none' }
         }
       );
     });
@@ -680,10 +681,7 @@
      ═════════════════════════════════════════ */
   function initSkillAnimations() {
     const section    = $('#skills');
-    const gridView   = $('#skillsGrid');
-    const cloudView  = $('#skillsCloud');
     const cards      = $$('.skills__card');
-    const cloudItems = $$('.skills__cloud-item');
     if (!section) return;
 
     /* ── Background grid parallax (reduced) ── */
@@ -722,10 +720,10 @@
       }
     }
 
-    /* ── 3D Skill Cards — scroll reveal + SVG bar animation ── */
+    /* ── Signal-Meter Skill Cards — scroll reveal + bar animation ── */
     cards.forEach((card, i) => {
-      const val  = parseInt(card.dataset.val, 10);
-      const fill = card.querySelector('.skills__bar-fill');
+      const level = parseInt(card.dataset.val, 10);
+      const bars  = card.querySelectorAll('.skills__signal-bar');
 
       /* Staggered entrance */
       gsap.fromTo(card,
@@ -737,7 +735,15 @@
             trigger: card, start: 'top 90%',
             toggleActions: 'play none none none',
           },
-          onComplete: () => card.classList.add('revealed'),
+          onComplete: () => {
+            card.classList.add('revealed');
+            /* Activate bars up to --level */
+            bars.forEach((bar, bi) => {
+              if (bi < level) {
+                setTimeout(() => bar.classList.add('active'), bi * 60);
+              }
+            });
+          },
         }
       );
 
@@ -775,71 +781,6 @@
           gsap.to(card, { x: 0, y: 0, duration: 0.5, ease: EASE.smooth });
         });
       }
-    });
-
-    /* ── Floating Cloud — gentl animations + mouse parallax ── */
-    cloudItems.forEach(item => {
-      const depth = parseInt(item.dataset.depth, 10);
-      const dur   = 2.5 + Math.random() * 2;
-      const range = 8 + depth * 6;
-
-      gsap.to(item, {
-        y: `+=${range}`,
-        duration: dur,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-    });
-
-    if (!isTouch) {
-      section.addEventListener('mousemove', e => {
-        const rect = section.getBoundingClientRect();
-        const cx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        const cy = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-
-        cloudItems.forEach(item => {
-          const depth  = parseInt(item.dataset.depth, 10);
-          const factor = (4 - depth) * 18;
-          gsap.to(item, {
-            x: cx * factor,
-            duration: 0.8,
-            ease: EASE.smooth,
-            overwrite: 'auto',
-          });
-        });
-      }, { passive: true });
-    }
-
-    /* ── View Toggle (Grid ↔ Cloud) ── */
-    const toggleBtns = $$('.skills__toggle-btn');
-    toggleBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (btn.classList.contains('active')) return;
-        toggleBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const view = btn.dataset.view;
-        if (view === 'grid') {
-          gsap.to(cloudView, {
-            opacity: 0, scale: 0.96, duration: 0.35,
-            onComplete: () => {
-              cloudView.style.display = 'none';
-              gridView.style.display = 'grid';
-              gsap.fromTo(gridView, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
-            }
-          });
-        } else {
-          gsap.to(gridView, {
-            opacity: 0, scale: 0.96, duration: 0.35,
-            onComplete: () => {
-              gridView.style.display = 'none';
-              cloudView.style.display = 'block';
-              gsap.fromTo(cloudView, { opacity: 0, scale: 1.05 }, { opacity: 1, scale: 1, duration: 0.4 });
-            }
-          });
-        }
-      });
     });
 
     /* ── Stat Counters ── */
@@ -966,78 +907,87 @@
     const section = $('#contact');
     if (!section) return;
 
-    /* Section header */
-    const header = section.querySelector('.section__header');
-    if (header) {
-      const title = header.querySelector('.section__title');
-      const num   = header.querySelector('.section__num');
-      if (title) {
-        gsap.fromTo(title,
-          { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
-          { clipPath: 'inset(0 0% 0 0)', opacity: 1, ease: EASE.inOut,
-            scrollTrigger: { trigger: header, start: 'top 82%', end: 'top 45%', scrub: 1 }
-          }
-        );
-      }
-      if (num) {
-        gsap.fromTo(num, { x: -20, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.6, ease: EASE.smooth,
-            scrollTrigger: { trigger: header, start: 'top 80%',
-              onEnter: () => num.classList.add('active'),
-              onLeaveBack: () => num.classList.remove('active'),
+    /* Wrap in gsap.context scoped to #contact for clean lifecycle */
+    const ctx = gsap.context(() => {
+
+      /* Section header */
+      const header = section.querySelector('.section__header');
+      if (header) {
+        const title = header.querySelector('.section__title');
+        const num   = header.querySelector('.section__num');
+        if (title) {
+          gsap.fromTo(title,
+            { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+            { clipPath: 'inset(0 0% 0 0)', opacity: 1, ease: EASE.inOut,
+              scrollTrigger: { trigger: header, start: 'top 82%', end: 'top 45%', scrub: 1, invalidateOnRefresh: true }
             }
+          );
+        }
+        if (num) {
+          gsap.fromTo(num, { x: -20, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.6, ease: EASE.smooth,
+              scrollTrigger: { trigger: header, start: 'top 80%', invalidateOnRefresh: true,
+                onEnter: () => num.classList.add('active'),
+                onLeaveBack: () => num.classList.remove('active'),
+              }
+            }
+          );
+        }
+      }
+
+      /* Headline — dramatic scale + clip reveal */
+      const headline = section.querySelector('.contact__headline');
+      if (headline) {
+        gsap.fromTo(headline,
+          { clipPath: 'inset(0 0 100% 0)', opacity: 0, scale: 1.12 },
+          { clipPath: 'inset(0 0 0% 0)', opacity: 1, scale: 1,
+            duration: 1.4, ease: EASE.inOut,
+            scrollTrigger: { trigger: headline, start: 'top 80%', end: 'top 40%', scrub: 1, invalidateOnRefresh: true }
           }
         );
       }
-    }
 
-    /* Headline — dramatic scale + clip reveal */
-    const headline = section.querySelector('.contact__headline');
-    if (headline) {
-      gsap.fromTo(headline,
-        { clipPath: 'inset(0 0 100% 0)', opacity: 0, scale: 1.12 },
-        { clipPath: 'inset(0 0 0% 0)', opacity: 1, scale: 1,
-          duration: 1.4, ease: EASE.inOut,
-          scrollTrigger: { trigger: headline, start: 'top 80%', end: 'top 40%', scrub: 1 }
+      /* Generic reveal-up for other contact elements */
+      section.querySelectorAll('.reveal-up').forEach(el => {
+        const children = el.querySelectorAll('p, dl > div, .contact__social, .btn');
+
+        if (children.length > 1) {
+          gsap.set(children, { opacity: 0, y: 40 });
+          gsap.set(el, { opacity: 1, transform: 'none' });
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 85%',
+            once: true,
+            invalidateOnRefresh: true,
+            onEnter: () => {
+              gsap.to(children, {
+                opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: EASE.smooth,
+              });
+            }
+          });
+        } else {
+          gsap.to(el, {
+            opacity: 1, y: 0, duration: 0.9, ease: EASE.smooth,
+            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none', invalidateOnRefresh: true }
+          });
         }
-      );
-    }
+      });
 
-    /* Generic reveal-up for other contact elements */
-    section.querySelectorAll('.reveal-up').forEach(el => {
-      const children = el.querySelectorAll('p, dl > div, .contact__social, .btn');
-
-      if (children.length > 1) {
-        gsap.set(children, { opacity: 0, y: 40 });
-        gsap.set(el, { opacity: 1, transform: 'none' });
-        ScrollTrigger.create({
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-          onEnter: () => {
-            gsap.to(children, {
-              opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: EASE.smooth,
-            });
+      /* Social links stagger */
+      const socials = section.querySelectorAll('.contact__social a');
+      if (socials.length) {
+        gsap.fromTo(socials,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: EASE.smooth,
+            scrollTrigger: { trigger: socials[0].parentElement, start: 'top 88%', toggleActions: 'play none none none', invalidateOnRefresh: true }
           }
-        });
-      } else {
-        gsap.to(el, {
-          opacity: 1, y: 0, duration: 0.9, ease: EASE.smooth,
-          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-        });
+        );
       }
-    });
 
-    /* Social links stagger */
-    const socials = section.querySelectorAll('.contact__social a');
-    if (socials.length) {
-      gsap.fromTo(socials,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: EASE.smooth,
-          scrollTrigger: { trigger: socials[0].parentElement, start: 'top 88%', toggleActions: 'play none none none' }
-        }
-      );
-    }
+    }, section); /* end gsap.context scoped to #contact */
+
+    /* Refresh triggers after fonts are ready to fix layout positioning */
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
   }
 
 
