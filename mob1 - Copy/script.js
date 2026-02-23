@@ -22,7 +22,7 @@
      initDeepDive()           → project case study modal with rich data
      initExperience()         → layered card stack, glow pulse, tech tags
      initWins()               → horizontal scroll showcase, particle burst, trophy cards
-     initFinale()              → cinematic scroll transition, pin + yPercent reveal
+     initFinale()              → cinematic word-stagger, ambient depth, opacity fade exit
      initMicroInteractions()  → RGB split on fast scroll, magnetic cursor, keyboard shortcuts
      initDarkEnergy()         → easter egg (Konami code / "buildbreakrepeat")
      initPerfLog()            → console telemetry & session summary
@@ -1001,7 +1001,7 @@
 
   /* ═════════════════════════════════════════
      12b · FINALE — Cinematic scroll transition
-           Pin + single master timeline
+           Word stagger + ambient depth + fade exit
      ═════════════════════════════════════════ */
   function initFinale() {
     const section = $('#finale');
@@ -1009,10 +1009,12 @@
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* Reduced motion — no pin, just show text */
+    /* Reduced motion — no pin, just show everything */
     if (prefersReduced) {
-      gsap.set('.line1, .line2', { opacity: 1, y: 0 });
-      gsap.set('.finale__divider', { height: '60px' });
+      gsap.set('.finale__content', { opacity: 1 });
+      gsap.set('.word', { opacity: 1, y: 0 });
+      gsap.set('.finale__sub', { opacity: 0.7, y: 0 });
+      gsap.set('.finale__core-line', { height: '60px' });
       return;
     }
 
@@ -1022,59 +1024,59 @@
         scrollTrigger: {
           trigger: '#finale',
           start: 'top top',
-          end: '+=120%',
-          scrub: 1,
+          end: '+=160%',
+          scrub: 1.2,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         }
       });
 
-      /* Phase 1 — Line 1 fades in */
-      tl.to('.line1', {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-      })
-
-      /* Phase 2 — Line 2 fades in */
-      .to('.line2', {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-      }, '+=0.2')
-
-      /* Phase 3 — Red divider grows */
-      .to('.finale__divider', {
+      /* Signal line grows */
+      tl.to('.finale__core-line', {
         height: '60vh',
         duration: 0.6,
-        ease: 'none',
-      })
+        ease: 'power2.out',
+      });
 
-      /* Phase 4 — Subtle zoom */
-      .to('#finale', {
-        scale: 1.05,
-        duration: 0.6,
-        ease: 'none',
-      })
-
-      /* Phase 5 — Fade content out */
-      .to('.finale__content', {
-        opacity: 0,
+      /* Fade content in */
+      tl.to('.finale__content', {
+        opacity: 1,
         duration: 0.4,
-      })
+      }, '-=0.2');
 
-      /* Phase 6 — Slide finale up to reveal contact */
-      .to('#finale', {
-        yPercent: -100,
+      /* Word reveal stagger */
+      tl.to('.word', {
+        y: 0,
+        opacity: 1,
+        stagger: 0.15,
+        duration: 0.6,
+        ease: 'power3.out',
+      });
+
+      /* Sub reveal */
+      tl.to('.finale__sub', {
+        y: 0,
+        opacity: 0.7,
+        duration: 0.5,
+      }, '-=0.3');
+
+      /* Ambient depth (runs from start) */
+      tl.to('.finale__ambient', {
+        scale: 1.2,
+        opacity: 0.6,
+        duration: 1,
         ease: 'none',
+      }, 0);
+
+      /* Elegant fade to contact */
+      tl.to('#finale', {
+        opacity: 0,
         duration: 0.8,
+        ease: 'power2.inOut',
       });
 
     });
-
-    /* Refresh after layout settles */
-    ScrollTrigger.refresh();
 
     return () => ctx.revert();
   }

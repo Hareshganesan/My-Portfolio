@@ -1128,7 +1128,8 @@ h1, h2, h3, h4 {
    ─────────────────────────────────────── */
 #finale {
   position: relative;
-  height: 100vh;
+  min-height: 100dvh;
+  min-height: 100vh;
   background: #050505;
   display: flex;
   align-items: center;
@@ -1136,51 +1137,76 @@ h1, h2, h3, h4 {
   overflow: hidden;
   z-index: 2;
 }
-.finale__overlay {
+.finale__ambient {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at center, rgba(255,45,32,0.08), transparent 70%);
+  opacity: 0.4;
+  transform: scale(1);
+  will-change: transform, opacity;
   pointer-events: none;
+}
+.finale__core-line {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  width: 2px;
+  height: 0;
+  background: #FF2D20;
+  transform: translateX(-50%) translateY(50%);
+  will-change: height;
+  pointer-events: none;
+  z-index: 1;
 }
 .finale__content {
   position: relative;
   text-align: center;
-  z-index: 2;
-}
-.finale__line {
-  font-family: var(--f-heading);
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--c-text);
+  max-width: 90%;
   opacity: 0;
+  z-index: 2;
+  will-change: opacity;
+}
+.finale__headline {
+  font-family: var(--f-heading);
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 0;
+  line-height: 1.1;
+  color: var(--c-text);
+}
+.word {
+  display: inline-block;
   transform: translateY(40px);
+  opacity: 0;
   will-change: transform, opacity;
 }
-.finale__divider {
-  width: 2px;
-  height: 0;
-  background: #FF2D20;
-  margin: 2rem auto;
-  will-change: height;
+.word.accent {
+  color: #FF2D20;
 }
-.finale__hint {
-  margin-top: 2rem;
+.finale__sub {
+  margin-top: 1.5rem;
   font-family: var(--f-body);
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
   color: var(--c-muted);
-  opacity: 0.5;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
 }
 
 /* Reduced motion: no pin, simple fade */
 @media (prefers-reduced-motion: reduce) {
-  #finale { height: auto; min-height: 50vh; }
-  .finale__line { opacity: 1; transform: none; }
-  .finale__divider { height: 60px; }
-  .finale__hint { display: none; }
+  #finale { min-height: auto; padding: 6rem 0; }
+  .finale__content { opacity: 1; }
+  .word { opacity: 1; transform: none; }
+  .finale__sub { opacity: 0.7; transform: none; }
+  .finale__core-line { height: 60px; }
+}
+
+@media (max-width: 768px) {
+  .finale__content { padding: 0 1.5rem; }
+  .finale__headline { font-size: clamp(1.8rem, 8vw, 3rem); }
 }
 
 /* ───────────────────────────────────────
@@ -1189,6 +1215,7 @@ h1, h2, h3, h4 {
 #contact {
   position: relative;
   z-index: 1;
+  background: #050505;
 }
 .contact__grid {
   display: grid;
@@ -1995,8 +2022,7 @@ body.dark-energy h3 {
   .wins__header-area { position: relative; padding-bottom: 0; }
 
   /* Finale: mobile */
-  .finale__line { font-size: clamp(1.4rem, 6vw, 2.5rem); }
-  .finale__hint { font-size: 0.75rem; }
+  .finale__headline { font-size: clamp(1.6rem, 7vw, 2.5rem); }
 
   /* System status: hidden */
   .systat { display: none; }
