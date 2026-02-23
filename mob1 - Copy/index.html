@@ -98,15 +98,15 @@
         </div>
         <div class="hero__stats">
           <div class="hero__stat">
-            <span class="hero__stat-num">10+</span>
+            <span class="hero__stat-num">7+</span>
             <span class="hero__stat-label">Projects</span>
           </div>
           <div class="hero__stat">
-            <span class="hero__stat-num">5+</span>
+            <span class="hero__stat-num">12+</span>
             <span class="hero__stat-label">Technologies</span>
           </div>
           <div class="hero__stat">
-            <span class="hero__stat-num">2+</span>
+            <span class="hero__stat-num">4+</span>
             <span class="hero__stat-label">Years Exp</span>
           </div>
         </div>
@@ -160,39 +160,91 @@
         <a href="./files/CV_Ganesan_PV.pdf" download="CV_Ganesan_PV.pdf" class="btn" data-magnetic>Download CV &darr;</a>
       </div>
     </div>
+    <!-- Certifications -->
+    <div class="about__certs" aria-label="Certifications">
+      <div class="about__certs-track">
+        <span>TCS IT Certification — AWS Cloud Foundations — AWS Cloud Developer (AWS Academy) — Python &amp; SQL (HackerRank) —&nbsp;</span>
+        <span>TCS IT Certification — AWS Cloud Foundations — AWS Cloud Developer (AWS Academy) — Python &amp; SQL (HackerRank) —&nbsp;</span>
+      </div>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- PROJECTS — Horizontal Scroll Gallery    -->
+  <!-- EXPERIENCE                               -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="experience section" id="experience" aria-label="Professional Experience">
+    <div class="section__header">
+      <span class="section__num">02</span>
+      <h2 class="section__title">Current Focus</h2>
+    </div>
+    <div class="experience__stack">
+      <div class="experience__layer experience__layer--3" aria-hidden="true"></div>
+      <div class="experience__layer experience__layer--2" aria-hidden="true"></div>
+      <div class="experience__layer experience__layer--1" aria-hidden="true"></div>
+      <div class="experience__card">
+        <div class="experience__corner experience__corner--tl" aria-hidden="true"></div>
+        <div class="experience__corner experience__corner--tr" aria-hidden="true"></div>
+        <div class="experience__corner experience__corner--bl" aria-hidden="true"></div>
+        <div class="experience__corner experience__corner--br" aria-hidden="true"></div>
+        <div class="experience__status">
+          <span class="experience__dot" aria-hidden="true"></span>
+          <span class="experience__status-text">Currently Active</span>
+        </div>
+        <span class="experience__role">ARTIFICIAL INTELLIGENCE INTERN</span>
+        <span class="experience__company">Infosys Springboard</span>
+        <ul class="experience__list">
+          <li>Working on applied AI systems and model-driven solutions.</li>
+          <li>Focus on scalable ML workflows and deployment concepts.</li>
+          <li>Contributing to real-world problem statements under mentorship.</li>
+        </ul>
+        <div class="experience__tags">
+          <span class="experience__tag">ML Systems</span>
+          <span class="experience__tag">Applied AI</span>
+          <span class="experience__tag">Deployment Concepts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PROJECTS                                -->
   <!-- ═══════════════════════════════════════ -->
   <section class="projects-wrap" id="projects" aria-label="Selected projects">
     <div class="projects__header-area">
       <div class="section__header">
-        <span class="section__num">02</span>
+        <span class="section__num">03</span>
         <h2 class="section__title">Work</h2>
+        <p class="section__subtitle">Shipped, not shelved.</p>
       </div>
     </div>
 
     <div class="projects__track" id="projectsTrack">
       <!-- Project 01 -->
-      <article class="project" data-project>
+      <article class="project" data-project data-casestudy="waste">
         <div class="project__card">
           <div class="project__index-wrap">
             <span class="project__index">01</span>
           </div>
           <div class="project__body">
-            <h3 class="project__name">Smart Waste Categorizer</h3>
+            <h3 class="project__name">Object Categorizer &amp; Waste Manager</h3>
             <ul class="project__desc">
-              <li>AI-powered real-time waste sorting using computer vision.</li>
-              <li>Classifies waste into organic, plastic, paper, and metal.</li>
-              <li>Deep learning for accurate waste identification.</li>
-              <li>Designed for smart cities and eco-friendly communities.</li>
+              <li>98% precision in real-time waste segregation.</li>
+              <li>Image recognition + sensor fusion pipeline.</li>
+              <li>Edge deployment on Raspberry Pi.</li>
+              <li>End-to-end Python + ML inference pipeline.</li>
             </ul>
             <div class="project__tech">
               <span>Python</span>
               <span>TensorFlow</span>
               <span>OpenCV</span>
+              <span>Raspberry Pi</span>
             </div>
+            <details class="project__arch-toggle">
+              <summary>Architecture Used</summary>
+              <p>Camera → Preprocessing → CNN (MobileNetV2) → Classification → Sensor Fusion → Output</p>
+            </details>
             <div class="project__links">
               <a href="https://github.com/Hareshganesan/Object_Segregration" target="_blank" rel="noopener">GitHub &nearr;</a>
             </div>
@@ -204,7 +256,7 @@
       </article>
 
       <!-- Project 02 -->
-      <article class="project" data-project>
+      <article class="project" data-project data-casestudy="platoon">
         <div class="project__card">
           <div class="project__index-wrap">
             <span class="project__index">02</span>
@@ -212,16 +264,20 @@
           <div class="project__body">
             <h3 class="project__name">Autonomous Vehicle Platoon</h3>
             <ul class="project__desc">
-              <li>Distributed system for synchronized autonomous vehicle fleets.</li>
-              <li>V2V communication and adaptive cruise control.</li>
-              <li>Real-time sensor fusion for safety and efficiency.</li>
-              <li>Optimized for highway driving and platooning scenarios.</li>
+              <li>95%+ control efficiency in multi-agent coordination.</li>
+              <li>30% reduction in simulated traffic delay.</li>
+              <li>Implemented in CARLA 0.9.12 with PPO-based RL.</li>
+              <li>V2V communication for real-time state sharing.</li>
             </ul>
             <div class="project__tech">
               <span>Python</span>
-              <span>Carla</span>
+              <span>CARLA 0.9.12</span>
               <span>PPO</span>
             </div>
+            <details class="project__arch-toggle">
+              <summary>Architecture Used</summary>
+              <p>CARLA Sim → Sensor Suite → State Encoder → PPO Agent → V2V Broadcast → Platoon Coordinator</p>
+            </details>
             <div class="project__links">
               <a href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" rel="noopener">GitHub &nearr;</a>
             </div>
@@ -233,23 +289,30 @@
       </article>
 
       <!-- Project 03 -->
-      <article class="project" data-project>
+      <article class="project" data-project data-casestudy="finance">
         <div class="project__card">
           <div class="project__index-wrap">
             <span class="project__index">03</span>
           </div>
           <div class="project__body">
-            <h3 class="project__name">AI Finance Tracker</h3>
+            <h3 class="project__name">Multi-Agent Financial Portfolio Assistant</h3>
             <ul class="project__desc">
-              <li>AI-powered dashboard for analyzing spending and predicting trends.</li>
-              <li>Automated expense categorization and real-time budget alerts.</li>
-              <li>Animated charts and beautiful, intuitive UI.</li>
+              <li>6-agent AI architecture for portfolio analysis.</li>
+              <li>19 Asian tech stocks analyzed with live data.</li>
+              <li>RAG pipeline using FAISS for context retrieval.</li>
+              <li>Gemini LLM integration for natural language insights.</li>
+              <li>Streamlit dashboard + voice interface.</li>
             </ul>
             <div class="project__tech">
-              <span>React</span>
-              <span>Node.js</span>
-              <span>Machine Learning</span>
+              <span>Python</span>
+              <span>FAISS</span>
+              <span>Gemini API</span>
+              <span>Streamlit</span>
             </div>
+            <details class="project__arch-toggle">
+              <summary>Architecture Used</summary>
+              <p>Data Agents → FAISS RAG → Gemini LLM → Analysis Engine → Streamlit UI + Voice I/O</p>
+            </details>
             <div class="project__links">
               <a href="https://github.com/Hareshganesan/ai-finance-tracker" target="_blank" rel="noopener">GitHub &nearr;</a>
               <a href="https://ai-finance-tracker-demo.vercel.app/" target="_blank" rel="noopener">Live Demo &nearr;</a>
@@ -284,9 +347,9 @@
     <div class="skills__accent-pulse" aria-hidden="true"></div>
 
     <div class="section__header">
-      <span class="section__num">03</span>
-      <h2 class="section__title">Skills</h2>
-      <p class="section__subtitle">Signal strength across the stack</p>
+      <span class="section__num">04</span>
+      <h2 class="section__title">Execution Depth</h2>
+      <p class="section__subtitle">Measured by what ships, not what's listed.</p>
     </div>
 
     <!-- Marquee -->
@@ -368,7 +431,7 @@
         </div>
       </div>
       <div class="skills__card" data-skill="mysql" data-val="10">
-        <span class="skills__card-label">SQL</span>
+        <span class="skills__card-label">MY</span>
         <h4 class="skills__card-name">MySQL</h4>
         <p class="skills__card-desc">Schema, Query Optimization</p>
         <div class="skills__signal" style="--level:10" aria-label="10 of 10">
@@ -435,44 +498,10 @@
           <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="figma" data-val="6">
-        <span class="skills__card-label">FIG</span>
-        <h4 class="skills__card-name">Figma</h4>
-        <p class="skills__card-desc">UI Design, Prototyping</p>
-        <div class="skills__signal" style="--level:6" aria-label="6 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="vscode" data-val="10">
-        <span class="skills__card-label">VSC</span>
-        <h4 class="skills__card-name">VS Code</h4>
-        <p class="skills__card-desc">Extensions, Debugging</p>
-        <div class="skills__signal" style="--level:10" aria-label="10 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="premiere" data-val="9">
-        <span class="skills__card-label">PR</span>
-        <h4 class="skills__card-name">Premiere Pro</h4>
-        <p class="skills__card-desc">Video Editing, Motion</p>
+      <div class="skills__card" data-skill="sql" data-val="9">
+        <span class="skills__card-label">SQL</span>
+        <h4 class="skills__card-name">SQL</h4>
+        <p class="skills__card-desc">Queries, Joins, Optimization</p>
         <div class="skills__signal" style="--level:9" aria-label="9 of 10">
           <span class="skills__signal-bar"></span>
           <span class="skills__signal-bar"></span>
@@ -486,10 +515,10 @@
           <span class="skills__signal-bar"></span>
         </div>
       </div>
-      <div class="skills__card" data-skill="kotlin" data-val="7">
-        <span class="skills__card-label">KT</span>
-        <h4 class="skills__card-name">Kotlin</h4>
-        <p class="skills__card-desc">Android, Coroutines</p>
+      <div class="skills__card" data-skill="postgresql" data-val="7">
+        <span class="skills__card-label">PG</span>
+        <h4 class="skills__card-name">PostgreSQL</h4>
+        <p class="skills__card-desc">Relational, ACID, Extensions</p>
         <div class="skills__signal" style="--level:7" aria-label="7 of 10">
           <span class="skills__signal-bar"></span>
           <span class="skills__signal-bar"></span>
@@ -502,6 +531,49 @@
           <span class="skills__signal-bar"></span>
           <span class="skills__signal-bar"></span>
         </div>
+      </div>
+      <div class="skills__card" data-skill="sysdesign" data-val="7">
+        <span class="skills__card-label">SYS</span>
+        <h4 class="skills__card-name">System Design</h4>
+        <p class="skills__card-desc">Architecture, Scaling, APIs</p>
+        <div class="skills__signal" style="--level:7" aria-label="7 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+        </div>
+      </div>
+      <div class="skills__card" data-skill="kotlin" data-val="5">
+        <span class="skills__card-label">KT</span>
+        <h4 class="skills__card-name">Kotlin</h4>
+        <p class="skills__card-desc">Fundamentals, Basics</p>
+        <div class="skills__signal" style="--level:5" aria-label="5 of 10">
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+          <span class="skills__signal-bar"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Creative Tools -->
+    <div class="skills__creative">
+      <span class="skills__creative-label">Creative Tools</span>
+      <div class="skills__creative-pills">
+        <span class="skills__pill">Figma</span>
+        <span class="skills__pill">Premiere Pro</span>
       </div>
     </div>
 
@@ -527,11 +599,88 @@
   </section>
 
   <!-- ═══════════════════════════════════════ -->
+  <!-- WINS — Horizontal Scroll Showcase        -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="wins" id="wins" aria-label="Competitive Wins">
+    <canvas class="wins__particles" id="winsParticles" aria-hidden="true"></canvas>
+    <div class="wins__header-area">
+      <div class="section__header">
+        <span class="section__num">05</span>
+        <h2 class="section__title">Competitive Edge</h2>
+      </div>
+      <span class="wins__counter" id="winsCounter" aria-live="polite">01 / 06</span>
+    </div>
+    <div class="wins__track" id="winsTrack">
+      <article class="wins__card" data-win-idx="1">
+        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
+        <span class="wins__year">2025</span>
+        <h3 class="wins__position">1st</h3>
+        <h4 class="wins__name">Ingenium 5.0</h4>
+        <p class="wins__impact">Outperformed 50+ teams in 24Hr Iot Based Hardware-Software hackathon.</p>
+        <span class="wins__meta">Tantrotsav, National Level Tech-Fest</span>
+      </article>
+      <article class="wins__card" data-win-idx="2">
+        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
+        <span class="wins__year">2025</span>
+        <h3 class="wins__position">1st</h3>
+        <h4 class="wins__name">Infinity Gauntlet</h4>
+        <p class="wins__impact">Multi-domain challenge with time limited rounds mainly on cybersec and website-design.</p>
+        <span class="wins__meta">Tantrotsav, National Level Tech-Fest</span>
+      </article>
+      <article class="wins__card" data-win-idx="3">
+        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
+        <span class="wins__year">Oct 2025</span>
+        <h3 class="wins__position">1st</h3>
+        <h4 class="wins__name">Logical Nexus</h4>
+        <p class="wins__impact">Won IEEE CAS Circuits and Hardware based competition.</p>
+        <span class="wins__meta">IEEE CAS, Chennai</span>
+      </article>
+      <article class="wins__card" data-win-idx="4">
+        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
+        <span class="wins__year">Mar 2025</span>
+        <h3 class="wins__position">2nd</h3>
+        <h4 class="wins__name">HackQuest CTF</h4>
+        <p class="wins__impact">Capture-the-flag cybersecurity challenge runner-up.</p>
+        <span class="wins__meta">Delta</span>
+      </article>
+      <article class="wins__card" data-win-idx="5">
+        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
+        <span class="wins__year">Jan 2025</span>
+        <h3 class="wins__position">3rd</h3>
+        <h4 class="wins__name">Code of Duty</h4>
+        <p class="wins__impact">Competitive programming under time pressure.</p>
+        <span class="wins__meta">Cognizance</span>
+      </article>
+      <article class="wins__card" data-win-idx="6">
+        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
+        <span class="wins__year">2024</span>
+        <h3 class="wins__position">Winner</h3>
+        <h4 class="wins__name">Coder's of Black Pearl</h4>
+        <p class="wins__impact">Solved every challenge — 100% completion rate.</p>
+        <span class="wins__meta">Hackathon</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- FINALE — Cinematic Transition            -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="finale">
+    <div class="finale__overlay"></div>
+    <div class="finale__content">
+      <h2 class="finale__line line1">You've reached the end.</h2>
+      <h2 class="finale__line line2">Now let's build what's next.</h2>
+      <div class="finale__divider"></div>
+      <p class="finale__hint">Scroll to continue</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
   <!-- CONTACT                                 -->
   <!-- ═══════════════════════════════════════ -->
   <section class="contact section" id="contact" aria-label="Contact">
     <div class="section__header">
-      <span class="section__num">04</span>
+      <span class="section__num">06</span>
       <h2 class="section__title">Contact</h2>
     </div>
     <div class="contact__grid">
@@ -577,6 +726,42 @@
       <a href="#hero" class="footer__top" aria-label="Back to top">&uarr; Top</a>
     </div>
   </footer>
+
+  <!-- System Status Panel -->
+  <div class="systat systat--mini" id="systemStatus" aria-hidden="true">
+    <div class="systat__dot-indicator" id="systatDotBtn" aria-label="Open system monitor">
+      <span class="systat__blink"></span>
+    </div>
+    <div class="systat__tooltip" id="systatTooltip">System monitor active &mdash; click to inspect</div>
+    <div class="systat__scanline" aria-hidden="true"></div>
+    <div class="systat__expanded" id="systatExpanded">
+      <div class="systat__header">
+        <span class="systat__label">SYSTEM STATUS</span>
+        <button class="systat__minimize" id="systatMinimize" aria-label="Minimize">&minus;</button>
+      </div>
+      <div class="systat__body" id="systatBody">
+        <div class="systat__row"><span>SCROLL VEL</span><span class="systat__val" id="systatVel">0</span></div>
+        <div class="systat__row"><span>FPS</span><span class="systat__val" id="systatFps">60</span></div>
+        <div class="systat__row"><span>CURSOR</span><span class="systat__val" id="systatCursor">default</span></div>
+        <div class="systat__row"><span>SECTION</span><span class="systat__val" id="systatSection">hero</span></div>
+        <div class="systat__row"><span>TIME</span><span class="systat__val" id="systatTime">00:00</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Deep Dive Modal -->
+  <div class="deepdive" id="deepDive" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="deepdive__backdrop"></div>
+    <div class="deepdive__content">
+      <button class="deepdive__close" id="deepDiveClose" aria-label="Close">&times;</button>
+      <div class="deepdive__inner" id="deepDiveInner">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Energy Mode Badge -->
+  <div class="dark-energy-badge" id="darkEnergyBadge" aria-hidden="true">Dark Energy Mode</div>
 
   <!-- GSAP + ScrollTrigger + ScrollTo -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

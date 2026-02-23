@@ -18,6 +18,14 @@
      initContactAnimations()  → scale-in, headline reveal
      initGlobalEffects()      → depth reveals, velocity skew, scroll cue, active nav, magnetic
      initPerformance()        → resize debounce, load refresh
+     initSystemStatus()       → minimized terminal widget (expand/collapse, tooltip, sessionStorage)
+     initDeepDive()           → project case study modal with rich data
+     initExperience()         → layered card stack, glow pulse, tech tags
+     initWins()               → horizontal scroll showcase, particle burst, trophy cards
+     initFinale()              → cinematic scroll transition, pin + yPercent reveal
+     initMicroInteractions()  → RGB split on fast scroll, magnetic cursor, keyboard shortcuts
+     initDarkEnergy()         → easter egg (Konami code / "buildbreakrepeat")
+     initPerfLog()            → console telemetry & session summary
    ═══════════════════════════════════════════════════════ */
 
 (() => {
@@ -992,6 +1000,87 @@
 
 
   /* ═════════════════════════════════════════
+     12b · FINALE — Cinematic scroll transition
+           Pin + single master timeline
+     ═════════════════════════════════════════ */
+  function initFinale() {
+    const section = $('#finale');
+    if (!section) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Reduced motion — no pin, just show text */
+    if (prefersReduced) {
+      gsap.set('.line1, .line2', { opacity: 1, y: 0 });
+      gsap.set('.finale__divider', { height: '60px' });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#finale',
+          start: 'top top',
+          end: '+=120%',
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        }
+      });
+
+      /* Phase 1 — Line 1 fades in */
+      tl.to('.line1', {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+      })
+
+      /* Phase 2 — Line 2 fades in */
+      .to('.line2', {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+      }, '+=0.2')
+
+      /* Phase 3 — Red divider grows */
+      .to('.finale__divider', {
+        height: '60vh',
+        duration: 0.6,
+        ease: 'none',
+      })
+
+      /* Phase 4 — Subtle zoom */
+      .to('#finale', {
+        scale: 1.05,
+        duration: 0.6,
+        ease: 'none',
+      })
+
+      /* Phase 5 — Fade content out */
+      .to('.finale__content', {
+        opacity: 0,
+        duration: 0.4,
+      })
+
+      /* Phase 6 — Slide finale up to reveal contact */
+      .to('#finale', {
+        yPercent: -100,
+        ease: 'none',
+        duration: 0.8,
+      });
+
+    });
+
+    /* Refresh after layout settles */
+    ScrollTrigger.refresh();
+
+    return () => ctx.revert();
+  }
+
+
+  /* ═════════════════════════════════════════
      13 · GLOBAL EFFECTS
           Depth reveals · velocity skew ·
           scroll cue · active nav · magnetic
@@ -1120,6 +1209,824 @@
 
 
   /* ═════════════════════════════════════════
+     15 · SYSTEM STATUS PANEL — Minimized Default
+          Expandable terminal widget with tooltip,
+          scanline, typing effect, sessionStorage
+     ═════════════════════════════════════════ */
+  function initSystemStatus() {
+    const panel    = $('#systemStatus');
+    const dotBtn   = $('#systatDotBtn');
+    const tooltip  = $('#systatTooltip');
+    const expanded = $('#systatExpanded');
+    const minBtn   = $('#systatMinimize');
+    const body     = $('#systatBody');
+    if (!panel || isMobile()) return;
+
+    const elVel     = $('#systatVel');
+    const elFps     = $('#systatFps');
+    const elCursor  = $('#systatCursor');
+    const elSection = $('#systatSection');
+    const elTime    = $('#systatTime');
+
+    let isOpen = sessionStorage.getItem('systatOpen') === '1';
+    let firstOpen = !sessionStorage.getItem('systatOpened');
+
+    function setOpen(open) {
+      isOpen = open;
+      panel.classList.toggle('systat--mini', !open);
+      panel.classList.toggle('systat--open', open);
+      sessionStorage.setItem('systatOpen', open ? '1' : '0');
+      if (open && firstOpen) {
+        firstOpen = false;
+        sessionStorage.setItem('systatOpened', '1');
+        typeEffect();
+      }
+    }
+
+    /* Typing effect on first open */
+    function typeEffect() {
+      const rows = $$('.systat__row', body);
+      rows.forEach(r => { r.style.opacity = '0'; });
+      rows.forEach((r, i) => {
+        gsap.to(r, { opacity: 1, duration: 0.15, delay: i * 0.12 });
+      });
+    }
+
+    /* Open / close handlers */
+    if (dotBtn) {
+      dotBtn.addEventListener('click', () => {
+        gsap.fromTo(expanded, { scaleY: 0.3, scaleX: 0.6, opacity: 0, transformOrigin: 'bottom left' },
+          { scaleY: 1, scaleX: 1, opacity: 1, duration: 0.35, ease: EASE.smooth });
+        setOpen(true);
+      });
+    }
+    if (minBtn) {
+      minBtn.addEventListener('click', () => {
+        setOpen(false);
+      });
+    }
+
+    /* Initialize state */
+    setOpen(isOpen);
+
+    /* Tooltip after 3s, fade after 5s */
+    if (!isOpen) {
+      setTimeout(() => {
+        if (!isOpen && tooltip) tooltip.classList.add('systat__tooltip--visible');
+      }, 3000);
+      setTimeout(() => {
+        if (tooltip) tooltip.classList.remove('systat__tooltip--visible');
+      }, 8000);
+    }
+
+    /* FPS counter */
+    let frames = 0, lastFpsTime = performance.now(), fps = 60;
+    function countFrame() {
+      frames++;
+      const now = performance.now();
+      if (now - lastFpsTime >= 1000) {
+        fps = frames;
+        frames = 0;
+        lastFpsTime = now;
+      }
+      requestAnimationFrame(countFrame);
+    }
+    requestAnimationFrame(countFrame);
+
+    /* Scroll velocity */
+    let scrollVel = 0;
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: self => { scrollVel = Math.round(Math.abs(self.getVelocity())); }
+    });
+
+    /* Active section tracking */
+    let activeSection = 'hero';
+    const sectionIds = ['hero', 'about', 'experience', 'projects', 'freeze', 'skills', 'wins', 'finale', 'contact'];
+    sectionIds.forEach(id => {
+      const el = $(`#${id}`);
+      if (!el) return;
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 50%',
+        end: 'bottom 50%',
+        onEnter:     () => { activeSection = id; },
+        onEnterBack: () => { activeSection = id; },
+      });
+    });
+
+    /* Cursor state */
+    let cursorState = 'default';
+    if (cursor) {
+      const observer = new MutationObserver(() => {
+        const cls = cursor.className;
+        if (cls.includes('hover'))    cursorState = 'hover';
+        else if (cls.includes('click')) cursorState = 'click';
+        else cursorState = 'default';
+      });
+      observer.observe(cursor, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /* Time on page */
+    const startTime = Date.now();
+
+    /* Smooth number roll helper */
+    function rollTo(el, newText) {
+      if (!el || el.textContent === String(newText)) return;
+      el.textContent = newText;
+    }
+
+    /* Throttled UI update — 10fps */
+    let lastUpdate = 0;
+    function updatePanel(now) {
+      if (document.hidden) { requestAnimationFrame(updatePanel); return; }
+      if (now - lastUpdate >= 100) {
+        lastUpdate = now;
+        if (isOpen) {
+          rollTo(elVel, scrollVel);
+          rollTo(elFps, fps);
+          rollTo(elCursor, cursorState);
+          rollTo(elSection, activeSection);
+          if (elTime) {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+            const s = String(elapsed % 60).padStart(2, '0');
+            rollTo(elTime, `${m}:${s}`);
+          }
+        }
+      }
+      requestAnimationFrame(updatePanel);
+    }
+    requestAnimationFrame(updatePanel);
+
+    /* Glitch flicker every 20-40s */
+    function scheduleGlitch() {
+      const delay = 20000 + Math.random() * 20000;
+      setTimeout(() => {
+        if (!document.hidden) {
+          panel.classList.add('systat--glitch');
+          setTimeout(() => panel.classList.remove('systat--glitch'), 200);
+        }
+        scheduleGlitch();
+      }, delay);
+    }
+    scheduleGlitch();
+
+    /* Pause on visibility change */
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) panel.classList.add('systat--paused');
+      else panel.classList.remove('systat--paused');
+    });
+  }
+
+
+  /* ═════════════════════════════════════════
+     16 · PROJECT DEEP DIVE MODAL
+          Case study expansion with rich data
+     ═════════════════════════════════════════ */
+  function initDeepDive() {
+    const modal     = $('#deepDive');
+    const backdrop  = modal ? modal.querySelector('.deepdive__backdrop') : null;
+    const content   = modal ? modal.querySelector('.deepdive__content') : null;
+    const inner     = $('#deepDiveInner');
+    const closeBtn  = $('#deepDiveClose');
+    if (!modal || !inner) return;
+
+    /* Case study data */
+    const studies = {
+      waste: {
+        title: 'Object Categorizer & Waste Manager',
+        problem: 'Urban waste management lacks real-time sorting. Manual segregation is slow, error-prone, and unsanitary — leading to contamination of recyclable streams.',
+        approach: 'Built a computer vision pipeline using TensorFlow and OpenCV with MobileNetV2 transfer learning. Achieved 98% precision in real-time waste segregation with sensor fusion, deployed on Raspberry Pi for edge inference.',
+        architecture: 'Camera → Preprocessing → CNN (MobileNetV2) → Classification → Sensor Fusion → Raspberry Pi Output',
+        challenges: [
+          'Handling varied lighting conditions in real-world capture',
+          'Reducing model size for Raspberry Pi edge deployment',
+          'Sensor fusion integration with image classification pipeline',
+        ],
+        metrics: [
+          { label: 'Precision', value: '98%' },
+          { label: 'Inference', value: '< 200ms' },
+          { label: 'Platform', value: 'Raspberry Pi' },
+          { label: 'Pipeline', value: 'CNN + Sensor Fusion' },
+        ],
+        github: 'https://github.com/Hareshganesan/Object_Segregration',
+      },
+      platoon: {
+        title: 'Autonomous Vehicle Platoon',
+        problem: 'Highway fuel efficiency drops with uncoordinated vehicle spacing. Manual platooning is dangerous and inconsistent. V2V communication latency introduces coordination risks.',
+        approach: 'Implemented PPO-based reinforcement learning in CARLA 0.9.12 for multi-agent platoon coordination. Achieved 95%+ control efficiency with 30% reduction in simulated traffic delay through V2V state sharing.',
+        architecture: 'CARLA Sim → Sensor Suite → State Encoder → PPO Agent → V2V Broadcast → Platoon Coordinator',
+        challenges: [
+          'Sim-to-real gap in sensor noise and physics',
+          'Training stability with multi-agent RL across 5+ vehicles',
+          'Maintaining safe following distance at varying speeds',
+        ],
+        metrics: [
+          { label: 'Control Efficiency', value: '95%+' },
+          { label: 'Traffic Delay', value: '-30%' },
+          { label: 'Simulator', value: 'CARLA 0.9.12' },
+          { label: 'Framework', value: 'PPO' },
+        ],
+        github: 'https://github.com/Hareshganesan/Vehicle_Platoon',
+      },
+      finance: {
+        title: 'Multi-Agent Financial Portfolio Assistant',
+        problem: 'Retail investors lack tools that combine real-time data, AI analysis, and natural language interaction for portfolio decisions across Asian tech markets.',
+        approach: 'Built a 6-agent AI architecture analyzing 19 Asian tech stocks. Uses FAISS-based RAG for context retrieval and Gemini LLM for natural language insights, served via Streamlit dashboard with voice interface.',
+        architecture: 'Data Agents (6) → FAISS RAG Pipeline → Gemini LLM → Analysis Engine → Streamlit UI + Voice I/O',
+        challenges: [
+          'Coordinating 6 specialized agents without state conflicts',
+          'Building efficient FAISS index for real-time stock context retrieval',
+          'Integrating voice I/O with Streamlit\u0027s synchronous rendering',
+        ],
+        metrics: [
+          { label: 'Agents', value: '6' },
+          { label: 'Stocks Tracked', value: '19' },
+          { label: 'RAG Engine', value: 'FAISS' },
+          { label: 'LLM', value: 'Gemini' },
+        ],
+        github: 'https://github.com/Hareshganesan/ai-finance-tracker',
+        live: 'https://ai-finance-tracker-demo.vercel.app/',
+      },
+    };
+
+    let isOpen = false;
+
+    function openModal(key) {
+      const data = studies[key];
+      if (!data || isOpen) return;
+      isOpen = true;
+
+      /* Populate content */
+      inner.innerHTML = `
+        <h3 class="deepdive__title">${data.title}</h3>
+        <div class="deepdive__section">
+          <h4>The Problem</h4>
+          <p>${data.problem}</p>
+        </div>
+        <div class="deepdive__section">
+          <h4>Approach</h4>
+          <p>${data.approach}</p>
+        </div>
+        <div class="deepdive__section deepdive__architecture">
+          <h4>Architecture</h4>
+          <pre>${data.architecture}</pre>
+        </div>
+        <div class="deepdive__section">
+          <h4>Challenges</h4>
+          <ul>${data.challenges.map(c => `<li>${c}</li>`).join('')}</ul>
+        </div>
+        <div class="deepdive__metrics">
+          ${data.metrics.map(m => `<div class="deepdive__metric"><span class="deepdive__metric-val">${m.value}</span><span class="deepdive__metric-label">${m.label}</span></div>`).join('')}
+        </div>
+        <div class="deepdive__links">
+          <a href="${data.github}" target="_blank" rel="noopener" class="btn">GitHub &nearr;</a>
+          ${data.live ? `<a href="${data.live}" target="_blank" rel="noopener" class="btn">Live Demo &nearr;</a>` : ''}
+        </div>
+      `;
+
+      /* Show modal */
+      document.body.style.overflow = 'hidden';
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+
+      /* Disable ScrollTrigger while open */
+      ScrollTrigger.getAll().forEach(t => t.disable());
+
+      /* Animate in */
+      gsap.fromTo(content,
+        { scale: 0.92, opacity: 0, y: 40 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: EASE.expo }
+      );
+      gsap.fromTo(backdrop,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: 'power1.out' }
+      );
+    }
+
+    function closeModal() {
+      if (!isOpen) return;
+      gsap.to(content, {
+        scale: 0.95, opacity: 0, y: 20, duration: 0.3, ease: EASE.inOut,
+        onComplete: () => {
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          isOpen = false;
+          /* Re-enable ScrollTrigger */
+          ScrollTrigger.getAll().forEach(t => t.enable());
+          ScrollTrigger.refresh();
+        }
+      });
+      gsap.to(backdrop, { opacity: 0, duration: 0.25 });
+    }
+
+    /* Click on project cards */
+    $$('[data-casestudy]').forEach(card => {
+      card.addEventListener('click', e => {
+        /* Don't intercept link clicks */
+        if (e.target.closest('a')) return;
+        openModal(card.dataset.casestudy);
+      });
+      card.style.cursor = 'pointer';
+    });
+
+    /* Close handlers */
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (backdrop) backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && isOpen) closeModal();
+    });
+  }
+
+
+  /* ═════════════════════════════════════════
+     17 · EXPERIENCE — Enhanced Card Stack
+          Layered depth, glow pulse, tech tags
+     ═════════════════════════════════════════ */
+  function initExperience() {
+    const section = $('#experience');
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      /* Depth reveal */
+      gsap.fromTo(section,
+        { scale: 0.97, opacity: 0.5, z: -30, transformOrigin: 'center top', transformPerspective: 1200 },
+        { scale: 1, opacity: 1, z: 0, ease: EASE.scrub,
+          scrollTrigger: { trigger: section, start: 'top 95%', end: 'top 40%', scrub: 1.2 }
+        }
+      );
+
+      /* Header */
+      const header = section.querySelector('.section__header');
+      if (header) {
+        const title = header.querySelector('.section__title');
+        const num   = header.querySelector('.section__num');
+        if (title) {
+          gsap.fromTo(title,
+            { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+            { clipPath: 'inset(0 0% 0 0)', opacity: 1, ease: EASE.inOut,
+              scrollTrigger: { trigger: header, start: 'top 82%', end: 'top 45%', scrub: 1 }
+            }
+          );
+        }
+        if (num) {
+          gsap.fromTo(num, { x: -20, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.6, ease: EASE.smooth,
+              scrollTrigger: { trigger: header, start: 'top 80%',
+                onEnter: () => num.classList.add('active'),
+                onLeaveBack: () => num.classList.remove('active'),
+              }
+            }
+          );
+        }
+      }
+
+      /* Main card reveal */
+      const card = section.querySelector('.experience__card');
+      if (card) {
+        gsap.fromTo(card,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: EASE.smooth,
+            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none reverse' }
+          }
+        );
+
+        /* Corner brackets scale in */
+        const corners = $$('.experience__corner', card);
+        corners.forEach((c, i) => {
+          gsap.fromTo(c,
+            { scale: 0 },
+            { scale: 1, duration: 0.4, ease: 'back.out(2)',
+              scrollTrigger: { trigger: card, start: 'top 80%', toggleActions: 'play none none reverse' },
+              delay: 0.3 + i * 0.08,
+            }
+          );
+        });
+      }
+
+      /* Layered card stack animation */
+      const layers = $$('.experience__layer', section);
+      layers.forEach((layer, i) => {
+        gsap.fromTo(layer,
+          { opacity: 0, x: 20 + i * 10, y: 20 + i * 10 },
+          { opacity: [0.3, 0.2, 0.1][i] || 0.1, x: 0, y: 0, duration: 0.6, ease: EASE.smooth,
+            scrollTrigger: { trigger: section, start: 'top 80%', toggleActions: 'play none none reverse' },
+            delay: 0.5 + i * 0.1,
+          }
+        );
+      });
+
+      /* Tech tags stagger */
+      const tags = $$('.experience__tag', section);
+      tags.forEach((tag, i) => {
+        gsap.fromTo(tag,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.3, ease: EASE.smooth,
+            scrollTrigger: { trigger: tag, start: 'top 92%', toggleActions: 'play none none reverse' },
+            delay: 0.6 + i * 0.08,
+          }
+        );
+      });
+
+      /* Glow pulse on first reveal */
+      const stack = section.querySelector('.experience__stack');
+      if (stack) {
+        ScrollTrigger.create({
+          trigger: stack,
+          start: 'top 75%',
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(stack,
+              { boxShadow: '0 0 0 0 rgba(255,45,32,0)' },
+              { boxShadow: '0 0 60px 10px rgba(255,45,32,0.25)', duration: 0.6, ease: EASE.smooth,
+                onComplete: () => {
+                  gsap.to(stack, { boxShadow: '0 0 0 0 rgba(255,45,32,0)', duration: 1, delay: 0.5 });
+                }
+              }
+            );
+          }
+        });
+      }
+    }, section);
+  }
+
+
+  /* ═════════════════════════════════════════
+     17.1 · WINS — Horizontal Scroll Showcase
+            Pinned section, particle burst canvas,
+            trophy reveal, card scaling
+     ═════════════════════════════════════════ */
+  function initWins() {
+    const section = $('#wins');
+    if (!section) return;
+
+    const track   = $('#winsTrack');
+    const counter = $('#winsCounter');
+    const canvas  = section.querySelector('.wins__particles');
+    const cards   = $$('.wins__card', section);
+    const total   = cards.length;
+    if (!track || !total) return;
+
+    /* Header reveal */
+    const header = section.querySelector('.section__header');
+    if (header) {
+      const title = header.querySelector('.section__title');
+      const num   = header.querySelector('.section__num');
+      if (title) {
+        gsap.fromTo(title,
+          { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+          { clipPath: 'inset(0 0% 0 0)', opacity: 1, ease: EASE.inOut,
+            scrollTrigger: { trigger: header, start: 'top 82%', end: 'top 45%', scrub: 1 }
+          }
+        );
+      }
+      if (num) {
+        gsap.fromTo(num, { x: -20, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.6, ease: EASE.smooth,
+            scrollTrigger: { trigger: header, start: 'top 80%',
+              onEnter: () => num.classList.add('active'),
+              onLeaveBack: () => num.classList.remove('active'),
+            }
+          }
+        );
+      }
+    }
+
+    /* Horizontal scroll pin */
+    const scrollWidth = track.scrollWidth - section.offsetWidth;
+    let activeIdx = 0;
+
+    gsap.to(track, {
+      x: () => -scrollWidth,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${scrollWidth * 2}`,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: self => {
+          const progress = self.progress;
+          const idx = Math.min(Math.floor(progress * total), total - 1);
+          if (idx !== activeIdx) {
+            cards[activeIdx].classList.remove('wins__card--active');
+            cards[idx].classList.add('wins__card--active');
+            burstParticles(cards[idx]);
+            activeIdx = idx;
+          }
+          if (counter) {
+            counter.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+          }
+        }
+      }
+    });
+
+    /* Set first card active */
+    if (cards[0]) cards[0].classList.add('wins__card--active');
+
+    /* Card scale on proximity */
+    cards.forEach((card, i) => {
+      gsap.fromTo(card,
+        { scale: 0.88, opacity: 0.6 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: EASE.smooth,
+          scrollTrigger: { trigger: card, start: 'left 80%', end: 'left 40%', scrub: 1,
+            containerAnimation: gsap.getById && gsap.getById('winsScroll') || undefined,
+          }
+        }
+      );
+    });
+
+    /* Trophy SVG fade in */
+    const trophies = $$('.wins__trophy', section);
+    trophies.forEach(t => {
+      gsap.fromTo(t, { opacity: 0, scale: 0.7 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)',
+          scrollTrigger: { trigger: t, start: 'top 90%', toggleActions: 'play none none reverse' }
+        }
+      );
+    });
+
+    /* ── Canvas Particle Burst ── */
+    let ctx2d = null;
+    let particles = [];
+    let rafId = null;
+
+    if (canvas) {
+      canvas.width  = section.offsetWidth;
+      canvas.height = section.offsetHeight;
+      ctx2d = canvas.getContext('2d');
+
+      window.addEventListener('resize', () => {
+        canvas.width  = section.offsetWidth;
+        canvas.height = section.offsetHeight;
+      });
+    }
+
+    function burstParticles(card) {
+      if (!ctx2d) return;
+      const rect = card.getBoundingClientRect();
+      const secRect = section.getBoundingClientRect();
+      const cx = rect.left - secRect.left + rect.width / 2;
+      const cy = rect.top - secRect.top + rect.height / 2;
+
+      for (let i = 0; i < 15; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1.5 + Math.random() * 3;
+        particles.push({
+          x: cx, y: cy,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 1,
+          size: 2 + Math.random() * 3,
+        });
+      }
+      if (!rafId) animateParticles();
+    }
+
+    function animateParticles() {
+      if (!ctx2d) return;
+      ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(p => p.life > 0);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.02;
+        p.vy += 0.05; /* gravity */
+        ctx2d.beginPath();
+        ctx2d.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+        ctx2d.fillStyle = `rgba(255,45,32,${p.life * 0.8})`;
+        ctx2d.fill();
+      });
+      if (particles.length > 0) {
+        rafId = requestAnimationFrame(animateParticles);
+      } else {
+        rafId = null;
+        ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+  }
+
+
+  /* ═════════════════════════════════════════
+     17.3 · MICRO-INTERACTIONS
+            RGB split, magnetic cursor, shortcuts
+     ═════════════════════════════════════════ */
+  function initMicroInteractions() {
+    /* ── RGB Split on fast scroll ── */
+    const headings = $$('.section__title');
+    let lastScroll = 0;
+    let rgbTimeout = null;
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: self => {
+        const vel = Math.abs(self.getVelocity());
+        if (vel > 2500) {
+          headings.forEach(h => h.classList.add('rgb-split'));
+          clearTimeout(rgbTimeout);
+          rgbTimeout = setTimeout(() => {
+            headings.forEach(h => h.classList.remove('rgb-split'));
+          }, 300);
+        }
+      }
+    });
+
+    /* ── Magnetic cursor on win cards ── */
+    if (!isTouch) {
+      const winCards = $$('.wins__card');
+      winCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const dx = (e.clientX - rect.left - rect.width / 2) * 0.08;
+          const dy = (e.clientY - rect.top - rect.height / 2) * 0.08;
+          gsap.to(card, { x: dx, y: dy, duration: 0.3, ease: EASE.smooth });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+        });
+      });
+    }
+
+    /* ── Keyboard shortcuts ── */
+    document.addEventListener('keydown', e => {
+      /* Skip if input focused */
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const key = e.key.toLowerCase();
+      if (key === 'f') gsap.to(window, { scrollTo: '#finale', duration: 1, ease: EASE.smooth });
+      if (key === 'w') gsap.to(window, { scrollTo: '#wins', duration: 1, ease: EASE.smooth });
+      if (key === 's' && !e.ctrlKey && !e.metaKey) gsap.to(window, { scrollTo: '#skills', duration: 1, ease: EASE.smooth });
+    });
+  }
+
+
+  /* ═════════════════════════════════════════
+     19 · DARK ENERGY MODE (Easter Egg)
+          Konami code + "buildbreakrepeat"
+     ═════════════════════════════════════════ */
+  function initDarkEnergy() {
+    const badge = $('#darkEnergyBadge');
+    let darkActive = false;
+
+    /* Konami Code: ↑↑↓↓←→←→BA */
+    const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiIdx = 0;
+
+    /* Typing: "buildbreakrepeat" */
+    const phrase = 'buildbreakrepeat';
+    let phraseBuffer = '';
+
+    function toggleDarkEnergy() {
+      darkActive = !darkActive;
+      document.body.classList.toggle('dark-energy', darkActive);
+      if (badge) {
+        badge.classList.toggle('active', darkActive);
+      }
+      /* Log it */
+      if (darkActive) {
+        console.log('%c⚡ DARK ENERGY MODE ACTIVATED', 'color: #00b4ff; font-size: 16px; font-weight: bold;');
+      } else {
+        console.log('%c⚡ Dark Energy Mode deactivated', 'color: #777; font-size: 12px;');
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      /* Konami check */
+      if (e.key === konami[konamiIdx]) {
+        konamiIdx++;
+        if (konamiIdx === konami.length) {
+          konamiIdx = 0;
+          toggleDarkEnergy();
+          return;
+        }
+      } else {
+        konamiIdx = 0;
+      }
+
+      /* Phrase check */
+      if (e.key.length === 1) {
+        phraseBuffer += e.key.toLowerCase();
+        if (phraseBuffer.length > phrase.length) {
+          phraseBuffer = phraseBuffer.slice(-phrase.length);
+        }
+        if (phraseBuffer === phrase) {
+          phraseBuffer = '';
+          toggleDarkEnergy();
+        }
+      }
+    });
+  }
+
+
+  /* ═════════════════════════════════════════
+     20 · PERFORMANCE MONITORING LOG
+          Console telemetry — section times,
+          interaction heat, scroll stats
+     ═════════════════════════════════════════ */
+  function initPerfLog() {
+    const LOG_PREFIX = '[PerfLog]';
+    const sectionEnterTimes = {};
+    const sectionTotalTimes = {};
+    let interactionCount = 0;
+    let scrollSamples = [];
+    let lastLoggedSection = null;
+
+    /* Track section enter/leave times */
+    const sectionIds = ['hero', 'about', 'experience', 'projects', 'freeze', 'skills', 'wins', 'finale', 'contact'];
+    sectionIds.forEach(id => {
+      const el = $(`#${id}`);
+      if (!el) return;
+      sectionTotalTimes[id] = 0;
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 50%',
+        end: 'bottom 50%',
+        onEnter: () => {
+          sectionEnterTimes[id] = Date.now();
+          if (id !== lastLoggedSection) {
+            console.log(`${LOG_PREFIX} Entered: ${id}`);
+            lastLoggedSection = id;
+          }
+        },
+        onLeave: () => {
+          if (sectionEnterTimes[id]) {
+            sectionTotalTimes[id] += Date.now() - sectionEnterTimes[id];
+            delete sectionEnterTimes[id];
+          }
+        },
+        onEnterBack: () => {
+          sectionEnterTimes[id] = Date.now();
+          if (id !== lastLoggedSection) {
+            console.log(`${LOG_PREFIX} Re-entered: ${id}`);
+            lastLoggedSection = id;
+          }
+        },
+        onLeaveBack: () => {
+          if (sectionEnterTimes[id]) {
+            sectionTotalTimes[id] += Date.now() - sectionEnterTimes[id];
+            delete sectionEnterTimes[id];
+          }
+        },
+      });
+    });
+
+    /* Scroll velocity sampling */
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: self => {
+        const vel = Math.abs(self.getVelocity());
+        if (vel > 10) scrollSamples.push(vel);
+        if (scrollSamples.length > 500) scrollSamples = scrollSamples.slice(-500);
+      }
+    });
+
+    /* Interaction heat counter */
+    ['click', 'mousemove', 'keydown'].forEach(evt => {
+      document.addEventListener(evt, () => interactionCount++, { passive: true });
+    });
+
+    /* Deep dive open logging */
+    const deepDive = $('#deepDive');
+    if (deepDive) {
+      const observer = new MutationObserver(() => {
+        if (deepDive.classList.contains('active')) {
+          console.log(`${LOG_PREFIX} Deep Dive modal opened`);
+        }
+      });
+      observer.observe(deepDive, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /* Summary dump on page unload */
+    window.addEventListener('beforeunload', () => {
+      /* Flush any currently-active section */
+      Object.keys(sectionEnterTimes).forEach(id => {
+        sectionTotalTimes[id] = (sectionTotalTimes[id] || 0) + (Date.now() - sectionEnterTimes[id]);
+      });
+
+      const avgScroll = scrollSamples.length
+        ? Math.round(scrollSamples.reduce((a, b) => a + b, 0) / scrollSamples.length)
+        : 0;
+
+      console.groupCollapsed(`${LOG_PREFIX} Session Summary`);
+      console.table(sectionTotalTimes);
+      console.log(`Avg scroll velocity: ${avgScroll} px/s`);
+      console.log(`Total interactions: ${interactionCount}`);
+      console.groupEnd();
+    });
+  }
+
+
+  /* ═════════════════════════════════════════
      BOOT SEQUENCE
      ═════════════════════════════════════════ */
   initIntro().then(() => {
@@ -1138,6 +2045,23 @@
     initContactAnimations();
     initGlobalEffects();
     initPerformance();
+
+    /* ── New feature modules ── */
+    initSystemStatus();
+    initDeepDive();
+    initExperience();
+    initWins();
+    initMicroInteractions();
+    initDarkEnergy();
+    initPerfLog();
+
+    /* Finale: init after fonts loaded + layout stabilized */
+    document.fonts.ready.then(() => {
+      requestAnimationFrame(() => {
+        initFinale();
+        ScrollTrigger.refresh();
+      });
+    });
   });
 
 })();
