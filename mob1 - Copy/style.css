@@ -248,13 +248,17 @@ ul { list-style: none; }
 }
 .menu-overlay.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 
-/* Force cursor colors when menu is open */
+/* Force cursor and nav colors when menu is open */
 body.menu-open .cursor-dot {
   background-color: #fff !important;
   border-color: #fff !important;
 }
 body.menu-open .cursor-text {
   color: #000 !important;
+}
+body.menu-open .nav {
+  mix-blend-mode: normal !important;
+  color: #fff !important;
 }
 
 .menu-inner {
@@ -832,6 +836,11 @@ body.menu-open .cursor-text {
 @media (max-width: 768px) {
   .custom-cursor { display: none !important; }
   * { cursor: auto !important; }
+  
+  /* Kill heavy GPU operations on mobile to fix scroll lag */
+  .hero-mask, .hero-bg-marquee { display: none !important; }
+  .hero-floater { animation: none !important; display: none !important; }
+  
   .hero-split { flex-direction: column-reverse; justify-content: flex-end; gap: 8vh; }
   .about-grid, .philosophy-grid, .exp-item, .skills-grid, .contact-bottom { grid-template-columns: 1fr; }
   .contact-links { grid-template-columns: 1fr; }
