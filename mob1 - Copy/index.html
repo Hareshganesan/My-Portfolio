@@ -5,786 +5,499 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GANESAN P V — Portfolio</title>
   <meta name="description" content="Ganesan P V — Full Stack Developer. Building digital solutions with precision." />
-  <meta name="theme-color" content="#FF2D20" />
-
-  <!-- Fonts: Space Grotesk + JetBrains Mono -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-
+  <!-- Using a sophisticated mix of Grotesk and an elegant Serif for premium contrast -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=PP+Neue+Montreal:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="loading">
 
-  <!-- Cinematic Intro Overlay -->
-  <div class="intro" id="intro" aria-hidden="true">
-    <div class="intro__grain"></div>
-    <div class="intro__content">
-      <span class="intro__line intro__line--top">Portfolio of</span>
-      <h2 class="intro__name">
-        <span class="intro__char">G</span><span class="intro__char">A</span><span class="intro__char">N</span><span class="intro__char">E</span><span class="intro__char">S</span><span class="intro__char">A</span><span class="intro__char">N</span>
-      </h2>
-      <span class="intro__line intro__line--bottom">Full Stack Developer — Chennai, India</span>
+  <!-- Grain Overlay for Cinematic Texture -->
+  <div class="grain-overlay"></div>
+
+  <!-- Advanced Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-bg loader-bg-top"></div>
+    <div class="loader-bg loader-bg-bottom"></div>
+    <div class="loader-content">
+      <div class="loader-brand">PVG. <span>PORTFOLIO</span></div>
+      <div class="loader-counter">
+        <span id="loader-progress">000</span>
+      </div>
     </div>
-    <button class="intro__skip" id="introSkip" aria-label="Skip intro">Skip &rarr;</button>
-    <div class="intro__progress" id="introProgress"></div>
   </div>
 
-  <!-- Page Transition Overlay -->
-  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
-
-  <!-- Cursor -->
-  <div class="cursor" id="cursor" aria-hidden="true">
-    <div class="cursor__dot"></div>
+  <!-- Custom Cursor with Project Reveal -->
+  <div class="custom-cursor" id="custom-cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-text" id="cursor-text">Explore</div>
+    <div class="cursor-media">
+      <!-- Images for hover reveal will be inserted here dynamically -->
+    </div>
   </div>
 
-  <!-- Scroll Progress -->
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
-  <!-- Grain Overlay -->
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- Section Indicator Nav -->
-  <nav class="section-nav" id="sectionNav" aria-label="Section navigation">
-    <button class="section-nav__dot active" data-target="#hero" aria-label="Hero"></button>
-    <button class="section-nav__dot" data-target="#about" aria-label="About"></button>
-    <button class="section-nav__dot" data-target="#projects" aria-label="Projects"></button>
-    <button class="section-nav__dot" data-target="#skills" aria-label="Skills"></button>
-    <button class="section-nav__dot" data-target="#contact" aria-label="Contact"></button>
+  <!-- Sleek Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">PVG<span class="dot">.</span></a>
+    <div class="nav-center">Student Developer / IND</div>
+    <button class="nav-toggle" id="nav-toggle">
+      <div class="nav-lines">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-text">MENU</div>
+    </button>
   </nav>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- NAVIGATION                              -->
-  <!-- ═══════════════════════════════════════ -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav__inner">
-      <a href="#hero" class="nav__logo" aria-label="Go to top">PVG<span class="accent">.</span></a>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-      <ul class="nav__links" id="navLinks" role="list">
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#projects" class="nav__link">Work</a></li>
-        <li><a href="#skills" class="nav__link">Skills</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- HERO                                    -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="hero" id="hero" aria-label="Hero introduction">
-    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="hero__gradient hero__gradient--top" aria-hidden="true"></div>
-    <div class="hero__gradient hero__gradient--bottom" aria-hidden="true"></div>
-
-    <div class="hero__grid">
-      <div class="hero__col hero__col--left">
-        <p class="hero__tag">[Available for hire]</p>
-        <h1 class="hero__name" data-scroll-scale>
-          <span class="hero__name-line" data-split>Ganesan</span>
-          <span class="hero__name-line" data-split>P V<span class="accent">.</span></span>
-        </h1>
-        <div class="hero__role">
-          <span class="hero__rule"></span>
-          <span class="hero__role-text">Full Stack Developer</span>
-        </div>
-        <p class="hero__tagline">I build stuff that works.<br/><em>Sometimes it even looks good.</em></p>
-      </div>
-      <div class="hero__col hero__col--right">
-        <div class="hero__img-wrap" data-scroll-pan>
-          <img src="./images/profile.jpg" alt="Ganesan P V — Portrait" class="hero__img" loading="eager" />
-        </div>
-        <div class="hero__stats">
-          <div class="hero__stat">
-            <span class="hero__stat-num">7+</span>
-            <span class="hero__stat-label">Projects</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-num">12+</span>
-            <span class="hero__stat-label">Technologies</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-num">4+</span>
-            <span class="hero__stat-label">Years Exp</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="hero__scroll-cue" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- ABOUT                                   -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="about section" id="about" aria-label="About me">
-    <div class="about__bg-grid" aria-hidden="true"></div>
-    <div class="section__header">
-      <span class="section__num">01</span>
-      <h2 class="section__title">About</h2>
-    </div>
-    <div class="about__grid">
-      <div class="about__text">
-        <p class="about__lead">I'm a passionate <strong>Student &amp; Web Developer</strong> from Chennai, India.</p>
-        <p>Currently pursuing my B.Tech in Computer and Communication Engineering at Amrita School of Engineering (2023–2027). I enjoy learning new technologies and building projects that combine clean design with functionality.</p>
-        <p>I'm passionate about using technology to solve real-world problems. My expertise includes Python, JavaScript, C, and SQL, with hands-on experience in web development, database management, and machine learning projects. When I'm not coding, you can find me listening to music, reading, or experimenting with new technologies.</p>
-      </div>
-      <div class="about__philosophy">
-        <h3 class="about__philosophy-title">How I Think</h3>
-        <div class="about__philosophy-grid">
-          <div class="about__philosophy-block">
-            <span class="about__philosophy-num">01</span>
-            <h4>Systems First</h4>
-            <p>I think in systems, not screens. Every component exists within a larger architecture — understanding the whole informs every detail.</p>
-          </div>
-          <div class="about__philosophy-block">
-            <span class="about__philosophy-num">02</span>
-            <h4>Ship &gt; Perfect</h4>
-            <p>Momentum beats perfection. I ship early, iterate fast, and let real feedback shape the product instead of assumptions.</p>
-          </div>
-          <div class="about__philosophy-block">
-            <span class="about__philosophy-num">03</span>
-            <h4>Break to Learn</h4>
-            <p>The best way to understand something is to tear it apart. I reverse-engineer tools, frameworks, and patterns until they click.</p>
-          </div>
-          <div class="about__philosophy-block">
-            <span class="about__philosophy-num">04</span>
-            <h4>Performance Matters</h4>
-            <p>Speed is a feature. I obsess over load times, bundle sizes, and perceived performance — because every millisecond counts.</p>
-          </div>
-        </div>
-        <a href="./files/CV_Ganesan_PV.pdf" download="CV_Ganesan_PV.pdf" class="btn" data-magnetic>Download CV &darr;</a>
-      </div>
-    </div>
-    <!-- Certifications -->
-    <div class="about__certs" aria-label="Certifications">
-      <div class="about__certs-track">
-        <span>TCS IT Certification — AWS Cloud Foundations — AWS Cloud Developer (AWS Academy) — Python &amp; SQL (HackerRank) —&nbsp;</span>
-        <span>TCS IT Certification — AWS Cloud Foundations — AWS Cloud Developer (AWS Academy) — Python &amp; SQL (HackerRank) —&nbsp;</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- EXPERIENCE                               -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="experience section" id="experience" aria-label="Professional Experience">
-    <div class="section__header">
-      <span class="section__num">02</span>
-      <h2 class="section__title">Experience</h2>
-    </div>
-    <div class="experience__stack">
-      <div class="experience__layer experience__layer--3" aria-hidden="true"></div>
-      <div class="experience__layer experience__layer--2" aria-hidden="true"></div>
-      <div class="experience__layer experience__layer--1" aria-hidden="true"></div>
-      <div class="experience__card">
-        <div class="experience__corner experience__corner--tl" aria-hidden="true"></div>
-        <div class="experience__corner experience__corner--tr" aria-hidden="true"></div>
-        <div class="experience__corner experience__corner--bl" aria-hidden="true"></div>
-        <div class="experience__corner experience__corner--br" aria-hidden="true"></div>
-        <div class="experience__status">
-          <span class="experience__dot" aria-hidden="true"></span>
-          <span class="experience__status-text">Feb'26 to May'26</span>
-        </div>
-        <span class="experience__role">ARTIFICIAL INTELLIGENCE INTERN</span>
-        <span class="experience__company">Infosys Springboard</span>
-        <ul class="experience__list">
-          <li>Working on applied AI systems and model-driven solutions.</li>
-          <li>Focus on scalable ML workflows and deployment concepts.</li>
-          <li>Contributing to real-world problem statements under mentorship.</li>
+  <!-- Premium Fullscreen Menu -->
+  <div class="menu-overlay" id="menu-overlay">
+    <div class="menu-inner">
+      <div class="menu-left">
+        <div class="menu-tag">Navigation</div>
+        <ul class="menu-links">
+          <li><a href="#about" class="menu-link"><span class="num">01</span> About</a></li>
+          <li><a href="#experience" class="menu-link"><span class="num">02</span> Experience</a></li>
+          <li><a href="#projects" class="menu-link"><span class="num">03</span> Selected Works</a></li>
+          <li><a href="#skills" class="menu-link"><span class="num">04</span> Execution Depth</a></li>
+          <li><a href="#contact" class="menu-link"><span class="num">05</span> Contact</a></li>
         </ul>
-        <div class="experience__tags">
-          <span class="experience__tag">ML Systems</span>
-          <span class="experience__tag">Applied AI</span>
-          <span class="experience__tag">Deployment Concepts</span>
-        </div>
       </div>
-    </div>
-  </section>
-
-
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- PROJECTS                                -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="projects-wrap" id="projects" aria-label="Selected projects">
-    <div class="projects__header-area">
-      <div class="section__header">
-        <span class="section__num">03</span>
-        <h2 class="section__title">Work</h2>
-        <p class="section__subtitle">Shipped, not shelved.</p>
-      </div>
-    </div>
-
-    <div class="projects__track" id="projectsTrack">
-      <!-- Project 01 -->
-      <article class="project" data-project data-casestudy="waste">
-        <div class="project__card">
-          <div class="project__index-wrap">
-            <span class="project__index">01</span>
-          </div>
-          <div class="project__body">
-            <h3 class="project__name">Object Categorizer &amp; Waste Manager</h3>
-            <ul class="project__desc">
-              <li>98% precision in real-time waste segregation.</li>
-              <li>Image recognition + sensor fusion pipeline.</li>
-              <li>Edge deployment on Raspberry Pi.</li>
-              <li>End-to-end Python + ML inference pipeline.</li>
-            </ul>
-            <div class="project__tech">
-              <span>Python</span>
-              <span>TensorFlow</span>
-              <span>OpenCV</span>
-              <span>Raspberry Pi</span>
-            </div>
-            <details class="project__arch-toggle">
-              <summary>Architecture Used</summary>
-              <p>Camera → Preprocessing → CNN (MobileNetV2) → Classification → Sensor Fusion → Output</p>
-            </details>
-            <div class="project__links">
-              <a href="https://github.com/Hareshganesan/Object_Segregration" target="_blank" rel="noopener">GitHub &nearr;</a>
-            </div>
-          </div>
-          <svg class="project__svg-outline" viewBox="0 0 600 400" fill="none" preserveAspectRatio="none" aria-hidden="true">
-            <rect x="1" y="1" width="598" height="398" stroke="currentColor" stroke-width="2" pathLength="1" class="project__svg-rect"/>
-          </svg>
-        </div>
-      </article>
-
-      <!-- Project 02 -->
-      <article class="project" data-project data-casestudy="platoon">
-        <div class="project__card">
-          <div class="project__index-wrap">
-            <span class="project__index">02</span>
-          </div>
-          <div class="project__body">
-            <h3 class="project__name">Autonomous Vehicle Platoon</h3>
-            <ul class="project__desc">
-              <li>95%+ control efficiency in multi-agent coordination.</li>
-              <li>30% reduction in simulated traffic delay.</li>
-              <li>Implemented in CARLA 0.9.12 with PPO-based RL.</li>
-              <li>V2V communication for real-time state sharing.</li>
-            </ul>
-            <div class="project__tech">
-              <span>Python</span>
-              <span>CARLA 0.9.12</span>
-              <span>PPO</span>
-            </div>
-            <details class="project__arch-toggle">
-              <summary>Architecture Used</summary>
-              <p>CARLA Sim → Sensor Suite → State Encoder → PPO Agent → V2V Broadcast → Platoon Coordinator</p>
-            </details>
-            <div class="project__links">
-              <a href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" rel="noopener">GitHub &nearr;</a>
-            </div>
-          </div>
-          <svg class="project__svg-outline" viewBox="0 0 600 400" fill="none" preserveAspectRatio="none" aria-hidden="true">
-            <rect x="1" y="1" width="598" height="398" stroke="currentColor" stroke-width="2" pathLength="1" class="project__svg-rect"/>
-          </svg>
-        </div>
-      </article>
-
-      <!-- Project 03 -->
-      <article class="project" data-project data-casestudy="finance">
-        <div class="project__card">
-          <div class="project__index-wrap">
-            <span class="project__index">03</span>
-          </div>
-          <div class="project__body">
-            <h3 class="project__name">Multi-Agent Financial Portfolio Assistant</h3>
-            <ul class="project__desc">
-              <li>6-agent AI architecture for portfolio analysis.</li>
-              <li>19 Asian tech stocks analyzed with live data.</li>
-              <li>RAG pipeline using FAISS for context retrieval.</li>
-              <li>Gemini LLM integration for natural language insights.</li>
-              <li>Streamlit dashboard + voice interface.</li>
-            </ul>
-            <div class="project__tech">
-              <span>Python</span>
-              <span>FAISS</span>
-              <span>Gemini API</span>
-              <span>Streamlit</span>
-            </div>
-            <details class="project__arch-toggle">
-              <summary>Architecture Used</summary>
-              <p>Data Agents → FAISS RAG → Gemini LLM → Analysis Engine → Streamlit UI + Voice I/O</p>
-            </details>
-            <div class="project__links">
-              <a href="https://github.com/Hareshganesan/ai-finance-tracker" target="_blank" rel="noopener">GitHub &nearr;</a>
-              <a href="https://ai-finance-tracker-demo.vercel.app/" target="_blank" rel="noopener">Live Demo &nearr;</a>
-            </div>
-          </div>
-          <svg class="project__svg-outline" viewBox="0 0 600 400" fill="none" preserveAspectRatio="none" aria-hidden="true">
-            <rect x="1" y="1" width="598" height="398" stroke="currentColor" stroke-width="2" pathLength="1" class="project__svg-rect"/>
-          </svg>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- SIGNATURE MOMENT — Scroll Freeze Wipe   -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="freeze" id="freeze" aria-hidden="true">
-    <div class="freeze__text">
-      <span class="freeze__word" data-speed="0.8">Build</span>
-      <span class="freeze__word freeze__word--accent" data-speed="1.2">Break</span>
-      <span class="freeze__word" data-speed="0.6">Repeat</span>
-    </div>
-    <div class="freeze__mask freeze__mask--left"></div>
-    <div class="freeze__mask freeze__mask--right"></div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- SKILLS — Full Transformation            -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="skills section" id="skills" aria-label="Skills">
-    <div class="skills__bg-grid" aria-hidden="true"></div>
-    <div class="skills__accent-pulse" aria-hidden="true"></div>
-
-    <div class="section__header">
-      <span class="section__num">04</span>
-      <h2 class="section__title">Execution Depth</h2>
-      <p class="section__subtitle">Measured by what ships, not what's listed.</p>
-    </div>
-
-    <!-- Marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Front-End — Back-End — Machine Learning — UI/UX — Cloud — DevOps — Databases — API Design —&nbsp;</span>
-        <span>Front-End — Back-End — Machine Learning — UI/UX — Cloud — DevOps — Databases — API Design —&nbsp;</span>
-      </div>
-    </div>
-
-    <!-- Signal Grid: Skill Cards -->
-    <div class="skills__cards-grid" id="skillsGrid">
-      <div class="skills__card" data-skill="python" data-val="10">
-        <span class="skills__card-label">PY</span>
-        <h4 class="skills__card-name">Python</h4>
-        <p class="skills__card-desc">AI, ML, Automation, Backend</p>
-        <div class="skills__signal" style="--level:10" aria-label="10 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="c" data-val="9">
-        <span class="skills__card-label">C</span>
-        <h4 class="skills__card-name">C</h4>
-        <p class="skills__card-desc">Systems, Embedded, DSA</p>
-        <div class="skills__signal" style="--level:9" aria-label="9 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="javascript" data-val="8">
-        <span class="skills__card-label">JS</span>
-        <h4 class="skills__card-name">JavaScript</h4>
-        <p class="skills__card-desc">Frontend, Node, GSAP</p>
-        <div class="skills__signal" style="--level:8" aria-label="8 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="java" data-val="6">
-        <span class="skills__card-label">JV</span>
-        <h4 class="skills__card-name">Java</h4>
-        <p class="skills__card-desc">OOP, Android, Spring</p>
-        <div class="skills__signal" style="--level:6" aria-label="6 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="mysql" data-val="10">
-        <span class="skills__card-label">MY</span>
-        <h4 class="skills__card-name">MySQL</h4>
-        <p class="skills__card-desc">Schema, Query Optimization</p>
-        <div class="skills__signal" style="--level:10" aria-label="10 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="mongodb" data-val="7">
-        <span class="skills__card-label">MDB</span>
-        <h4 class="skills__card-name">MongoDB</h4>
-        <p class="skills__card-desc">NoSQL, Aggregation, Atlas</p>
-        <div class="skills__signal" style="--level:7" aria-label="7 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="git" data-val="9">
-        <span class="skills__card-label">GIT</span>
-        <h4 class="skills__card-name">Git</h4>
-        <p class="skills__card-desc">Version Control, CI/CD</p>
-        <div class="skills__signal" style="--level:9" aria-label="9 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="aws" data-val="8">
-        <span class="skills__card-label">AWS</span>
-        <h4 class="skills__card-name">AWS</h4>
-        <p class="skills__card-desc">EC2, S3, Lambda, Deploy</p>
-        <div class="skills__signal" style="--level:8" aria-label="8 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="sql" data-val="9">
-        <span class="skills__card-label">SQL</span>
-        <h4 class="skills__card-name">SQL</h4>
-        <p class="skills__card-desc">Queries, Joins, Optimization</p>
-        <div class="skills__signal" style="--level:9" aria-label="9 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="postgresql" data-val="7">
-        <span class="skills__card-label">PG</span>
-        <h4 class="skills__card-name">PostgreSQL</h4>
-        <p class="skills__card-desc">Relational, ACID, Extensions</p>
-        <div class="skills__signal" style="--level:7" aria-label="7 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="sysdesign" data-val="7">
-        <span class="skills__card-label">SYS</span>
-        <h4 class="skills__card-name">System Design</h4>
-        <p class="skills__card-desc">Architecture, Scaling, APIs</p>
-        <div class="skills__signal" style="--level:7" aria-label="7 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-      <div class="skills__card" data-skill="kotlin" data-val="5">
-        <span class="skills__card-label">KT</span>
-        <h4 class="skills__card-name">Kotlin</h4>
-        <p class="skills__card-desc">Fundamentals, Basics</p>
-        <div class="skills__signal" style="--level:5" aria-label="5 of 10">
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-          <span class="skills__signal-bar"></span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Creative Tools -->
-    <div class="skills__creative">
-      <span class="skills__creative-label">Creative Tools</span>
-      <div class="skills__creative-pills">
-        <span class="skills__pill">Figma</span>
-        <span class="skills__pill">Premiere Pro</span>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="skills__stats">
-      <div class="skills__stat">
-        <span class="skills__stat-num" data-count="7">0</span>
-        <span class="skills__stat-label">Projects</span>
-      </div>
-      <div class="skills__stat">
-        <span class="skills__stat-num" data-count="12">0</span>
-        <span class="skills__stat-label">Technologies</span>
-      </div>
-      <div class="skills__stat">
-        <span class="skills__stat-num" data-count="4">0</span>
-        <span class="skills__stat-label">Years Coding</span>
-      </div>
-      <div class="skills__stat">
-        <span class="skills__stat-num" data-count="350">0</span>
-        <span class="skills__stat-label">Bugs Squashed</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- WINS — Horizontal Scroll Showcase        -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="wins" id="wins" aria-label="Competitive Wins">
-    <canvas class="wins__particles" id="winsParticles" aria-hidden="true"></canvas>
-    <div class="wins__header-area">
-      <div class="section__header">
-        <span class="section__num">05</span>
-        <h2 class="section__title">Competitive Edge</h2>
-      </div>
-      <span class="wins__counter" id="winsCounter" aria-live="polite">01 / 06</span>
-    </div>
-    <div class="wins__track" id="winsTrack">
-      <article class="wins__card" data-win-idx="1">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year"> Mar 2026</span>
-        <h3 class="wins__position">2nd</h3>
-        <h4 class="wins__name">Crazy Syntax</h4>
-        <p class="wins__impact">Challenged with 35+ teams for Complex custom syntax programming based challenge</p>
-        <span class="wins__meta">Delta 2.0, Inter-college Tech-Fest</span>
-      </article>
-      <article class="wins__card" data-win-idx="1">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year"> Jan 2026</span>
-        <h3 class="wins__position">1st</h3>
-        <h4 class="wins__name">Ingenium 5.0</h4>
-        <p class="wins__impact">Outperformed 50+ teams in 24Hr Iot Based Hardware-Software hackathon.</p>
-        <span class="wins__meta">Tantrotsav, National Level Tech-Fest</span>
-      </article>
-      <article class="wins__card" data-win-idx="2">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year">2026</span>
-        <h3 class="wins__position">1st</h3>
-        <h4 class="wins__name">Infinity Gauntlet</h4>
-        <p class="wins__impact">Multi-domain challenge with time limited rounds mainly on cybersec and website-design.</p>
-        <span class="wins__meta">Tantrotsav, National Level Tech-Fest</span>
-      </article>
-      <article class="wins__card" data-win-idx="3">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year">Oct 2025</span>
-        <h3 class="wins__position">1st</h3>
-        <h4 class="wins__name">Logical Nexus</h4>
-        <p class="wins__impact">Won IEEE CAS Circuits and Hardware based competition.</p>
-        <span class="wins__meta">IEEE CAS, Chennai</span>
-      </article>
-      <article class="wins__card" data-win-idx="4">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year">Mar 2025</span>
-        <h3 class="wins__position">2nd</h3>
-        <h4 class="wins__name">HackQuest CTF</h4>
-        <p class="wins__impact">Capture-the-flag cybersecurity challenge runner-up.</p>
-        <span class="wins__meta">Delta</span>
-      </article>
-      <article class="wins__card" data-win-idx="5">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year">Jan 2025</span>
-        <h3 class="wins__position">3rd</h3>
-        <h4 class="wins__name">Code of Duty</h4>
-        <p class="wins__impact">Competitive programming under time pressure.</p>
-        <span class="wins__meta">Cognizance</span>
-      </article>
-      <article class="wins__card" data-win-idx="6">
-        <svg class="wins__trophy" aria-hidden="true" viewBox="0 0 80 80"><path d="M40 10 L50 30 H70 L54 44 L60 66 L40 54 L20 66 L26 44 L10 30 H30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.12"/></svg>
-        <span class="wins__year">2024</span>
-        <h3 class="wins__position">Winner</h3>
-        <h4 class="wins__name">Coder's of Black Pearl</h4>
-        <p class="wins__impact">Solved every challenge — 100% completion rate.</p>
-        <span class="wins__meta">Hackathon</span>
-      </article>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- FINALE — Cinematic Transition            -->
-  <!-- ═══════════════════════════════════════ -->
-  <section id="finale">
-    <div class="finale__ambient"></div>
-    <div class="finale__core-line"></div>
-
-    <div class="finale__content">
-      <h2 class="finale__headline">
-        <span class="word">Every</span>
-        <span class="word accent">system</span>
-        <span class="word">evolves.</span>
-      </h2>
-
-      <p class="finale__sub">
-        So does the builder behind it.
-      </p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- CONTACT                                 -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="contact section" id="contact" aria-label="Contact">
-    <div class="section__header">
-      <span class="section__num">06</span>
-      <h2 class="section__title">Contact</h2>
-    </div>
-    <div class="contact__grid">
-      <div class="contact__cta reveal-up">
-        <p class="contact__headline">Let's make<br/>something <em>cool</em><span class="accent">.</span></p>
-        <p class="contact__sub">Feel free to reach out. I'm always open to discussing new projects, creative ideas, or opportunities.</p>
-        <a href="mailto:Hareshganesan1@gmail.com" class="btn btn--large" data-magnetic>Say Hello &rarr;</a>
-      </div>
-      <div class="contact__info reveal-up">
-        <dl class="contact__details">
-          <div>
-            <dt>Email</dt>
-            <dd><a href="mailto:Hareshganesan1@gmail.com">Hareshganesan1@gmail.com</a></dd>
-          </div>
-          <div>
-            <dt>Phone</dt>
-            <dd><a href="tel:+919566096541">+91 9566096541</a></dd>
-          </div>
-          <div>
-            <dt>Location</dt>
-            <dd>Chennai 600063, India</dd>
-          </div>
-          <div>
-            <dt>Hours</dt>
-            <dd>Mon – Fri, 9 AM – 6 PM</dd>
-          </div>
-        </dl>
-        <div class="contact__social">
-          <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-          <a href="https://github.com/Hareshganesan" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          <a href="https://www.instagram.com/bored_boy.7/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- FOOTER                                  -->
-  <!-- ═══════════════════════════════════════ -->
-  <footer class="footer" role="contentinfo">
-    <div class="footer__inner">
-      <p>&copy; 2025 GANESAN P V — BUILT WITH SLEEPLESS NIGHTS &amp; CAFFEINE</p>
-      <a href="#hero" class="footer__top" aria-label="Back to top">&uarr; Top</a>
-    </div>
-  </footer>
-
-  <!-- System Status Panel -->
-  <div class="systat systat--mini" id="systemStatus" aria-hidden="true">
-    <div class="systat__dot-indicator" id="systatDotBtn" aria-label="Open system monitor">
-      <span class="systat__blink"></span>
-    </div>
-    <div class="systat__tooltip" id="systatTooltip">System monitor active &mdash; click to inspect</div>
-    <div class="systat__scanline" aria-hidden="true"></div>
-    <div class="systat__expanded" id="systatExpanded">
-      <div class="systat__header">
-        <span class="systat__label">SYSTEM STATUS</span>
-        <button class="systat__minimize" id="systatMinimize" aria-label="Minimize">&minus;</button>
-      </div>
-      <div class="systat__body" id="systatBody">
-        <div class="systat__row"><span>SCROLL VEL</span><span class="systat__val" id="systatVel">0</span></div>
-        <div class="systat__row"><span>FPS</span><span class="systat__val" id="systatFps">60</span></div>
-        <div class="systat__row"><span>CURSOR</span><span class="systat__val" id="systatCursor">default</span></div>
-        <div class="systat__row"><span>SECTION</span><span class="systat__val" id="systatSection">hero</span></div>
-        <div class="systat__row"><span>TIME</span><span class="systat__val" id="systatTime">00:00</span></div>
+      <div class="menu-right">
+        <div class="menu-tag">Socials & Contact</div>
+        <a href="mailto:Hareshganesan1@gmail.com" class="menu-social-link">Hareshganesan1@gmail.com</a>
+        <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank" class="menu-social-link">LinkedIn ↗</a>
+        <a href="https://github.com/Hareshganesan" target="_blank" class="menu-social-link">GitHub ↗</a>
+        <a href="https://www.instagram.com/bored_boy.7/" target="_blank" class="menu-social-link">Instagram ↗</a>
+        <img src="./images/profile.jpg" alt="Profile" class="menu-profile-img" />
       </div>
     </div>
   </div>
 
-  <!-- Project Deep Dive Modal -->
-  <div class="deepdive" id="deepDive" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="deepdive__backdrop"></div>
-    <div class="deepdive__content">
-      <button class="deepdive__close" id="deepDiveClose" aria-label="Close">&times;</button>
-      <div class="deepdive__inner" id="deepDiveInner">
-        <!-- Populated dynamically -->
+  <div id="lenis-wrapper">
+    
+    <!-- PREMIUM INTERACTIVE HERO -->
+    <section class="hero theme-dark" id="hero">
+      
+      <!-- Faint Diagonal Background Marquee -->
+      <div class="hero-bg-marquee">
+        <div class="marquee-inner">
+          SYSTEMS ARCHITECTURE ✦ APPLIED INTELLIGENCE ✦ FULL STACK ENGINEERING ✦ SYSTEMS ARCHITECTURE ✦ APPLIED INTELLIGENCE ✦ FULL STACK ENGINEERING ✦
+        </div>
       </div>
-    </div>
+
+      <!-- Base Layer -->
+      <div class="hero-layer hero-base">
+        <div class="hero-floater floater-1">+</div>
+        <div class="hero-floater floater-2">×</div>
+        <div class="hero-floater floater-3">○</div>
+        
+        <!-- Creative Tech Widgets filling empty space -->
+        <div class="hero-hud hud-top-right">
+          <span class="hud-title">SYSTEM STATUS</span>
+          <span class="hud-data blink">ONLINE & READY</span>
+          <div class="hud-line"></div>
+        </div>
+        
+        <div class="hero-hud hud-mid-left">
+          <span class="hud-title">LIVE TRACKING</span>
+          <span class="hud-data" id="live-coords">X:000 Y:000</span>
+          <div class="hud-line"></div>
+        </div>
+
+        <div class="hero-hud hud-skills">
+          <div class="hud-title">CORE PROTOCOLS</div>
+          <ul>
+            <li>SYSTEMS ARCHITECTURE</li>
+            <li>APPLIED ARTIFICIAL INTEL.</li>
+            <li>FULL STACK ENGINEERING</li>
+          </ul>
+        </div>
+
+        <div class="hero-hud hud-barcode">
+          <div class="bars"></div>
+          <span>ID: GPV-2026-ENG</span>
+        </div>
+
+        <!-- Terminal Window filling the void -->
+        <div class="hero-hud hud-terminal">
+          <div class="terminal-header">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="title">sys_boot.exe</span>
+          </div>
+          <div class="terminal-body">
+            > INITIATING SEQUENCE...<br/>
+            > LOADING MODULES [OK]<br/>
+            > RENDER ENGINE : WEBGL<br/>
+            > AWAITING INPUT<span class="cursor"></span>
+          </div>
+        </div>
+
+        <div class="hero-hud hud-center-target"></div>
+
+        <div class="hero-huge-wrapper">
+          <div class="hero-line left">
+            GANESAN
+            <!-- Data strip anchored under GANESAN -->
+            <div class="hud-data-strip">
+              <div class="strip-inner">
+                00110011 // ENG ✦ 01010101 // ARC ✦ 11100011 // ML ✦ 00011100 // SYS ✦ 10101010 // DEV ✦ 00110011 // ENG ✦ 01010101 // ARC ✦ 
+              </div>
+            </div>
+          </div>
+          <div class="hero-line right"><span class="italic">P.V.</span></div>
+        </div>
+      </div>
+      
+      <!-- Interactive Mask Layer -->
+      <div class="hero-layer hero-mask">
+        <div class="hero-huge-wrapper mask-text">
+          <div class="hero-line left">GANESAN</div>
+          <div class="hero-line right"><span class="italic">P.V.</span></div>
+        </div>
+      </div>
+
+      <!-- UI Overlays -->
+      <div class="hero-absolute-footer">
+        <div class="hero-info">
+          Not a style, a perspective.<br/>Because execution is everything.
+        </div>
+        <div class="hero-scroll-circle">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <defs>
+              <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+            </defs>
+            <text font-size="14" letter-spacing="2.5">
+              <textPath href="#circlePath" fill="currentColor">
+                BUILD • BREAK • LEARN • REPEAT • 
+              </textPath>
+            </text>
+          </svg>
+          <div class="circle-dot">↓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section theme-light" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">01 / 06</span>
+          <h2 class="section-title">About Me</h2>
+        </div>
+        
+        <div class="about-grid">
+          <div class="about-text-col">
+            <div class="about-text-large reveal-text">
+              I am a B.Tech student in Computer and Communication Engineering at Amrita School of Engineering. Momentum beats perfection. I ship early, iterate fast, and let real feedback shape the product.
+            </div>
+            
+            <div class="about-details">
+              <div class="about-desc">
+                <strong>GPA: 8.2/10.0</strong><br/><br/>
+                My expertise spans Python, Java, JavaScript, and SQL, with deep hands-on experience in web architecture, machine learning pipelines, and database management. I love building systems that scale and solving complex real-world problems.
+              </div>
+              
+              <a href="./files/CV_Ganesan_PV.pdf" download="CV_Ganesan_PV.pdf" class="btn-premium" data-cursor="hover">
+                <span class="btn-text">Download CV</span>
+              </a>
+            </div>
+          </div>
+          
+          <div class="about-visual" data-scroll data-scroll-speed="0.1">
+            <div class="about-img-box">
+              <img src="./images/profile.jpg" alt="Ganesan P V" />
+            </div>
+            <div class="about-badge">
+              <svg viewBox="0 0 100 100" width="60" height="60">
+                <path fill="currentColor" d="M50,0 L55,45 L100,50 L55,55 L50,100 L45,55 L0,50 L45,45 Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE DOMAINS (Replaces Philosophy) -->
+    <section class="domains theme-dark" id="domains">
+      <div class="domain-row" data-cursor="explore">
+        <div class="domain-bg"></div>
+        <div class="container domain-container">
+          <h2 class="domain-title">FULL STACK ENG.</h2>
+          <span class="domain-meta">01</span>
+        </div>
+      </div>
+      <div class="domain-row" data-cursor="explore">
+        <div class="domain-bg"></div>
+        <div class="container domain-container">
+          <h2 class="domain-title">APPLIED A.I.</h2>
+          <span class="domain-meta">02</span>
+        </div>
+      </div>
+      <div class="domain-row" data-cursor="explore">
+        <div class="domain-bg"></div>
+        <div class="container domain-container">
+          <h2 class="domain-title">SYSTEM ARCH.</h2>
+          <span class="domain-meta">03</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience section theme-dark" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">02 / 06</span>
+          <h2 class="section-title">Experience</h2>
+        </div>
+        
+        <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-date">Feb 2026 — May 2026</div>
+            <div class="exp-main">
+              <h3 class="exp-role">Artificial Intelligence Intern</h3>
+              <div class="exp-company">Infosys [Remote]</div>
+              <ul class="exp-desc">
+                <li>Developed an NLP-based email classifier processing 10K+ emails with 98.5% accuracy.</li>
+                <li>Built preprocessing pipelines for tokenization, vectorization, and feature extraction.</li>
+                <li>Automated enterprise email categorization using machine learning techniques.</li>
+              </ul>
+              <div class="exp-tags">
+                <span class="tag">NLP</span>
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="publications section theme-dark" id="publications">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">03 / 06</span>
+          <h2 class="section-title">Publications</h2>
+        </div>
+        
+        <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-date">2026</div>
+            <div class="exp-main">
+              <h3 class="exp-role">Hierarchical Spectral Ensemble with Physics-Informed Augmentation</h3>
+              <div class="exp-company">Frontiers in Remote Sensing</div>
+              <ul class="exp-desc">
+                <li>Global Water Quality Retrieval from Hyperspectral Remote Sensing.</li>
+                <li>DOI: 10.3389/frsen.2026.1860176</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="exp-item">
+            <div class="exp-date">2026</div>
+            <div class="exp-main">
+              <h3 class="exp-role">A Lightweight Framework for Post-Treatment Brain Tumor Analysis</h3>
+              <div class="exp-company">Springer (LNEE)</div>
+              <ul class="exp-desc">
+                <li>VNet-Based Segmentation and Voxel-Derived Progression Tracking.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS -->
+    <section class="works section theme-light" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">04 / 06</span>
+          <h2 class="section-title">Selected Works</h2>
+          <p class="section-subtitle">Shipped, not shelved.</p>
+        </div>
+        
+        <div class="works-list">
+          
+          <a href="#" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project1.jpg">
+            <div class="work-num">01</div>
+            <h3 class="work-name">Water Quality Retrieval</h3>
+            <div class="work-meta">Python, ML, Remote Sensing</div>
+            <div class="work-arrow">↗</div>
+          </a>
+
+          <a href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project2.jpg">
+            <div class="work-num">02</div>
+            <h3 class="work-name">Autonomous Platoon</h3>
+            <div class="work-meta">Python, CARLA, PPO</div>
+            <div class="work-arrow">↗</div>
+          </a>
+
+          <a href="https://github.com/Hareshganesan/ai-finance-tracker" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project3.jpg">
+            <div class="work-num">03</div>
+            <h3 class="work-name">Financial Assistant</h3>
+            <div class="work-meta">Python, FAISS, Gemini API</div>
+            <div class="work-arrow">↗</div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLLING FREEZE SECTION -->
+    <section class="freeze-scrub theme-light" id="freeze">
+      <div class="freeze-content">
+        <div class="freeze-line line-1">BUILD</div>
+        <div class="freeze-line line-2 outline italic">BREAK</div>
+        <div class="freeze-line line-3">REPEAT</div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills section theme-light" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">05 / 06</span>
+          <h2 class="section-title">Execution Depth</h2>
+        </div>
+        
+        <div class="skills-grid">
+          <div class="skills-cloud">
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag outline">Java</div>
+            <div class="skill-tag">JavaScript</div>
+            <div class="skill-tag outline">CSS</div>
+            <div class="skill-tag">HTML</div>
+            <div class="skill-tag outline">Git</div>
+            <div class="skill-tag">Figma</div>
+            <div class="skill-tag outline">AWS</div>
+            <div class="skill-tag">SQL</div>
+            <div class="skill-tag outline">Machine Learning</div>
+            <div class="skill-tag">Data Science</div>
+            <div class="skill-tag outline">Adobe Premiere</div>
+          </div>
+          
+          <div class="stats-col">
+            <div class="stat-block">
+              <span class="stat-number">7+</span>
+              <span class="stat-label">Projects Shipped</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-number">12+</span>
+              <span class="stat-label">Technologies Mastered</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-number">4+</span>
+              <span class="stat-label">Years Coding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="wins theme-light" id="wins">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">06 / 06</span>
+          <h2 class="section-title">Achievements</h2>
+        </div>
+        
+        <div class="wins-grid">
+          <div class="win-card highlight">
+            <div class="win-year">2026</div>
+            <h3 class="win-title">Amazon ML Summer School</h3>
+            <p class="win-desc">Selected among top students nationwide for advanced Machine Learning training.</p>
+          </div>
+          
+          <div class="win-card">
+            <div class="win-year">1st Prize</div>
+            <h3 class="win-title">Ingenium 5.0</h3>
+            <p class="win-desc">National level hackathon winner for building scalable AI solutions.</p>
+          </div>
+
+          <div class="win-card">
+            <div class="win-year">1st Prize</div>
+            <h3 class="win-title">Logical Nexus</h3>
+            <p class="win-desc">Top algorithmic problem solver in advanced competitive programming.</p>
+          </div>
+
+          <div class="win-card highlight">
+            <div class="win-year">1st Prize</div>
+            <h3 class="win-title">Infinity Gauntlet</h3>
+            <p class="win-desc">Advanced coding competition focused on system architecture and optimization.</p>
+          </div>
+
+          <div class="win-card highlight">
+            <div class="win-year">2nd Prize</div>
+            <h3 class="win-title">Crazy Syntax</h3>
+            <p class="win-desc">State-level web development and creative coding challenge.</p>
+          </div>
+
+          <div class="win-card">
+            <div class="win-year">2nd Prize</div>
+            <h3 class="win-title">HackQuest CTF</h3>
+            <p class="win-desc">Cybersecurity Capture The Flag competition runner-up.</p>
+          </div>
+
+          <div class="win-card">
+            <div class="win-year">3rd Prize</div>
+            <h3 class="win-title">Code of Duty</h3>
+            <p class="win-desc">Rapid prototyping and algorithmic challenge.</p>
+          </div>
+
+          <div class="win-card highlight">
+            <div class="win-year">Winner</div>
+            <h3 class="win-title">Black Pearl</h3>
+            <p class="win-desc">Exclusive invitation-only developer tournament champion.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact section theme-dark" id="contact">
+      <div class="container">
+        <h2 class="contact-lead">Every system evolves.<br/><span class="italic">So does the builder behind it.</span></h2>
+        
+        <div class="contact-bottom">
+          <a href="mailto:Hareshganesan1@gmail.com" class="huge-email" data-cursor="hover">LET'S TALK ↗</a>
+          
+          <div class="contact-links">
+            <div class="link-group">
+              <span class="link-title">Connect</span>
+              <a href="mailto:Hareshganesan1@gmail.com">Email</a>
+              <a href="tel:+919566096541">Phone</a>
+            </div>
+            <div class="link-group">
+              <span class="link-title">Socials</span>
+              <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank">LinkedIn</a>
+              <a href="https://github.com/Hareshganesan" target="_blank">GitHub</a>
+              <a href="https://www.instagram.com/bored_boy.7/" target="_blank">Instagram</a>
+            </div>
+            <div class="link-group">
+              <span class="link-title">Location</span>
+              <span>Chennai 600063,<br/>India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer theme-dark">
+      <div class="container footer-container">
+        <p>© 2025 GANESAN P V</p>
+        <p>BUILT WITH SLEEPLESS NIGHTS & CAFFEINE</p>
+      </div>
+    </footer>
   </div>
 
-  <!-- Dark Energy Mode Badge -->
-  <div class="dark-energy-badge" id="darkEnergyBadge" aria-hidden="true">Dark Energy Mode</div>
-  <script>
-      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
-  <!-- GSAP + ScrollTrigger + ScrollTo -->
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
