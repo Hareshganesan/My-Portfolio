@@ -106,6 +106,7 @@ navToggle.addEventListener("click", () => {
     navToggle.classList.add("open");
     navToggle.querySelector(".nav-text").innerText = "CLOSE";
     menuOverlay.classList.add("active");
+    document.body.classList.add("menu-open");
     lenis.stop();
     
     gsap.fromTo(menuLinks, 
@@ -116,6 +117,7 @@ navToggle.addEventListener("click", () => {
     navToggle.classList.remove("open");
     navToggle.querySelector(".nav-text").innerText = "MENU";
     menuOverlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
     lenis.start();
   }
 });
@@ -126,6 +128,7 @@ menuLinks.forEach(link => {
     navToggle.classList.remove("open");
     navToggle.querySelector(".nav-text").innerText = "MENU";
     menuOverlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
     lenis.start();
   });
 });
