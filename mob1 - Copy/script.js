@@ -165,15 +165,12 @@ function initHeroAnimations() {
     };
 
     document.addEventListener('mousemove', (e) => {
-      updateHeroInteractions(e.clientX, e.clientY);
-    });
-
-    // Mobile touch support
-    document.addEventListener('touchmove', (e) => {
-      if(e.touches.length > 0) {
-        updateHeroInteractions(e.touches[0].clientX, e.touches[0].clientY);
+      // Only track if it's a desktop/mouse device to save mobile battery and fix scroll lag
+      if (window.innerWidth > 768) {
+        updateHeroInteractions(e.clientX, e.clientY);
       }
-    }, { passive: true });
+    });
+    // Removed heavy touchmove listener to completely eliminate mobile scroll lag
   }
 
   gsap.fromTo(".hero-base .hero-line", 
