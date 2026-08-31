@@ -207,13 +207,34 @@
           </div>
           
           <div class="about-visual" data-scroll data-scroll-speed="0.1">
-            <div class="about-img-box">
-              <img src="./images/profile.jpg" alt="Ganesan P V" />
-            </div>
-            <div class="about-badge">
-              <svg viewBox="0 0 100 100" width="60" height="60">
-                <path fill="currentColor" d="M50,0 L55,45 L100,50 L55,55 L50,100 L45,55 L0,50 L45,45 Z" />
-              </svg>
+            <div class="idcard" id="about-idcard">
+              <div class="idcard-glow" aria-hidden="true"></div>
+              <div class="idcard-shell">
+                <article class="idcard-face">
+                  <div class="idcard-sheen" aria-hidden="true"></div>
+                  <div class="idcard-grain" aria-hidden="true"></div>
+
+                  <header class="idcard-top">
+                    <span class="idcard-brand">PVG<span>.</span></span>
+                    <span class="idcard-serial">GPV·2026·ENG</span>
+                  </header>
+
+                  <figure class="idcard-photo">
+                    <img src="./images/profile.jpg" alt="Ganesan P V" loading="lazy" />
+                  </figure>
+
+                  <div class="idcard-info">
+                    <h3 class="idcard-name">Ganesan P V</h3>
+                    <p class="idcard-role">Full Stack · Applied AI</p>
+                    <div class="idcard-meta">
+                      <span class="idcard-status"><i aria-hidden="true"></i>Available</span>
+                      <button class="idcard-contact" type="button" aria-label="Contact Ganesan P V">
+                        Contact <span aria-hidden="true">↗</span>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>
@@ -405,49 +426,60 @@
           <h2 class="section-title">Achievements</h2>
         </div>
         
-        <div class="wins-grid">
+        <p class="section-subtitle">Drag to spin — every disc is a win.</p>
+
+        <div class="infinite-menu-wrap" id="infinite-menu">
+          <canvas id="infinite-grid-menu-canvas"></canvas>
+          <div class="menu-spotlight" aria-hidden="true"></div>
+          <h2 class="face-title inactive"></h2>
+          <p class="face-description inactive"></p>
+          <div class="menu-hint" aria-hidden="true"><span>swipe to explore ↻</span></div>
+        </div>
+
+        <div class="menu-caption" aria-live="polite">
+          <div class="cap-inner">
+            <div class="cap-prize"></div>
+            <h3 class="cap-title"></h3>
+            <p class="cap-desc"></p>
+          </div>
+        </div>
+
+        <div class="wins-grid wins-list">
           <div class="win-card highlight">
             <div class="win-year">2026</div>
             <h3 class="win-title">Amazon ML Summer School</h3>
             <p class="win-desc">Selected among top students nationwide for advanced Machine Learning training.</p>
           </div>
-          
           <div class="win-card">
             <div class="win-year">1st Prize</div>
             <h3 class="win-title">Ingenium 5.0</h3>
             <p class="win-desc">National level hackathon winner for building scalable AI solutions.</p>
           </div>
-
           <div class="win-card">
             <div class="win-year">1st Prize</div>
             <h3 class="win-title">Logical Nexus</h3>
             <p class="win-desc">Top algorithmic problem solver in advanced competitive programming.</p>
           </div>
-
           <div class="win-card highlight">
             <div class="win-year">1st Prize</div>
             <h3 class="win-title">Infinity Gauntlet</h3>
             <p class="win-desc">Advanced coding competition focused on system architecture and optimization.</p>
           </div>
-
           <div class="win-card highlight">
             <div class="win-year">2nd Prize</div>
             <h3 class="win-title">Crazy Syntax</h3>
             <p class="win-desc">State-level web development and creative coding challenge.</p>
           </div>
-
           <div class="win-card">
             <div class="win-year">2nd Prize</div>
             <h3 class="win-title">HackQuest CTF</h3>
             <p class="win-desc">Cybersecurity Capture The Flag competition runner-up.</p>
           </div>
-
           <div class="win-card">
             <div class="win-year">3rd Prize</div>
             <h3 class="win-title">Code of Duty</h3>
             <p class="win-desc">Rapid prototyping and algorithmic challenge.</p>
           </div>
-
           <div class="win-card highlight">
             <div class="win-year">Winner</div>
             <h3 class="win-title">Black Pearl</h3>
@@ -497,6 +529,7 @@
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
