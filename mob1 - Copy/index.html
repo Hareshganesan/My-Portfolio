@@ -633,7 +633,8 @@ function initLineWaves(containerSelector, options = {}) {
     lightMode = false
   } = options;
 
-  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+  // Cap resolution drastically on mobile to keep CSS blur performant
+  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: window.innerWidth < 768 ? 0.5 : 1 });
   const gl = renderer.gl;
   gl.clearColor(0, 0, 0, 0);
 
@@ -698,7 +699,13 @@ function initLineWaves(containerSelector, options = {}) {
   }
 
   let animationFrameId;
+  let isVisible = true;
+
   function update(time) {
+    if (!isVisible) {
+      animationFrameId = null;
+      return;
+    }
     animationFrameId = requestAnimationFrame(update);
     program.uniforms.uTime.value = time * 0.001;
 
@@ -711,9 +718,24 @@ function initLineWaves(containerSelector, options = {}) {
 
     renderer.render({ scene: mesh });
   }
-  animationFrameId = requestAnimationFrame(update);
+
+  const observer = new IntersectionObserver((entries) => {
+    isVisible = entries[0].isIntersecting;
+    if (isVisible) {
+      if (!animationFrameId) {
+        animationFrameId = requestAnimationFrame(update);
+      }
+    } else {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    }
+  }, { rootMargin: "200px" });
+  observer.observe(container);
 
   return () => {
+    observer.disconnect();
     cancelAnimationFrame(animationFrameId);
     window.removeEventListener('resize', resize);
     if (enableMouseInteraction) {
