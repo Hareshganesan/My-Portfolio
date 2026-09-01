@@ -634,7 +634,7 @@ function initLineWaves(containerSelector, options = {}) {
   } = options;
 
   // Cap resolution drastically on mobile to keep CSS blur performant
-  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: window.innerWidth < 768 ? 0.5 : 1 });
+  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: window.innerWidth < 768 ? 0.2 : 1 });
   const gl = renderer.gl;
   gl.clearColor(0, 0, 0, 0);
 
@@ -736,7 +736,7 @@ function initLineWaves(containerSelector, options = {}) {
 
   return () => {
     observer.disconnect();
-    cancelAnimationFrame(animationFrameId);
+    if (animationFrameId) cancelAnimationFrame(animationFrameId);
     window.removeEventListener('resize', resize);
     if (enableMouseInteraction) {
       window.removeEventListener('mousemove', handleMouseMove);
