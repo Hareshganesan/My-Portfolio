@@ -25,6 +25,7 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 html.lenis, html.lenis body { height: auto; }
@@ -311,7 +312,7 @@ body.menu-open .nav {
 .hero-line {
   position: relative;
   font-family: var(--f-heading);
-  font-size: clamp(6rem, 18vw, 25rem); /* Reverted to original massive size */
+  font-size: clamp(6rem, 18vw, 25rem);
   font-weight: 500;
   line-height: 0.85;
   letter-spacing: -0.06em;
@@ -1296,8 +1297,11 @@ body.menu-open .nav {
   /* blend-mode + a spinning SVG-textPath composite badly on mobile GPUs */
   .hero-absolute-footer { mix-blend-mode: normal !important; }
   .hero-scroll-circle { animation: none !important; }
-  .hud-data-strip .strip-inner { animation: none !important; }
+  .hud-data-strip { display: none !important; }
+  .hero-hud { display: none !important; }
   .circle-dot { animation: none !important; }
+  .nav-center { display: none !important; }
+  .hero-line { font-size: clamp(2rem, 11vw, 25rem) !important; }
 
   .hero-split { flex-direction: column-reverse; justify-content: flex-end; gap: 8vh; }
   .about-grid, .philosophy-grid, .exp-item, .skills-grid, .contact-bottom { grid-template-columns: 1fr; }
