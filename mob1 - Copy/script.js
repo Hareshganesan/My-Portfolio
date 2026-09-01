@@ -173,9 +173,9 @@ function initHeroAnimations() {
     // Removed heavy touchmove listener to completely eliminate mobile scroll lag
   }
 
-  gsap.fromTo(".hero-base .hero-line", 
-    { opacity: 0, y: "20%" },
-    { opacity: 1, y: "0%", duration: 1.5, stagger: 0.1, ease: "power3.out", delay: 0.2 }
+  gsap.fromTo(".hero-minimal-content > *", 
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 1.5, stagger: 0.15, ease: "power3.out", delay: 0.3 }
   );
 
   gsap.fromTo(".hero-absolute-footer",
@@ -1445,3 +1445,35 @@ void main() {
   }
   document.addEventListener("visibilitychange", () => { vis = !document.hidden; applyPause(); });
 })();
+// Dock Dark Mode observer
+(function initDockColor() {
+  const dock = document.querySelector(".dock");
+  if (!dock) return;
+  const sections = document.querySelectorAll(".theme-light, .theme-dark");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Hide dock if the hero section is behind it
+        if (entry.target.id === "hero") {
+          dock.classList.add("dock-hidden");
+        } else {
+          dock.classList.remove("dock-hidden");
+        }
+        
+        // Update text color based on section theme
+        if (entry.target.classList.contains("theme-light")) {
+          dock.classList.add("dock-dark-text");
+        } else {
+          dock.classList.remove("dock-dark-text");
+        }
+      }
+    });
+  }, {
+    rootMargin: "-80% 0px -10% 0px", 
+    threshold: 0
+  });
+  sections.forEach(sec => observer.observe(sec));
+})();
+
+
+

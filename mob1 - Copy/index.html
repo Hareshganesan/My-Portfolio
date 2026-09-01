@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GANESAN P V — Portfolio</title>
-  <meta name="description" content="Ganesan P V — Full Stack Developer. Building digital solutions with precision." />
+  <title>GANESAN P V - Portfolio</title>
+  <meta name="description" content="Ganesan P V - Full Stack Developer. Building digital solutions with precision." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Using a sophisticated mix of Grotesk and an elegant Serif for premium contrast -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=PP+Neue+Montreal:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Added Syne for a creative, liquid glass display font -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Grotesk:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
   
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
   <link rel="stylesheet" href="style.css?v=1.2" />
+  <link rel="stylesheet" href="glass-surface.css" />
 </head>
 <body class="loading">
 
@@ -69,94 +70,34 @@
       <div class="menu-right">
         <div class="menu-tag">Socials & Contact</div>
         <a href="mailto:Hareshganesan1@gmail.com" class="menu-social-link">Hareshganesan1@gmail.com</a>
-        <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank" class="menu-social-link">LinkedIn ↗</a>
-        <a href="https://github.com/Hareshganesan" target="_blank" class="menu-social-link">GitHub ↗</a>
-        <a href="https://www.instagram.com/bored_boy.7/" target="_blank" class="menu-social-link">Instagram ↗</a>
+        <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank" class="menu-social-link">LinkedIn &#8599;</a>
+        <a href="https://github.com/Hareshganesan" target="_blank" class="menu-social-link">GitHub &#8599;</a>
+        <a href="https://www.instagram.com/bored_boy.7/" target="_blank" class="menu-social-link">Instagram &#8599;</a>
       </div>
     </div>
   </div>
+
+  <!-- Floating Navigation Dock -->
+  <div class="dock glass-surface-auto dock-hidden">
+    <a href="#about" class="dock-item">About</a>
+    <a href="#experience" class="dock-item">Experience</a>
+    <a href="#projects" class="dock-item">Works</a>
+    <a href="#skills" class="dock-item">Skills</a>
+  </div>
+
 
   <div id="lenis-wrapper">
     
     <!-- PREMIUM INTERACTIVE HERO -->
     <section class="hero theme-dark" id="hero">
       
-      <!-- Faint Diagonal Background Marquee -->
-      <div class="hero-bg-marquee">
-        <div class="marquee-inner">
-          SYSTEMS ARCHITECTURE ✦ APPLIED INTELLIGENCE ✦ FULL STACK ENGINEERING ✦ SYSTEMS ARCHITECTURE ✦ APPLIED INTELLIGENCE ✦ FULL STACK ENGINEERING ✦
-        </div>
-      </div>
+      <!-- The WebGL Canvas Container -->
+      <div id="line-waves-bg"></div>
 
-      <!-- Base Layer -->
-      <div class="hero-layer hero-base">
-        <div class="hero-floater floater-1">+</div>
-        <div class="hero-floater floater-2">×</div>
-        <div class="hero-floater floater-3">○</div>
-        
-        <!-- Creative Tech Widgets filling empty space -->
-        <div class="hero-hud hud-top-right">
-          <span class="hud-title">SYSTEM STATUS</span>
-          <span class="hud-data blink">ONLINE & READY</span>
-          <div class="hud-line"></div>
-        </div>
-        
-        <div class="hero-hud hud-mid-left">
-          <span class="hud-title">LIVE TRACKING</span>
-          <span class="hud-data" id="live-coords">X:000 Y:000</span>
-          <div class="hud-line"></div>
-        </div>
-
-        <div class="hero-hud hud-skills">
-          <div class="hud-title">CORE PROTOCOLS</div>
-          <ul>
-            <li>SYSTEMS ARCHITECTURE</li>
-            <li>APPLIED ARTIFICIAL INTEL.</li>
-            <li>FULL STACK ENGINEERING</li>
-          </ul>
-        </div>
-
-        <div class="hero-hud hud-barcode">
-          <div class="bars"></div>
-          <span>ID: GPV-2026-ENG</span>
-        </div>
-
-        <!-- Terminal Window filling the void -->
-        <div class="hero-hud hud-terminal">
-          <div class="terminal-header">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="title">sys_boot.exe</span>
-          </div>
-          <div class="terminal-body">
-            > INITIATING SEQUENCE...<br/>
-            > LOADING MODULES [OK]<br/>
-            > RENDER ENGINE : WEBGL<br/>
-            > AWAITING INPUT<span class="cursor"></span>
-          </div>
-        </div>
-
-        <div class="hero-hud hud-center-target"></div>
-
-        <div class="hero-huge-wrapper">
-          <div class="hero-line left">
-            GANESAN
-            <!-- Data strip anchored under GANESAN -->
-            <div class="hud-data-strip">
-              <div class="strip-inner">
-                00110011 // ENG ✦ 01010101 // ARC ✦ 11100011 // ML ✦ 00011100 // SYS ✦ 10101010 // DEV ✦ 00110011 // ENG ✦ 01010101 // ARC ✦ 
-              </div>
-            </div>
-          </div>
-          <div class="hero-line right"><span class="italic">P.V.</span></div>
-        </div>
-      </div>
-      
-      <!-- Interactive Mask Layer -->
-      <div class="hero-layer hero-mask">
-        <div class="hero-huge-wrapper mask-text">
-          <div class="hero-line left">GANESAN</div>
-          <div class="hero-line right"><span class="italic">P.V.</span></div>
-        </div>
+      <!-- Minimal Typography Layer -->
+      <div class="hero-minimal-content">
+        <h1 class="hero-title">GANESAN P.V.</h1>
+        <p class="hero-subtitle">SYSTEMS ARCHITECT & FULL STACK DEVELOPER</p>
       </div>
 
       <!-- UI Overlays -->
@@ -171,11 +112,11 @@
             </defs>
             <text font-size="14" letter-spacing="2.5">
               <textPath href="#circlePath" fill="currentColor">
-                BUILD • BREAK • LEARN • REPEAT • 
+                BUILD &bull; BREAK &bull; LEARN &bull; REPEAT &bull; 
               </textPath>
             </text>
           </svg>
-          <div class="circle-dot">↓</div>
+          <div class="circle-dot">&darr;</div>
         </div>
       </div>
     </section>
@@ -216,7 +157,7 @@
 
                   <header class="idcard-top">
                     <span class="idcard-brand">PVG<span>.</span></span>
-                    <span class="idcard-serial">GPV·2026·ENG</span>
+                    <span class="idcard-serial">GPV-2026-ENG</span>
                   </header>
 
                   <figure class="idcard-photo">
@@ -225,11 +166,11 @@
 
                   <div class="idcard-info">
                     <h3 class="idcard-name">Ganesan P V</h3>
-                    <p class="idcard-role">Full Stack · Applied AI</p>
+                    <p class="idcard-role">Full Stack &bull; Applied AI</p>
                     <div class="idcard-meta">
                       <span class="idcard-status"><i aria-hidden="true"></i>Available</span>
                       <button class="idcard-contact" type="button" aria-label="Contact Ganesan P V">
-                        Contact <span aria-hidden="true">↗</span>
+                        Contact <span aria-hidden="true">&#8599;</span>
                       </button>
                     </div>
                   </div>
@@ -276,7 +217,7 @@
         
         <div class="exp-list">
           <div class="exp-item">
-            <div class="exp-date">Feb 2026 — May 2026</div>
+            <div class="exp-date">Feb 2026 &mdash; May 2026</div>
             <div class="exp-main">
               <h3 class="exp-role">Artificial Intelligence Intern</h3>
               <div class="exp-company">Infosys [Remote]</div>
@@ -346,21 +287,21 @@
             <div class="work-num">01</div>
             <h3 class="work-name">Water Quality Retrieval</h3>
             <div class="work-meta">Python, ML, Remote Sensing</div>
-            <div class="work-arrow">↗</div>
+            <div class="work-arrow">&#8599;</div>
           </a>
 
           <a href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project2.jpg">
             <div class="work-num">02</div>
             <h3 class="work-name">Autonomous Platoon</h3>
             <div class="work-meta">Python, CARLA, PPO</div>
-            <div class="work-arrow">↗</div>
+            <div class="work-arrow">&#8599;</div>
           </a>
 
           <a href="https://github.com/Hareshganesan/Stock_Market_Predictor" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project3.jpg">
             <div class="work-num">03</div>
             <h3 class="work-name">Financial Assistant</h3>
             <div class="work-meta">Python, FAISS, Gemini API</div>
-            <div class="work-arrow">↗</div>
+            <div class="work-arrow">&#8599;</div>
           </a>
 
         </div>
@@ -426,14 +367,14 @@
           <h2 class="section-title">Achievements</h2>
         </div>
         
-        <p class="section-subtitle">Drag to spin — every disc is a win.</p>
+        <p class="section-subtitle">Drag to spin &mdash; every disc is a win.</p>
 
         <div class="infinite-menu-wrap" id="infinite-menu">
           <canvas id="infinite-grid-menu-canvas"></canvas>
           <div class="menu-spotlight" aria-hidden="true"></div>
           <h2 class="face-title inactive"></h2>
           <p class="face-description inactive"></p>
-          <div class="menu-hint" aria-hidden="true"><span>swipe to explore ↻</span></div>
+          <div class="menu-hint" aria-hidden="true"><span>swipe to explore &rarr;</span></div>
         </div>
 
         <div class="menu-caption" aria-live="polite">
@@ -495,7 +436,7 @@
         <h2 class="contact-lead">Every system evolves.<br/><span class="italic">So does the builder behind it.</span></h2>
         
         <div class="contact-bottom">
-          <a href="mailto:Hareshganesan1@gmail.com" class="huge-email" data-cursor="hover">LET'S TALK ↗</a>
+          <a href="mailto:Hareshganesan1@gmail.com" class="huge-email" data-cursor="hover">LET'S TALK &#8599;</a>
           
           <div class="contact-links">
             <div class="link-group">
@@ -505,9 +446,9 @@
             </div>
             <div class="link-group">
               <span class="link-title">Socials</span>
-              <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank">LinkedIn</a>
-              <a href="https://github.com/Hareshganesan" target="_blank">GitHub</a>
-              <a href="https://www.instagram.com/bored_boy.7/" target="_blank">Instagram</a>
+              <a href="https://www.linkedin.com/in/ganesan-p-v-232ba831b" target="_blank">LinkedIn &#8599;</a>
+              <a href="https://github.com/Hareshganesan" target="_blank">GitHub &#8599;</a>
+              <a href="https://www.instagram.com/bored_boy.7/" target="_blank">Instagram &#8599;</a>
             </div>
             <div class="link-group">
               <span class="link-title">Location</span>
@@ -520,7 +461,7 @@
 
     <footer class="footer theme-dark">
       <div class="container footer-container">
-        <p>© 2025 GANESAN P V</p>
+        <p>&copy; 2025 GANESAN P V</p>
         <p>BUILT WITH SLEEPLESS NIGHTS & CAFFEINE</p>
       </div>
     </footer>
@@ -530,6 +471,263 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script>
+  <script src="glass-surface.js"></script>
+  <script type="module">
+import { Renderer, Program, Mesh, Triangle } from 'https://unpkg.com/ogl';
+
+const vertexShader = `
+attribute vec2 position;
+attribute vec2 uv;
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position, 0, 1);
+}
+`;
+
+const fragmentShader = `
+precision highp float;
+
+uniform float uTime;
+uniform vec3 uResolution;
+uniform float uSpeed;
+uniform float uInnerLines;
+uniform float uOuterLines;
+uniform float uWarpIntensity;
+uniform float uRotation;
+uniform float uEdgeFadeWidth;
+uniform float uColorCycleSpeed;
+uniform float uBrightness;
+uniform vec3 uColor1;
+uniform vec3 uColor2;
+uniform vec3 uColor3;
+uniform vec2 uMouse;
+uniform float uMouseInfluence;
+uniform bool uEnableMouse;
+uniform float uLightMode;
+
+#define HALF_PI 1.5707963
+
+float hashF(float n) {
+  return fract(sin(n * 127.1) * 43758.5453123);
+}
+
+float smoothNoise(float x) {
+  float i = floor(x);
+  float f = fract(x);
+  float u = f * f * (3.0 - 2.0 * f);
+  return mix(hashF(i), hashF(i + 1.0), u);
+}
+
+float displaceA(float coord, float t) {
+  float result = sin(coord * 2.123) * 0.2;
+  result += sin(coord * 3.234 + t * 4.345) * 0.1;
+  result += sin(coord * 0.589 + t * 0.934) * 0.5;
+  return result;
+}
+
+float displaceB(float coord, float t) {
+  float result = sin(coord * 1.345) * 0.3;
+  result += sin(coord * 2.734 + t * 3.345) * 0.2;
+  result += sin(coord * 0.189 + t * 0.934) * 0.3;
+  return result;
+}
+
+vec2 rotate2D(vec2 p, float angle) {
+  float c = cos(angle);
+  float s = sin(angle);
+  return vec2(p.x * c - p.y * s, p.x * s + p.y * c);
+}
+
+void main() {
+  vec2 coords = gl_FragCoord.xy / uResolution.xy;
+  coords = coords * 2.0 - 1.0;
+  coords = rotate2D(coords, uRotation);
+
+  float halfT = uTime * uSpeed * 0.5;
+  float fullT = uTime * uSpeed;
+
+  float mouseWarp = 0.0;
+  if (uEnableMouse) {
+    vec2 mPos = rotate2D(uMouse * 2.0 - 1.0, uRotation);
+    float mDist = length(coords - mPos);
+    mouseWarp = uMouseInfluence * exp(-mDist * mDist * 4.0);
+  }
+
+  float warpAx = coords.x + displaceA(coords.y, halfT) * uWarpIntensity + mouseWarp;
+  float warpAy = coords.y - displaceA(coords.x * cos(fullT) * 1.235, halfT) * uWarpIntensity;
+  float warpBx = coords.x + displaceB(coords.y, halfT) * uWarpIntensity + mouseWarp;
+  float warpBy = coords.y - displaceB(coords.x * sin(fullT) * 1.235, halfT) * uWarpIntensity;
+
+  vec2 fieldA = vec2(warpAx, warpAy);
+  vec2 fieldB = vec2(warpBx, warpBy);
+  vec2 blended = mix(fieldA, fieldB, mix(fieldA, fieldB, 0.5));
+
+  float fadeTop = smoothstep(uEdgeFadeWidth, uEdgeFadeWidth + 0.4, blended.y);
+  float fadeBottom = smoothstep(-uEdgeFadeWidth, -(uEdgeFadeWidth + 0.4), blended.y);
+  float vMask = 1.0 - max(fadeTop, fadeBottom);
+
+  float tileCount = mix(uOuterLines, uInnerLines, vMask);
+  float scaledY = blended.y * tileCount;
+  float nY = smoothNoise(abs(scaledY));
+
+  float ridge = pow(
+    step(abs(nY - blended.x) * 2.0, HALF_PI) * cos(2.0 * (nY - blended.x)),
+    5.0
+  );
+
+  float lines = 0.0;
+  for (float i = 1.0; i < 3.0; i += 1.0) {
+    lines += pow(max(fract(scaledY), fract(-scaledY)), i * 2.0);
+  }
+
+  float pattern = vMask * lines;
+
+  float cycleT = fullT * uColorCycleSpeed;
+  float rChannel = (pattern + lines * ridge) * (cos(blended.y + cycleT * 0.234) * 0.5 + 1.0);
+  float gChannel = (pattern + vMask * ridge) * (sin(blended.x + cycleT * 1.745) * 0.5 + 1.0);
+  float bChannel = (pattern + lines * ridge) * (cos(blended.x + cycleT * 0.534) * 0.5 + 1.0);
+
+  vec3 col = (rChannel * uColor1 + gChannel * uColor2 + bChannel * uColor3) * uBrightness;
+  float alpha = clamp(length(col), 0.0, 1.0);
+
+  if (uLightMode > 0.5) {
+    vec3 weights = pow(max(vec3(rChannel, gChannel, bChannel), vec3(0.0)), vec3(3.0));
+    float weightSum = max(weights.r + weights.g + weights.b, 0.0001);
+    vec3 chroma = (weights.r * uColor1 + weights.g * uColor2 + weights.b * uColor3) / weightSum;
+    float neutral = min(chroma.r, min(chroma.g, chroma.b));
+    chroma = max(chroma - vec3(neutral * 0.92), vec3(0.0));
+    float peak = max(chroma.r, max(chroma.g, chroma.b));
+    chroma = pow(clamp(chroma / max(peak, 0.0001), 0.0, 1.0), vec3(1.08));
+    float ink = clamp(max(rChannel, max(gChannel, bChannel)) * uBrightness * 1.15, 0.0, 0.92);
+    gl_FragColor = vec4(mix(vec3(1.0), chroma, ink), 1.0);
+  } else {
+    gl_FragColor = vec4(col, alpha);
+  }
+}
+`;
+
+function hexToVec3(hex) {
+  const c = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return c ? [parseInt(c[1], 16) / 255, parseInt(c[2], 16) / 255, parseInt(c[3], 16) / 255] : [1, 1, 1];
+}
+
+function initLineWaves(containerSelector, options = {}) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
+  const {
+    speed = 0.3,
+    innerLineCount = 24.0,
+    outerLineCount = 28.0,
+    warpIntensity = 1.0,
+    rotation = -45,
+    edgeFadeWidth = 0.0,
+    colorCycleSpeed = 1.0,
+    brightness = 0.2, // Reduced to make the background more subtle
+    color1 = '#ffffff',
+    color2 = '#ffffff',
+    color3 = '#ffffff',
+    enableMouseInteraction = true,
+    mouseInfluence = 2.0,
+    lightMode = false
+  } = options;
+
+  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+  const gl = renderer.gl;
+  gl.clearColor(0, 0, 0, 0);
+
+  let program;
+  let currentMouse = [0.5, 0.5];
+  let targetMouse = [0.5, 0.5];
+
+  function handleMouseMove(e) {
+    const rect = gl.canvas.getBoundingClientRect();
+    targetMouse = [
+      (e.clientX - rect.left) / rect.width,
+      1.0 - (e.clientY - rect.top) / rect.height
+    ];
+  }
+
+  function handleMouseLeave() {
+    targetMouse = [0.5, 0.5];
+  }
+
+  function resize() {
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    if (program) {
+      program.uniforms.uResolution.value = [gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height];
+    }
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const geometry = new Triangle(gl);
+  const rotationRad = (rotation * Math.PI) / 180;
+  
+  program = new Program(gl, {
+    vertex: vertexShader,
+    fragment: fragmentShader,
+    uniforms: {
+      uTime: { value: 0 },
+      uResolution: { value: [gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height] },
+      uSpeed: { value: speed },
+      uInnerLines: { value: innerLineCount },
+      uOuterLines: { value: outerLineCount },
+      uWarpIntensity: { value: warpIntensity },
+      uRotation: { value: rotationRad },
+      uEdgeFadeWidth: { value: edgeFadeWidth },
+      uColorCycleSpeed: { value: colorCycleSpeed },
+      uBrightness: { value: brightness },
+      uColor1: { value: hexToVec3(color1) },
+      uColor2: { value: hexToVec3(color2) },
+      uColor3: { value: hexToVec3(color3) },
+      uMouse: { value: new Float32Array([0.5, 0.5]) },
+      uMouseInfluence: { value: mouseInfluence },
+      uEnableMouse: { value: enableMouseInteraction },
+      uLightMode: { value: lightMode ? 1 : 0 }
+    }
+  });
+
+  const mesh = new Mesh(gl, { geometry, program });
+  container.appendChild(gl.canvas);
+
+  if (enableMouseInteraction) {
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+  }
+
+  let animationFrameId;
+  function update(time) {
+    animationFrameId = requestAnimationFrame(update);
+    program.uniforms.uTime.value = time * 0.001;
+
+    if (enableMouseInteraction) {
+      currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
+      currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
+      program.uniforms.uMouse.value[0] = currentMouse[0];
+      program.uniforms.uMouse.value[1] = currentMouse[1];
+    }
+
+    renderer.render({ scene: mesh });
+  }
+  animationFrameId = requestAnimationFrame(update);
+
+  return () => {
+    cancelAnimationFrame(animationFrameId);
+    window.removeEventListener('resize', resize);
+    if (enableMouseInteraction) {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+    }
+    container.removeChild(gl.canvas);
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+  };
+}
+
+initLineWaves('#line-waves-bg');
+
+</script>
   <script src="script.js?v=1.2"></script>
 </body>
 </html>
