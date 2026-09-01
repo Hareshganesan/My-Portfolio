@@ -631,11 +631,13 @@ function initLineWaves(containerSelector, options = {}) {
     enableMouseInteraction = true,
     mouseInfluence = 2.0,
     lightMode = false
-  } = options;
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) {
+    document.querySelector('#line-waves-bg').classList.add('mobile-static-bg');
+    return; // Completely disable WebGL for mobile
+  }
 
-  // Cap resolution drastically on mobile to keep CSS blur performant
-  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: window.innerWidth < 768 ? 0.2 : 1 });
-  const gl = renderer.gl;
+  const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: 1 });
   gl.clearColor(0, 0, 0, 0);
 
   let program;
