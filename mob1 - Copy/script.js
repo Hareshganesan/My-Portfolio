@@ -205,8 +205,14 @@ document.querySelectorAll(".theme-dark, .theme-light").forEach((section) => {
 
 // Hero -> About: dark fades to light in step with the scroll instead of
 // flipping at one point, so there's no flash and no hard edge.
+// While the page is anywhere above the end of this range, the scrub OWNS the
+// theme: setTheme() is ignored there and any running theme tween is killed.
+// (Otherwise About's 1s "turn light" tween, started as you scroll up past it,
+// could finish after the scrub had gone dark and leave the hero stuck white.)
+let heroScrub = null;
+let themeTween = null; // setTheme()'s current tween (declared here: the scrub callback uses it)
 if (document.getElementById("about")) {
-  gsap.fromTo("body",
+  heroScrub = gsap.fromTo("body",
     {
       "--c-bg-local": "#050505", "--c-text-local": "#f4f4f4", "--c-border": "rgba(255, 255, 255, 0.15)",
       backgroundColor: "#050505", color: "#f4f4f4"
@@ -216,9 +222,14 @@ if (document.getElementById("about")) {
       backgroundColor: "#f4f4f4", color: "#050505",
       ease: "none",
       immediateRender: false,
-      scrollTrigger: { trigger: "#about", start: "top 95%", end: "top 25%", scrub: true }
+      scrollTrigger: {
+        trigger: "#about", start: "top 95%", end: "top 25%", scrub: true,
+        // only while actually inside the range; jumping past it must not kill
+        // the tween the next section just started
+        onUpdate: (self) => { if (self.progress < 1 && themeTween) { themeTween.kill(); themeTween = null; } }
+      }
     }
-  );
+  ).scrollTrigger;
 }
 
 // shorter tween on phones so a fast scroll across many sections doesn't queue
@@ -226,8 +237,11 @@ if (document.getElementById("about")) {
 const THEME_DUR = window.matchMedia("(max-width: 768px)").matches ? 0.25 : 1;
 // Kill only our own previous tween. overwrite:"auto" could also kill the
 // scrubbed hero->about tween (same properties) and break it for good.
-let themeTween;
 function setTheme(theme) {
+  // hero/about range: the scrub decides. Read the live scroll position, not
+  // heroScrub.progress: triggers update in creation order, so during a jump
+  // the scrub's progress can still be stale when this runs.
+  if (heroScrub && heroScrub.scroll() < heroScrub.end - 1) return;
   if (themeTween) themeTween.kill();
   if(theme === 'light') {
     themeTween = gsap.to("body", {

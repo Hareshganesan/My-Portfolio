@@ -4,7 +4,16 @@
    Geometry is built in projects-tunnel.js.
    ═══════════════════════════════════════════════════════ */
 
-.works.theme-dark { padding: 0; background: #050505; color: #f4f4f4; }
+.works.theme-dark {
+  padding: 0; background: #050505; color: #f4f4f4;
+  /* The theme switcher tweens these on <body> for up to 1s. Declaring them
+     here keeps this section's computed style unchanged, so the browser skips
+     restyling the tunnel's ~400 elements on every frame of that tween (that
+     was the lag where the tunnel hands over to the next section). */
+  --c-bg-local: #050505;
+  --c-text-local: #f4f4f4;
+  --c-border: rgba(255, 255, 255, 0.15);
+}
 
 .pt-stage {
   position: relative;
@@ -269,4 +278,11 @@
 /* touch devices have no custom cursor */
 @media (hover: none) {
   .pt-face.is-photo, .pt-end a, .pt-index button, .pt-focus-close, .pt-focus-cap a { cursor: pointer; }
+}
+
+/* WebGL corridor (phones) — see projects-tunnel-gl.js */
+.pt-gl {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
 }

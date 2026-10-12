@@ -143,9 +143,18 @@
     epochEl.textContent = epoch;
   }
 
-  // Replay the decode on hover once a row has converged.
+  // Replay the decode on hover once a row has converged; click (or Enter)
+  // flies to that domain's first project in the Works tunnel.
+  const cursorText = document.getElementById("cursor-text");
   rows.forEach((r) => {
-    r.addEventListener("mouseenter", () => { if (r._on) decode(r.querySelector(".cd-title")); });
+    r.addEventListener("mouseenter", () => {
+      if (r._on) decode(r.querySelector(".cd-title"));
+      if (cursorText) cursorText.textContent = "View work";
+    });
+    r.addEventListener("mouseleave", () => { if (cursorText) cursorText.textContent = "Explore"; });
+    const go = () => { if (window.ptGoTo) window.ptGoTo(+r.dataset.project, 2.2); };
+    r.addEventListener("click", go);
+    r.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
   });
 
   let st = null;

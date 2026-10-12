@@ -110,6 +110,10 @@
 
 
   let W, H, P, c, rows = [], endWall, Tmax = 1;
+  // Phones/touch: draw the corridor with WebGL (projects-tunnel-gl.js). Mobile
+  // GPUs can't keep ~100 CSS 3D layers smooth as they fly at the camera.
+  let useGL = !!window.PTGL && (window.matchMedia("(hover: none), (pointer: coarse)").matches || window.innerWidth < 768);
+  let glr = null, glCanvas = null;
   let T = 0, Tt = 0, prevT = 0;
   let mx = 0, my = 0, tmx = 0, tmy = 0;
   let visible = false, activeStation = -1;
@@ -125,6 +129,9 @@
   function build() {
     world.textContent = "";
     rows = [];
+    if (glr) { glr.destroy(); glr = null; }
+    if (glCanvas) { glCanvas.remove(); glCanvas = null; }
+    const cells = []; // GL mode collects tile data instead of creating DOM
     // Hidden/unlaid-out page reports 0×0; fall back to the window so c is never 0.
     W = view.clientWidth || window.innerWidth || 1280;
     H = view.clientHeight || window.innerHeight || 720;
@@ -150,10 +157,10 @@
     const rand = rng(1729);
     const gap = c * 0.07;
     const walls = [
-      { cells: lanes,  w: TW, h: c,  tf: `translate3d(${-TW / 2}px, ${TH / 2}px, ${-c}px) rotateX(90deg)`, across: "x" },  // floor
-      { cells: lanes,  w: TW, h: c,  tf: `translate3d(${-TW / 2}px, ${-TH / 2}px, 0) rotateX(-90deg)`,     across: "x" },  // ceiling
-      { cells: vCells, w: c,  h: TH, tf: `translate3d(${-TW / 2}px, ${-TH / 2}px, 0) rotateY(90deg)`,      across: "y" },  // left
-      { cells: vCells, w: c,  h: TH, tf: `translate3d(${TW / 2}px, ${-TH / 2}px, ${-c}px) rotateY(-90deg)`, across: "y" }, // right
+      { cells: lanes,  w: TW, h: c,  tf: `translate3d(${-TW / 2}px, ${TH / 2}px, ${-c}px) rotateX(90deg)`, across: "x", name: "floor" },
+      { cells: lanes,  w: TW, h: c,  tf: `translate3d(${-TW / 2}px, ${-TH / 2}px, 0) rotateX(-90deg)`,     across: "x", name: "ceil" },
+      { cells: vCells, w: c,  h: TH, tf: `translate3d(${-TW / 2}px, ${-TH / 2}px, 0) rotateY(90deg)`,      across: "y", name: "left" },
+      { cells: vCells, w: c,  h: TH, tf: `translate3d(${TW / 2}px, ${-TH / 2}px, ${-c}px) rotateY(-90deg)`, across: "y", name: "right" },
     ];
 
     // Each wall strip is one flat layer placed straight into the world (no
@@ -165,11 +172,14 @@
       const strips = [];
 
       walls.forEach((wall) => {
-        const strip = el("div", "pt-strip", world);
-        strip.style.width = wall.w + "px";
-        strip.style.height = wall.h + "px";
-        strip.style.transform = `translate3d(0, 0, ${-r * c}px) ${wall.tf}`;
-        strips.push(strip);
+        let strip = null;
+        if (!useGL) {
+          strip = el("div", "pt-strip", world);
+          strip.style.width = wall.w + "px";
+          strip.style.height = wall.h + "px";
+          strip.style.transform = `translate3d(0, 0, ${-r * c}px) ${wall.tf}`;
+          strips.push(strip);
+        }
         if (r < 2) return; // keep the mouth of the tunnel clear
 
         for (let i = 0; i < wall.cells; i++) {
@@ -182,6 +192,14 @@
 
           // Mostly the owner's image, sometimes a neighbour's, so stretches blend.
           const pick = rand() < 0.8 ? owner : Math.floor(rand() * n);
+          if (useGL) {
+            const cell = { wall: wall.name, r, i, kind, project: pick, text: "", bx: 0, by: 0 };
+            if (kind === "photo") { cell.bx = rand(); cell.by = rand(); }
+            else if (kind === "num") cell.text = projects[pick].num;
+            else cell.text = words[Math.floor(rand() * words.length)];
+            cells.push(cell);
+            continue;
+          }
           const tile = el("div", "pt-tile", strip);
           const size = c - gap * 2;
           tile.style.width = tile.style.height = size + "px";
@@ -202,7 +220,21 @@
           }
         }
       });
-      rows.push({ strips, r, f: -1, shown: true });
+      if (!useGL) rows.push({ strips, r, f: -1, shown: true });
+    }
+
+    if (useGL) {
+      glCanvas = document.createElement("canvas");
+      glCanvas.className = "pt-gl";
+      glCanvas.setAttribute("aria-hidden", "true");
+      view.insertBefore(glCanvas, view.firstChild);
+      glr = window.PTGL.create({
+        canvas: glCanvas, W, H, P, c, TW, TH, L, gap,
+        dpr: Math.min(2, window.devicePixelRatio || 1),
+        cells, projects, fogNear: P + 2 * c, fogFar: P + 12 * c,
+      });
+      if (!glr) { useGL = false; return build(); } // no WebGL: fall back to CSS 3D
+      glr.ready.then(() => render(true));
     }
 
     endWall = el("div", "pt-end", world);
@@ -227,6 +259,7 @@
   function render(force) {
     prevT = T;
     world.style.transform = `translate3d(0, 0, ${T.toFixed(2)}px)`;
+    if (glr) glr.draw(T);
 
     if (!reduceMotion) {
       cam.style.transform =
@@ -271,12 +304,29 @@
     setStation(station);
   }
 
-  // Lenis already eases the scroll, so the camera follows it 1:1. A second
-  // easing layer here made the tunnel lag behind the rest of the page.
-  function tick() {
+  // Lenis already eases the scroll, so at normal speeds the camera follows it
+  // 1:1 (a second easing layer made the tunnel feel laggy). A hard flick,
+  // though, would jump several rows per frame and force the browser to draw
+  // all of those new walls at once. So the camera has a speed limit: past it,
+  // it travels at most MAX_ROWS_PER_SEC and then glides onto the scroll
+  // position.
+  const MAX_ROWS_PER_SEC = 9;
+  let catching = false;
+  function tick(time, deltaMs) {
     if (!visible || !built) return;
     if (st) Tt = st.progress * Tmax;
-    T = Tt;
+    const dt = Math.min(deltaMs || 16.7, 50) / 1000;
+    const maxStep = MAX_ROWS_PER_SEC * c * dt;
+    const d = Tt - T;
+    if (!catching && Math.abs(d) > maxStep) catching = true;
+    if (catching) {
+      // exponential glide, capped at the speed limit
+      const step = Math.min(maxStep, Math.max(Math.abs(d) * 0.1, 1));
+      if (Math.abs(d) <= step) { T = Tt; catching = false; }
+      else T += Math.sign(d) * step;
+    } else {
+      T = Tt;
+    }
     const lookMoving = Math.abs(tmx - mx) > 0.0005 || Math.abs(tmy - my) > 0.0005;
     if (lookMoving) { mx += (tmx - mx) * 0.08; my += (tmy - my) * 0.08; }
     if (T !== prevT || lookMoving) render();
@@ -289,13 +339,17 @@
     b.type = "button";
     b.innerHTML = `${p.num}<span> ${p.title.split(" ")[0]}</span>`;
     b.setAttribute("aria-label", "Go to " + p.title);
-    b.addEventListener("click", () => {
-      if (!st) return;
-      const y = st.start + (st.end - st.start) * stationS[k];
-      if (typeof lenis !== "undefined" && lenis && lenis.scrollTo) lenis.scrollTo(y, { duration: 1.6 });
-      else window.scrollTo({ top: y, behavior: "smooth" });
-    });
+    b.addEventListener("click", () => goTo(k));
   });
+
+  // Fly to project k (0-based). Also used by the Core Domains rows.
+  function goTo(k, duration = 1.6) {
+    if (!st || k < 0 || k >= n) return;
+    const y = st.start + (st.end - st.start) * stationS[k];
+    if (typeof lenis !== "undefined" && lenis && lenis.scrollTo) lenis.scrollTo(y, { duration });
+    else window.scrollTo({ top: y, behavior: "smooth" });
+  }
+  window.ptGoTo = goTo;
 
   /* ── Pointer look ────────────────────────────────── */
   if (finePointer && !reduceMotion) {
@@ -344,8 +398,10 @@
     return { x: rect.left - to.left, y: rect.top - to.top, scaleX: rect.width / to.width, scaleY: rect.height / to.height };
   }
 
-  function openFocus(face) {
-    const p = projects[+face.dataset.project];
+  // projectIdx + the tile's on-screen rect; `face` (DOM mode) lets the close
+  // animation fly back to wherever the tile is by then.
+  function openFocus(projectIdx, rect, face) {
+    const p = projects[projectIdx];
     fImg.src = p.img;
     fImg.alt = p.title;
     focus.querySelector(".pt-focus-num").textContent = p.num;
@@ -355,11 +411,11 @@
     a.hidden = !p.href;
     if (p.href) { a.href = p.href; a.textContent = p.linkText; }
 
-    lastFocus = face;
+    lastFocus = face || null;
     focusOpen = true;
     focus.classList.add("is-open");
     if (typeof lenis !== "undefined" && lenis && lenis.stop) lenis.stop();
-    focusFrom = face.getBoundingClientRect();
+    focusFrom = rect;
     const dur = reduceMotion ? 0 : 0.9;
     gsap.killTweensOf([fImg, fBackdrop, fCap, fClose]);
     gsap.fromTo(fImg, flipFrom(focusFrom), { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: dur, ease: "expo.out" });
@@ -386,8 +442,19 @@
   }
 
   stage.addEventListener("click", (e) => {
+    if (glr) {
+      // WebGL: ray-cast the tap against the walls (links/buttons keep working)
+      if (e.target.closest("a, button, .pt-station")) return;
+      const r = view.getBoundingClientRect();
+      const hit = glr.pick(e.clientX - r.left, e.clientY - r.top, T);
+      if (hit) {
+        const h = hit.rect;
+        openFocus(hit.project, { left: h.left + r.left, top: h.top + r.top, width: h.width, height: h.height });
+      }
+      return;
+    }
     const face = e.target.closest(".pt-face.is-photo");
-    if (face) openFocus(face);
+    if (face) openFocus(+face.dataset.project, face.getBoundingClientRect(), face);
   });
   fBackdrop.addEventListener("click", closeFocus);
   fClose.addEventListener("click", closeFocus);
