@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GANESAN P V - Portfolio</title>
-  <meta name="description" content="Ganesan P V - Full Stack Developer. Building digital solutions with precision." />
+  <meta name="description" content="Ganesan P V - ML engineer and AI researcher. Published work in remote sensing and medical imaging; AI intern at Infosys." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,8 +12,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Grotesk:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
   
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
-  <link rel="stylesheet" href="style.css?v=1.2" />
+  <link rel="stylesheet" href="style.css?v=1.7" />
   <link rel="stylesheet" href="glass-surface.css" />
+  <link rel="stylesheet" href="projects-tunnel.css" />
+  <link rel="stylesheet" href="core-domains.css" />
+  <link rel="stylesheet" href="mobile-hero.css" />
 </head>
 <body class="loading">
 
@@ -97,13 +100,13 @@
       <!-- Minimal Typography Layer -->
       <div class="hero-minimal-content">
         <h1 class="hero-title">GANESAN P.V.</h1>
-        <p class="hero-subtitle">SYSTEMS ARCHITECT & FULL STACK DEVELOPER</p>
+        <p class="hero-subtitle">ML ENGINEER &amp; AI RESEARCHER</p>
       </div>
 
       <!-- UI Overlays -->
       <div class="hero-absolute-footer">
         <div class="hero-info">
-          Not a style, a perspective.<br/>Because execution is everything.
+          I build models.<br/>Then I try to break them.
         </div>
         <div class="hero-scroll-circle">
           <svg viewBox="0 0 100 100" width="100" height="100">
@@ -182,27 +185,48 @@
       </div>
     </section>
 
-    <!-- CORE DOMAINS (Replaces Philosophy) -->
+    <!-- CORE DOMAINS: a training run (core-domains.js / core-domains.css) -->
     <section class="domains theme-dark" id="domains">
-      <div class="domain-row" data-cursor="explore">
-        <div class="domain-bg"></div>
-        <div class="container domain-container">
-          <h2 class="domain-title">FULL STACK ENG.</h2>
-          <span class="domain-meta">01</span>
-        </div>
-      </div>
-      <div class="domain-row" data-cursor="explore">
-        <div class="domain-bg"></div>
-        <div class="container domain-container">
-          <h2 class="domain-title">APPLIED A.I.</h2>
-          <span class="domain-meta">02</span>
-        </div>
-      </div>
-      <div class="domain-row" data-cursor="explore">
-        <div class="domain-bg"></div>
-        <div class="container domain-container">
-          <h2 class="domain-title">SYSTEM ARCH.</h2>
-          <span class="domain-meta">03</span>
+      <div class="container">
+        <header class="cd-log">
+          <span>training_log <span class="cd-dim">/ core domains</span></span>
+          <span>epoch <b class="cd-epoch-val">0</b>/3 <span class="cd-dim">&middot;</span> loss <b class="cd-loss-val">0.920</b></span>
+        </header>
+
+        <div class="cd-board">
+          <svg class="cd-curve" aria-hidden="true">
+            <path class="cd-loss-ghost" />
+            <path class="cd-loss" />
+            <g class="cd-dots"></g>
+            <circle class="cd-tip" r="5" />
+          </svg>
+
+          <article class="cd-row" data-cursor="explore">
+            <span class="cd-epoch">epoch 01</span>
+            <div class="cd-main">
+              <h2 class="cd-title" data-text="MACHINE LEARNING">MACHINE LEARNING</h2>
+              <p class="cd-work">Water quality retrieval &middot; RL vehicle platooning &middot; Remote sensing</p>
+            </div>
+            <div class="cd-metric"><b class="cd-val" data-to="2">2</b><span>published papers</span></div>
+          </article>
+
+          <article class="cd-row" data-cursor="explore">
+            <span class="cd-epoch">epoch 02</span>
+            <div class="cd-main">
+              <h2 class="cd-title" data-text="COMPUTER VISION">COMPUTER VISION</h2>
+              <p class="cd-work">Retinal OCT classification &middot; Brain tumor segmentation</p>
+            </div>
+            <div class="cd-metric"><b class="cd-val" data-to="93.7" data-dec="1" data-suffix="%">93.7%</b><span>patient-independent</span></div>
+          </article>
+
+          <article class="cd-row" data-cursor="explore">
+            <span class="cd-epoch">epoch 03</span>
+            <div class="cd-main">
+              <h2 class="cd-title" data-text="NLP &amp; AGENTS">NLP &amp; AGENTS</h2>
+              <p class="cd-work">6-agent RAG assistant &middot; Enterprise email classifier</p>
+            </div>
+            <div class="cd-metric"><b class="cd-val" data-to="98.5" data-dec="1" data-suffix="%">98.5%</b><span>on 10K+ emails</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -272,39 +296,76 @@
       </div>
     </section>
 
-    <!-- WORKS -->
-    <section class="works section theme-light" id="projects">
-      <div class="container">
-        <div class="section-header">
+    <!-- WORKS: scroll-driven tunnel (projects-tunnel.js / projects-tunnel.css) -->
+    <section class="works theme-dark" id="projects">
+      <div class="pt-stage" id="pt-stage" aria-label="Selected works. Scroll to travel through the tunnel; click a frame to open it.">
+        <div class="pt-view"><div class="pt-cam"><div class="pt-world"></div></div></div>
+        <div class="pt-fog" aria-hidden="true"></div>
+
+        <header class="pt-head">
           <span class="section-num">04 / 06</span>
           <h2 class="section-title">Selected Works</h2>
           <p class="section-subtitle">Shipped, not shelved.</p>
+          <div class="pt-progress" aria-hidden="true"><span></span></div>
+        </header>
+
+        <div class="pt-stations">
+          <div class="pt-station pt-intro is-active" data-kind="intro">
+            <p class="pt-kicker">Six builds. One corridor.</p>
+            <p class="pt-intro-line">Scroll to <span class="italic">travel</span></p>
+          </div>
+
+          <article class="pt-station" data-art="retina">
+            <span class="pt-num">01</span>
+            <h3 class="pt-title">Retinal Disease <span class="italic">Classification</span></h3>
+            <p class="pt-desc">Patient-level OCT classifier. Caught a data leak in OCT2017 that inflated accuracy by 2.5%.</p>
+            <p class="pt-meta">PyTorch, ResNet-50, U-Net &middot; 93.7% patient-independent</p>
+            <a class="pt-link" href="https://github.com/Hareshganesan/Retina" target="_blank" rel="noopener" data-cursor="hover">View on GitHub &#8599;</a>
+          </article>
+
+          <article class="pt-station" data-img="./images/project1.jpg">
+            <span class="pt-num">02</span>
+            <h3 class="pt-title">Water Quality <span class="italic">Retrieval</span></h3>
+            <p class="pt-desc">Hierarchical spectral ensemble with physics-informed augmentation, on GLORIA 2022.</p>
+            <p class="pt-meta">Python, ML, Hyperspectral &middot; Frontiers, 2026</p>
+            <a class="pt-link" href="https://www.frontiersin.org/journals/remote-sensing/articles/10.3389/frsen.2026.1860176/abstract" target="_blank" rel="noopener" data-cursor="hover">Read the paper &#8599;</a>
+          </article>
+
+          <article class="pt-station" data-art="voxel">
+            <span class="pt-num">03</span>
+            <h3 class="pt-title">Brain Tumor <span class="italic">Tracking</span></h3>
+            <p class="pt-desc">VNet segmentation with voxel-derived progression tracking, post-treatment.</p>
+            <p class="pt-meta">Python, VNet &middot; Springer LNEE</p>
+          </article>
+
+          <article class="pt-station" data-img="./images/project2.jpg">
+            <span class="pt-num">04</span>
+            <h3 class="pt-title">Autonomous <span class="italic">Platoon</span></h3>
+            <p class="pt-desc">Reinforcement-learned vehicle platooning in simulation.</p>
+            <p class="pt-meta">Python, CARLA, PPO</p>
+            <a class="pt-link" href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" rel="noopener" data-cursor="hover">View on GitHub &#8599;</a>
+          </article>
+
+          <article class="pt-station" data-img="./images/project3.jpg">
+            <span class="pt-num">05</span>
+            <h3 class="pt-title">Financial <span class="italic">Assistant</span></h3>
+            <p class="pt-desc">Six agents, 19 Asian tech stocks, RAG insights with a voice interface.</p>
+            <p class="pt-meta">Python, FAISS, Gemini API, Streamlit</p>
+            <a class="pt-link" href="https://github.com/Hareshganesan/Stock_Market_Predictor" target="_blank" rel="noopener" data-cursor="hover">View on GitHub &#8599;</a>
+          </article>
+
+          <article class="pt-station" data-art="inbox">
+            <span class="pt-num">06</span>
+            <h3 class="pt-title">Email <span class="italic">Intelligence</span></h3>
+            <p class="pt-desc">NLP classifier sorting 10K+ enterprise emails at 98.5% accuracy.</p>
+            <p class="pt-meta">Python, NLP &middot; Infosys internship</p>
+          </article>
         </div>
-        
-        <div class="works-list">
-          
-          <a href="https://www.frontiersin.org/journals/remote-sensing/articles/10.3389/frsen.2026.1860176/abstract" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project1.jpg">
-            <div class="work-num">01</div>
-            <h3 class="work-name">Water Quality Retrieval</h3>
-            <div class="work-meta">Python, ML, Remote Sensing</div>
-            <div class="work-arrow">&#8599;</div>
-          </a>
 
-          <a href="https://github.com/Hareshganesan/Vehicle_Platoon" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project2.jpg">
-            <div class="work-num">02</div>
-            <h3 class="work-name">Autonomous Platoon</h3>
-            <div class="work-meta">Python, CARLA, PPO</div>
-            <div class="work-arrow">&#8599;</div>
-          </a>
-
-          <a href="https://github.com/Hareshganesan/Stock_Market_Predictor" target="_blank" class="work-row" data-cursor="explore" data-img="./images/project3.jpg">
-            <div class="work-num">03</div>
-            <h3 class="work-name">Financial Assistant</h3>
-            <div class="work-meta">Python, FAISS, Gemini API</div>
-            <div class="work-arrow">&#8599;</div>
-          </a>
-
-        </div>
+        <footer class="pt-hud">
+          <ol class="pt-index"></ol>
+          <p class="pt-hint">Scroll to travel &middot; Click a frame</p>
+        </footer>
       </div>
     </section>
 
@@ -754,6 +815,9 @@ function initLineWaves(containerSelector, options = {}) {
 initLineWaves('#line-waves-bg');
 
 </script>
-  <script src="script.js?v=1.2"></script>
+  <script src="script.js?v=1.5"></script>
+  <script src="projects-tunnel.js"></script>
+  <script src="core-domains.js"></script>
+  <script src="mobile-hero.js"></script>
 </body>
 </html>

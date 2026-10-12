@@ -1,0 +1,272 @@
+/* ═══════════════════════════════════════════════════════
+   WORKS — Project Tunnel
+   A CSS-3D corridor the camera travels through on scroll.
+   Geometry is built in projects-tunnel.js.
+   ═══════════════════════════════════════════════════════ */
+
+.works.theme-dark { padding: 0; background: #050505; color: #f4f4f4; }
+
+.pt-stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+  background: #050505;
+  isolation: isolate;
+}
+
+/* ── 3D scene ─────────────────────────────────────────── */
+.pt-view {
+  position: absolute; inset: 0;
+  perspective-origin: 50% 50%;
+}
+.pt-cam, .pt-world {
+  position: absolute; left: 50%; top: 50%;
+  width: 0; height: 0;
+  transform-style: preserve-3d;
+}
+.pt-world { will-change: transform; }
+
+/* Each strip is a flat plane: its tiles paint into it as one layer rather
+   than becoming 3D layers of their own. contain keeps a hover or fog change
+   from touching anything outside the strip. */
+.pt-strip {
+  position: absolute; left: 0; top: 0;
+  transform-origin: 0 0;
+  pointer-events: none;
+  contain: strict;
+  backface-visibility: hidden;
+  --line: rgba(244, 244, 244, calc(0.13 * var(--f, 1)));
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: var(--c) var(--c);
+}
+
+.pt-tile {
+  position: absolute;
+  pointer-events: auto;
+}
+.pt-face {
+  position: absolute; inset: 0;
+  opacity: var(--f, 1);
+  border-radius: calc(var(--c) * 0.035);
+  overflow: hidden;
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+
+/* photo frames */
+.pt-face.is-photo {
+  background-size: 260%;
+  background-color: #111;
+  cursor: none;
+}
+.pt-face.is-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: #050505;
+  opacity: 0.42;
+  transition: opacity 0.5s var(--ease);
+}
+.pt-tile:hover .pt-face.is-photo {
+  transform: scale(1.07);
+  box-shadow: 0 0 0 1px rgba(244, 244, 244, 0.6), 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+.pt-tile:hover .pt-face.is-photo::after { opacity: 0; }
+
+/* inverted numeral tiles */
+.pt-face.is-num {
+  background: #f4f4f4; color: #050505;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  padding: 8%;
+  font-family: var(--f-serif); font-style: italic;
+  font-size: calc(var(--c) * 0.46); line-height: 0.8;
+}
+
+/* stack / keyword tiles */
+.pt-face.is-word {
+  border: 1px solid rgba(244, 244, 244, 0.28);
+  display: flex; align-items: flex-start; justify-content: flex-start;
+  padding: 9%;
+  font-family: var(--f-body); text-transform: uppercase;
+  font-size: max(9px, calc(var(--c) * 0.075)); letter-spacing: 0.08em;
+  color: rgba(244, 244, 244, 0.75);
+}
+
+/* end of the corridor */
+.pt-end {
+  position: absolute; left: 0; top: 0;
+  transform-origin: 0 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh;
+  opacity: var(--f, 0);
+  text-align: center;
+}
+.pt-end p {
+  font-family: var(--f-heading); text-transform: uppercase; letter-spacing: -0.02em;
+  font-size: calc(var(--c) * 0.42); line-height: 0.95;
+}
+.pt-end a {
+  font-family: var(--f-body); text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: calc(var(--c) * 0.08);
+  padding: 0.9em 1.6em; border: 1px solid #f4f4f4; border-radius: 99px;
+  color: #f4f4f4; text-decoration: none; cursor: none;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+.pt-end a:hover { background: #f4f4f4; color: #050505; }
+
+/* depth fog: the vanishing point fades into the page colour */
+.pt-fog::before {
+  /* the vanishing point; lifts as the end wall arrives (--fogc set in JS) */
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 34% 30% at 50% 50%, rgba(5, 5, 5, 0.92), rgba(5, 5, 5, 0) 100%);
+  opacity: var(--fogc, 1);
+}
+.pt-fog {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 120% 120% at 50% 50%, rgba(5, 5, 5, 0) 55%, rgba(5, 5, 5, 0.65) 100%),
+    linear-gradient(to bottom, rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0) 30%),
+    linear-gradient(to top, rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 0) 18%);
+}
+
+/* ── Overlay UI ───────────────────────────────────────── */
+.pt-head {
+  position: absolute; left: 5vw; right: 5vw; top: 12vh;
+  display: flex; align-items: baseline; gap: 2vw;
+  padding-bottom: 2vh;
+  border-bottom: 1px solid rgba(244, 244, 244, 0.15);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pt-stations { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.pt-station {
+  position: absolute; left: 50%; top: 54%;
+  width: min(90vw, 1100px);
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.6vh;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.6s var(--ease), visibility 0s linear 0.6s;
+}
+.pt-station.is-active {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity 0.6s var(--ease), visibility 0s;
+}
+.pt-station > * {
+  transform: translateY(30px);
+  transition: transform 0.9s var(--ease);
+}
+.pt-station.is-active > * { transform: none; }
+.pt-station.is-active > :nth-child(2) { transition-delay: 0.05s; }
+.pt-station.is-active > :nth-child(3) { transition-delay: 0.1s; }
+.pt-station.is-active > :nth-child(4) { transition-delay: 0.15s; }
+.pt-station.is-active > :nth-child(5) { transition-delay: 0.2s; }
+
+.pt-num, .pt-kicker {
+  font-family: var(--f-body); font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6;
+}
+.pt-title, .pt-intro-line {
+  font-family: var(--f-heading); font-weight: 500;
+  font-size: clamp(2.2rem, 6.4vw, 6.8rem);
+  line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase;
+  text-shadow: 0 0 40px #050505, 0 0 80px #050505;
+}
+.pt-title .italic, .pt-intro-line .italic { text-transform: none; }
+.pt-desc {
+  max-width: 34em;
+  font-family: var(--f-body); font-size: 1rem; line-height: 1.5; opacity: 0.85;
+  text-shadow: 0 0 20px #050505, 0 0 40px #050505;
+}
+.pt-meta {
+  font-family: var(--f-body); font-size: 0.95rem; text-transform: uppercase; opacity: 0.65; letter-spacing: 0.05em;
+}
+.pt-link {
+  margin-top: 1vh;
+  font-family: var(--f-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 0.9em 1.6em; border: 1px solid rgba(244, 244, 244, 0.6); border-radius: 99px;
+  background: rgba(5, 5, 5, 0.4);
+  color: #f4f4f4; text-decoration: none;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.9s var(--ease) !important;
+}
+.pt-link:hover { background: #f4f4f4; color: #050505; }
+
+.pt-hud {
+  position: absolute; left: 5vw; right: 5vw; bottom: 5vh;
+  display: flex; justify-content: space-between; align-items: center; gap: 3vw;
+  z-index: 2;
+  font-family: var(--f-body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.pt-index { list-style: none; display: flex; gap: 1.6vw; margin: 0; padding: 0; }
+.pt-index button {
+  background: none; border: 0; padding: 0.4em 0; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit;
+  opacity: 0.4; cursor: none; transition: opacity 0.3s ease;
+}
+.pt-index button:hover, .pt-index button.is-active { opacity: 1; }
+.pt-index button.is-active::before { content: "\2192\00a0"; }
+.pt-index button span { display: none; }
+.pt-index button.is-active span { display: inline; }
+.pt-head .pt-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; overflow: hidden; }
+.pt-progress span { position: absolute; inset: 0; background: #f4f4f4; transform-origin: 0 50%; transform: scaleX(0); }
+.pt-hint { opacity: 0.5; margin: 0; }
+
+/* ── Focus view (appended to <body>) ─────────────────── */
+.pt-focus {
+  position: fixed; inset: 0; z-index: 10000; /* above dock (9999), below custom cursor (10001) */
+  display: flex; align-items: center; justify-content: center;
+  visibility: hidden;
+}
+.pt-focus.is-open { visibility: visible; }
+.pt-focus-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(5, 5, 5, 0.86);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+}
+.pt-focus-card {
+  position: relative;
+  width: min(86vw, 62vh * 1.6, 980px);
+  display: flex; flex-direction: column; gap: 2vh;
+  color: #f4f4f4;
+}
+.pt-focus-img {
+  width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block;
+  border-radius: 6px;
+  transform-origin: 0 0;
+}
+.pt-focus-cap {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 2vw;
+  font-family: var(--f-body); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.06em;
+  opacity: 0;
+}
+.pt-focus-cap h3 {
+  font-family: var(--f-heading); font-weight: 500; text-transform: uppercase; letter-spacing: -0.02em;
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
+}
+.pt-focus-cap .pt-focus-meta { grid-column: 2; opacity: 0.6; }
+.pt-focus-cap a { color: #f4f4f4; text-decoration: none; border-bottom: 1px solid currentColor; cursor: none; }
+.pt-focus-close {
+  position: absolute; top: 4vh; right: 5vw; z-index: 1;
+  background: none; border: 1px solid rgba(244, 244, 244, 0.5); border-radius: 99px;
+  color: #f4f4f4; padding: 0.7em 1.3em; cursor: none;
+  font-family: var(--f-body); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em;
+  opacity: 0;
+}
+.pt-focus-close:focus { outline: none; }
+.pt-focus-close:focus-visible { outline: 1px solid #f4f4f4; outline-offset: 3px; }
+
+@media (max-width: 768px) {
+  .pt-head { top: 9vh; flex-wrap: wrap; }
+  .pt-head .section-subtitle { margin-left: 0; width: 100%; font-size: 1.3rem; }
+  .pt-hud { bottom: 4vh; }
+  .pt-index { gap: 5vw; font-size: 0.7rem; }
+  .pt-index button { white-space: nowrap; }
+  .pt-desc { font-size: 0.85rem; }
+  .pt-hint { display: none; }
+  .pt-focus-cap { grid-template-columns: 1fr; }
+  .pt-focus-cap .pt-focus-meta { grid-column: auto; }
+}
+
+/* touch devices have no custom cursor */
+@media (hover: none) {
+  .pt-face.is-photo, .pt-end a, .pt-index button, .pt-focus-close, .pt-focus-cap a { cursor: pointer; }
+}

@@ -1,0 +1,32 @@
+/* MOBILE HERO — see mobile-hero.js. Phones only; desktop is untouched. */
+@media (max-width: 768px) {
+  /* replaces the 2000px stock photo with a gradient that costs nothing to load */
+  #line-waves-bg.mobile-static-bg {
+    background: radial-gradient(120% 60% at 50% 42%, #18161f 0%, #0a0a0d 45%, #050505 75%);
+    opacity: 1;
+  }
+
+  .mh-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* the h1 stays for screen readers and SEO; the canvas draws the name */
+  .has-mh .hero-title {
+    position: absolute !important;
+    width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .has-mh .hero-subtitle { margin-top: 12vh; }
+
+  .mh-hint {
+    margin-top: 1.4rem;
+    font-family: var(--f-body); font-size: 0.62rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(244, 244, 244, 0.45);
+  }
+  .mh-hint b { font-weight: 400; color: #ff8a3c; font-variant-numeric: tabular-nums; }
+}

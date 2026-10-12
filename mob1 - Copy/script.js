@@ -189,22 +189,48 @@ function initHeroAnimations() {
 // ─────────────────────────────────────────
 document.querySelectorAll(".theme-dark, .theme-light").forEach((section) => {
   const theme = section.classList.contains("theme-light") ? "light" : "dark";
-  
+  // hero <-> about is scrubbed below; a snap tween there would fight it.
+  // (The page starts dark, so the hero needs no trigger of its own.)
+  if (section.id === "hero") return;
+  const isAbout = section.id === "about";
+
   ScrollTrigger.create({
     trigger: section,
     start: "top 50%",
     end: "bottom 50%",
-    onEnter: () => setTheme(theme),
+    onEnter: isAbout ? undefined : () => setTheme(theme),
     onEnterBack: () => setTheme(theme)
   });
 });
 
+// Hero -> About: dark fades to light in step with the scroll instead of
+// flipping at one point, so there's no flash and no hard edge.
+if (document.getElementById("about")) {
+  gsap.fromTo("body",
+    {
+      "--c-bg-local": "#050505", "--c-text-local": "#f4f4f4", "--c-border": "rgba(255, 255, 255, 0.15)",
+      backgroundColor: "#050505", color: "#f4f4f4"
+    },
+    {
+      "--c-bg-local": "#f4f4f4", "--c-text-local": "#050505", "--c-border": "rgba(0, 0, 0, 0.15)",
+      backgroundColor: "#f4f4f4", color: "#050505",
+      ease: "none",
+      immediateRender: false,
+      scrollTrigger: { trigger: "#about", start: "top 95%", end: "top 25%", scrub: true }
+    }
+  );
+}
+
 // shorter tween on phones so a fast scroll across many sections doesn't queue
 // a stack of overlapping 1s body-colour animations
 const THEME_DUR = window.matchMedia("(max-width: 768px)").matches ? 0.25 : 1;
+// Kill only our own previous tween. overwrite:"auto" could also kill the
+// scrubbed hero->about tween (same properties) and break it for good.
+let themeTween;
 function setTheme(theme) {
+  if (themeTween) themeTween.kill();
   if(theme === 'light') {
-    gsap.to("body", {
+    themeTween = gsap.to("body", {
       "--c-bg-local": "#f4f4f4",
       "--c-text-local": "#050505",
       "--c-border": "rgba(0, 0, 0, 0.15)",
@@ -212,10 +238,10 @@ function setTheme(theme) {
       color: "#050505",
       duration: THEME_DUR,
       ease: "power2.out",
-      overwrite: "auto"
+      overwrite: false
     });
   } else {
-    gsap.to("body", {
+    themeTween = gsap.to("body", {
       "--c-bg-local": "#050505",
       "--c-text-local": "#f4f4f4",
       "--c-border": "rgba(255, 255, 255, 0.15)",
@@ -223,7 +249,7 @@ function setTheme(theme) {
       color: "#f4f4f4",
       duration: THEME_DUR,
       ease: "power2.out",
-      overwrite: "auto"
+      overwrite: false
     });
   }
 }

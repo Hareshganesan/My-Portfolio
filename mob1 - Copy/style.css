@@ -498,7 +498,7 @@ body.menu-open .nav {
 }
 .hero-info {
   font-family: var(--f-body); font-size: 1rem;
-  text-transform: uppercase; max-width: 300px;
+  text-transform: uppercase; max-width: 560px;
   line-height: 1.4; opacity: 0.8;
 }
 .hero-scroll-circle {
@@ -1413,7 +1413,8 @@ body.menu-open .nav {
 /* MINIMAL HERO */
 #line-waves-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: blur(6px); transform: scale(1.05) translateZ(0); will-change: transform, filter; }
 @media (max-width: 768px) { 
-  #line-waves-bg { filter: none !important; transform: none !important; } 
+  /* static on phones: no layer promotion (its GPU edge drew a 1px seam at the hero bottom) */
+  #line-waves-bg { filter: none !important; transform: none !important; will-change: auto !important; } 
   .mobile-static-bg { background: url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; opacity: 0.4; }
 }
 #line-waves-bg canvas { display: block; width: 100%; height: 100%; will-change: opacity; }
@@ -1445,3 +1446,18 @@ body.menu-open .nav {
 
 
 
+
+/* Hero -> About: the hero background fades out at the bottom so the page
+   colour (scrubbed with the scroll in script.js) shows through. Masking the
+   layer itself leaves no partially-covered pixel row at the edge, so no seam.
+   The fade finishes 6% above the edge: the GPU layer sits on a fractional
+   pixel while scrolling and its very last row would otherwise smear into a
+   1px line. */
+#line-waves-bg {
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 94%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 94%);
+}
+@media (max-width: 768px) {
+  /* follow the page colour so the line stays readable as it fades to light */
+  .hero-absolute-footer { color: var(--c-text-local, #f4f4f4); }
+}
